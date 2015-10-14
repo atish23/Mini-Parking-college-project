@@ -5,6 +5,12 @@ class User < ActiveRecord::Base
   before_create :create_activation_digest
 
   validates :name, presence: true
+  NUMBER_REGEX =/\A[789]\d{9}\z/
+  validates :mobile, presence:true, length:{is: 10}, format: {with: NUMBER_REGEX}
+
+  #CAR_NUMBER_REGEX = Regexp.new('/\A[A-Z]{2}\s[0-9]{2}\s[A-Z]{2}\s[0-9]{4}\z/')
+
+  validates :car_number, presence:true#, format: {with: CAR_NUMBER_REGEX}
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
@@ -69,7 +75,7 @@ class User < ActiveRecord::Base
     def password_reset_expired?
       reset_sent_at < 2.hours.ago
     end
-    
+
     private
 
       # Converts email to all lower-case.
