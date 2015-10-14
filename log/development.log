@@ -1,0 +1,1454 @@
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:32:32 +0530
+
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+	bin/rake db:migrate RAILS_ENV=development
+
+):
+  activerecord (4.2.3) lib/active_record/migration.rb:392:in `check_pending!'
+  activerecord (4.2.3) lib/active_record/migration.rb:373:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:84:in `run_callbacks'
+  actionpack (4.2.3) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  web-console (2.0.0.beta3) lib/action_dispatch/debug_exceptions.rb:18:in `middleware_call'
+  web-console (2.0.0.beta3) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.3) lib/rails/engine.rb:518:in `call'
+  railties (4.2.3) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  puma (2.11.1) lib/puma/server.rb:507:in `handle_request'
+  puma (2.11.1) lib/puma/server.rb:375:in `process_client'
+  puma (2.11.1) lib/puma/server.rb:262:in `block in run'
+  puma (2.11.1) lib/puma/thread_pool.rb:104:in `call'
+  puma (2.11.1) lib/puma/thread_pool.rb:104:in `block in spawn_thread'
+
+
+  Rendered /var/lib/gems/2.1.0/gems/web-console-2.0.0.beta3/lib/action_dispatch/templates/rescues/_source.erb (2.0ms)
+  Rendered /var/lib/gems/2.1.0/gems/web-console-2.0.0.beta3/lib/action_dispatch/templates/rescues/_trace.html.erb (1.4ms)
+  Rendered /var/lib/gems/2.1.0/gems/web-console-2.0.0.beta3/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /var/lib/gems/2.1.0/gems/web-console-2.0.0.beta3/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.5ms)
+  Rendered /var/lib/gems/2.1.0/gems/web-console-2.0.0.beta3/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (20.0ms)
+  [1m[36m (192.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (143.9ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateUsers (20151012113554)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151012113554"]]
+  [1m[35m (143.3ms)[0m  commit transaction
+Migrating to CreatePosts (20151012113952)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "content" text, "user_id" integer, "image_file_name" varchar, "image_content_type" varchar, "image_file_size" integer, "image_updated_at" datetime, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_posts_on_user_id_and_created_at" ON "posts" ("user_id", "created_at")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151012113952"]]
+  [1m[36m (140.9ms)[0m  [1mcommit transaction[0m
+Migrating to AddIndexToUsersEmail (20151012174212)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151012174212"]]
+  [1m[36m (186.5ms)[0m  [1mcommit transaction[0m
+Migrating to AddPasswordDigestToUsers (20151012174437)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "password_digest" varchar[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151012174437"]]
+  [1m[36m (142.0ms)[0m  [1mcommit transaction[0m
+Migrating to AddRememberDigestToUsers (20151013090741)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "remember_digest" varchar[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151013090741"]]
+  [1m[36m (120.1ms)[0m  [1mcommit transaction[0m
+Migrating to AddAdminToUsers (20151013124211)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "admin" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151013124211"]]
+  [1m[36m (119.9ms)[0m  [1mcommit transaction[0m
+Migrating to AddActivationToUsers (20151013140655)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "activation_digest" varchar[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "activated" boolean DEFAULT 'f'
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "activated_at" datetime[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151013140655"]]
+  [1m[36m (141.2ms)[0m  [1mcommit transaction[0m
+Migrating to AddResetToUsers (20151013153419)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "reset_digest" varchar[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "reset_sent_at" datetime
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151013153419"]]
+  [1m[35m (119.7ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_posts_on_user_id_and_created_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_posts_on_user_id_and_created_at' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'example@aditya.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "admin", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Example User"], ["email", "example@aditya.com"], ["password_digest", "$2a$10$M8KVbKJcsTYE7KebxK3XfeJEmFSmzimdOW.cgDhp8azIbac/KiYRy"], ["admin", "t"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:14.156900"], ["created_at", "2015-10-14 19:03:14.310985"], ["updated_at", "2015-10-14 19:03:14.310985"], ["activation_digest", "$2a$10$.paQ/b6mtFHQsxm3GVUs6uw/D6lhh6QQSaLlKmSsHkyvLCM11aksm"]]
+  [1m[36m (157.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'arno.o.keefe.dr@smithwhite.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Dr. Arno O'Keefe"], ["email", "arno.o.keefe.dr@smithwhite.com"], ["password_digest", "$2a$10$LdRa6yzEOwCDpKuIbxl5WuVftRcVJTt7KXUvPVGPdMh7NxXnSI.S6"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:14.982308"], ["created_at", "2015-10-14 19:03:15.064432"], ["updated_at", "2015-10-14 19:03:15.064432"], ["activation_digest", "$2a$10$HbSDuJGVWiFjS1WK5vCDJ.7Nxwe08jNeyy8.hXZNc1jIb3jjs/WvC"]]
+  [1m[36m (156.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kemmer_clifton@nitzsche.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Clifton Kemmer"], ["email", "kemmer_clifton@nitzsche.name"], ["password_digest", "$2a$10$O2oXoV1g06ca0G29LnZIm.viPmFHdMYPF8/lOaCUMazWsanZgPSZC"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:15.381189"], ["created_at", "2015-10-14 19:03:15.514772"], ["updated_at", "2015-10-14 19:03:15.514772"], ["activation_digest", "$2a$10$pI5xHpu2SyFP2rEEijr1QuVSItGwFanc/912qTMzDAMfBVTQA32p."]]
+  [1m[36m (206.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'jacobi.mariane@smithstehr.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Mariane Jacobi"], ["email", "jacobi.mariane@smithstehr.info"], ["password_digest", "$2a$10$zUi0UenxX/3e6c1nw5mvr.K/Arz4O.pueNec2uky8uHqz38e8Ruu."], ["activated", "t"], ["activated_at", "2015-10-14 19:03:15.880025"], ["created_at", "2015-10-14 19:03:15.985464"], ["updated_at", "2015-10-14 19:03:15.985464"], ["activation_digest", "$2a$10$U2f94RO8YWdkd82Td0dep.yzXzTIhdFK22W0UwzvwCZiq.4L50QEO"]]
+  [1m[36m (180.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'i_halvorson_margie@abbott.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Margie Halvorson I"], ["email", "i_halvorson_margie@abbott.info"], ["password_digest", "$2a$10$vNdl.F0qko7c3vgL1peZDekeU/IlYD89.zNVtNzF7oUATwg.ABPx."], ["activated", "t"], ["activated_at", "2015-10-14 19:03:16.323372"], ["created_at", "2015-10-14 19:03:16.403088"], ["updated_at", "2015-10-14 19:03:16.403088"], ["activation_digest", "$2a$10$PRFQVhlydwfJ.sKGYhGVQOnT/H/yS0aPjWV1P8qw/75fdCWfm79ge"]]
+  [1m[36m (129.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'maybelle.murray@morarfranecki.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Maybelle Murray"], ["email", "maybelle.murray@morarfranecki.biz"], ["password_digest", "$2a$10$Ee1cZQkMSs3MYNZNCshtiuJPAJis7LT7xDSyYy48zep9Jxt//8Bza"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:16.689367"], ["created_at", "2015-10-14 19:03:16.769155"], ["updated_at", "2015-10-14 19:03:16.769155"], ["activation_digest", "$2a$10$GmOZsfBoI7eRgjUlU/Z9D.JIYwJ6h3pTlX1WxjCzymuBitDMuSwRW"]]
+  [1m[36m (149.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'nelda_quigley@gleason.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Nelda Quigley"], ["email", "nelda_quigley@gleason.info"], ["password_digest", "$2a$10$DVSdlDtuSCzgj0/Q7153mucGg6LGlDS1aW8uWOJMqFQcYkvt9S/6."], ["activated", "t"], ["activated_at", "2015-10-14 19:03:17.077581"], ["created_at", "2015-10-14 19:03:17.157701"], ["updated_at", "2015-10-14 19:03:17.157701"], ["activation_digest", "$2a$10$x1K0znUT0xRN43F6DopUwu/bN.tXAzbgZwpCbxrTJ0UV6ETlhp8yq"]]
+  [1m[36m (147.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'dds_jacobson_demarco@wittingsenger.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Demarco Jacobson DDS"], ["email", "dds_jacobson_demarco@wittingsenger.biz"], ["password_digest", "$2a$10$BnBnP8q1V6VUkVEeennyB.SPg2z.g1zo9RHJ.beQIdkBWkQ8hnLKC"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:17.465798"], ["created_at", "2015-10-14 19:03:17.546040"], ["updated_at", "2015-10-14 19:03:17.546040"], ["activation_digest", "$2a$10$fbJ7zn3SFooYUypEngw6euRuMPdMpt7xE0J5i/Nzff2wXop1NhLmq"]]
+  [1m[36m (183.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'feil_adrian@torphymcglynn.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Adrian Feil"], ["email", "feil_adrian@torphymcglynn.net"], ["password_digest", "$2a$10$PeCDB7XCBMjx5kANn2k6we87ob60qnfhghqO3Hr3laFAd1R91T.LW"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:17.887280"], ["created_at", "2015-10-14 19:03:17.972294"], ["updated_at", "2015-10-14 19:03:17.972294"], ["activation_digest", "$2a$10$dxvK/7NlkoyH6UB9OKFTLe0s4rV7CBVFaNwk8e7znjshCBLvgW/aS"]]
+  [1m[36m (121.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'cummings.jamil@powlowski.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Jamil Cummings"], ["email", "cummings.jamil@powlowski.com"], ["password_digest", "$2a$10$eKCzRV0kUO2/7cgaIYcz4ernKoeeO3Er.SZq1j2wB2uoBQyzIgWVG"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:18.253154"], ["created_at", "2015-10-14 19:03:18.338893"], ["updated_at", "2015-10-14 19:03:18.338893"], ["activation_digest", "$2a$10$kNj0VsDeNUleJ5gfmbCeXuVf5FCeYhRU6cfiOlI1m8oPaiPp5BPYm"]]
+  [1m[36m (134.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'mr.devante.wehner@daugherty.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Mr. Devante Wehner"], ["email", "mr.devante.wehner@daugherty.name"], ["password_digest", "$2a$10$5G4.ddyqGpdIwc/ScoPkWuEzSmI4tyQIUyu1UKTxuxOuzwmH5q.N."], ["activated", "t"], ["activated_at", "2015-10-14 19:03:18.631248"], ["created_at", "2015-10-14 19:03:18.711174"], ["updated_at", "2015-10-14 19:03:18.711174"], ["activation_digest", "$2a$10$EwqVCY1q6YfFrSqizZ06uOKGIblY6RONh16jlbC9hbvxtV7p65/fy"]]
+  [1m[36m (135.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'albertha.johnson@price.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Albertha Johnson"], ["email", "albertha.johnson@price.org"], ["password_digest", "$2a$10$rt8vJZqpGUn/5ZzEZT63N.9uLTsNfEP8k5gCVMZwWODFX6hxnPVwi"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:19.008594"], ["created_at", "2015-10-14 19:03:19.088829"], ["updated_at", "2015-10-14 19:03:19.088829"], ["activation_digest", "$2a$10$wlTqlmgslUnMDCRZO/OERuiFM3K6JY3JNVo6rreYejHC.jUlic36y"]]
+  [1m[36m (136.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'dereck.hara.o@baileyschamberger.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Dereck O'Hara"], ["email", "dereck.hara.o@baileyschamberger.org"], ["password_digest", "$2a$10$aHEpL5NOIXvDx42hmevKsO7Hrbim9SEm8QCsD2Cv2gJZsKozjo2TS"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:19.386471"], ["created_at", "2015-10-14 19:03:19.511390"], ["updated_at", "2015-10-14 19:03:19.511390"], ["activation_digest", "$2a$10$71ws6djfYoN13C6Ph1tiQOieCBuJg.Dwa3MIzxsHJYmYNCu6QrwW6"]]
+  [1m[36m (126.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'carolina_schneider@flatley.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Carolina Schneider"], ["email", "carolina_schneider@flatley.biz"], ["password_digest", "$2a$10$MhFGcn/8C1BrvhUjA.8pNeFEKaAKhzEpoWLT681UCjF7CPKvPUChi"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:19.796270"], ["created_at", "2015-10-14 19:03:19.904443"], ["updated_at", "2015-10-14 19:03:19.904443"], ["activation_digest", "$2a$10$8SeuBTcULwpYO/TJ1Kzn0eCW7cwAtN9Ve2eFbSxnXmvlSwTAyTtDK"]]
+  [1m[36m (130.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'hardy.williamson@ritchie.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Hardy Williamson"], ["email", "hardy.williamson@ritchie.biz"], ["password_digest", "$2a$10$gHZbo2jqnkx2iPZM1lsQCOjLEh/DHO5uBrcp.cTen26hgIr2syaqu"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:20.195084"], ["created_at", "2015-10-14 19:03:20.277929"], ["updated_at", "2015-10-14 19:03:20.277929"], ["activation_digest", "$2a$10$gQ4Usk/XunI5hrGgXzIeg.t1H9e2oBhgV2m3aYV7hwE0J2cwcHPEC"]]
+  [1m[36m (158.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'v.becker.ricardo@will.name' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Ricardo Becker V"], ["email", "v.becker.ricardo@will.name"], ["password_digest", "$2a$10$Q/jUJ/vG0fSwR3ouZf6lpeFGTx1agxMUR9.jU4qPf.v8k7G4Rx7Ie"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:20.595161"], ["created_at", "2015-10-14 19:03:20.691788"], ["updated_at", "2015-10-14 19:03:20.691788"], ["activation_digest", "$2a$10$CzLG.SWvOXgdgvVzqODexOhM1.TeIGNy8uB7IsNAZ2PN5IGS4xhrS"]]
+  [1m[36m (152.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'vena.douglas@hyatt.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Vena Douglas"], ["email", "vena.douglas@hyatt.net"], ["password_digest", "$2a$10$K5CgkqD79vy1UeJjEP39HOg8DcoxUavpLPMmZ6r7yfhQ9pDDb3xhW"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:21.004439"], ["created_at", "2015-10-14 19:03:21.093933"], ["updated_at", "2015-10-14 19:03:21.093933"], ["activation_digest", "$2a$10$mhHvcG7Qrrqe2v3tgFyWp.2xPJAdIjmz0Dem.emHvrbTMsSx2Qr.G"]]
+  [1m[36m (148.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'heaney_petra_mr@huelwatsica.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Mr. Petra Heaney"], ["email", "heaney_petra_mr@huelwatsica.org"], ["password_digest", "$2a$10$Wu5NeijIY2XNB5NSomYzzu7RSo9ZdUL8YzWmMyv3.jJdJ7yHa6O6G"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:21.403709"], ["created_at", "2015-10-14 19:03:21.516307"], ["updated_at", "2015-10-14 19:03:21.516307"], ["activation_digest", "$2a$10$iNKk1merhuICws.jZPOncupE2OkScLPPmxaIjTukttNXdH0pQtuny"]]
+  [1m[36m (148.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'dorothy.mckenzie@kuhn.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Dorothy McKenzie"], ["email", "dorothy.mckenzie@kuhn.info"], ["password_digest", "$2a$10$HbAFzsCQMvrmY2n2ehKwh.ZwLIQNbhorvXI/4GjRlQQJobwcYPdDy"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:21.825035"], ["created_at", "2015-10-14 19:03:21.906169"], ["updated_at", "2015-10-14 19:03:21.906169"], ["activation_digest", "$2a$10$E.u47f7wJzaogdIv9ANM6.sXNpUyuS3AB4wIXIhnsV2La14wI9qpq"]]
+  [1m[36m (175.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'franecki_zakary@schneiderwillms.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Zakary Franecki"], ["email", "franecki_zakary@schneiderwillms.biz"], ["password_digest", "$2a$10$JumUnwTz4.kFVMv0qR659.2Q5w.PHu8RyBaL3wkbts5dSyM56s4Nq"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:22.247443"], ["created_at", "2015-10-14 19:03:22.333754"], ["updated_at", "2015-10-14 19:03:22.333754"], ["activation_digest", "$2a$10$hJ.cY301S2Ts1jtzH4QeXeKSHq33o8p.rtTtWe.q2h7c0JiKuSPYm"]]
+  [1m[36m (224.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'mr_kirlin_kurt@wiza.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Mr. Kurt Kirlin"], ["email", "mr_kirlin_kurt@wiza.name"], ["password_digest", "$2a$10$4n2O400AOs0cimS/g/J7E.mP5RTXS5jwVWtmQys9F2IQLd8pKhf7a"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:22.724715"], ["created_at", "2015-10-14 19:03:22.840721"], ["updated_at", "2015-10-14 19:03:22.840721"], ["activation_digest", "$2a$10$yxtnxRBwtFOu5Lfz55UFFukef2.HspK1WpAMibPm7h.Jw86dA7Pda"]]
+  [1m[36m (229.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'anika.herzog@pfeffer.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Anika Herzog"], ["email", "anika.herzog@pfeffer.org"], ["password_digest", "$2a$10$V7pajiU9Ba3qiWaB33Y4SuompaRTFcBJszCsK4w0YQ2Hj/hnTCsMS"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:23.244856"], ["created_at", "2015-10-14 19:03:23.328863"], ["updated_at", "2015-10-14 19:03:23.328863"], ["activation_digest", "$2a$10$29ENeExGPc4GKKjh0Kq56OuwEZ7.RDFAT6iEyfH3y24Vlmy0rODbq"]]
+  [1m[36m (150.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'pearline_iv_heaney@hills.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Pearline Heaney IV"], ["email", "pearline_iv_heaney@hills.info"], ["password_digest", "$2a$10$ajGHu1ZeR8s8DeYFvWqO2.hNvNXy9nGY/5R6AAjCTAfc9FxwFNcQu"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:23.644003"], ["created_at", "2015-10-14 19:03:23.723645"], ["updated_at", "2015-10-14 19:03:23.723645"], ["activation_digest", "$2a$10$6kNvrD8EUnEjxHBZLoQ2ZuIiw1k6RU3HwTsOgu2nVBP/GW5L9nvAe"]]
+  [1m[36m (145.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'joshua.heller@nolan.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Joshua Heller"], ["email", "joshua.heller@nolan.name"], ["password_digest", "$2a$10$YCbfI6jSJTXk91Iivtdw2e4FyD8UTIhy.2V4Yt92a/G7hnbQuuORC"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:24.032045"], ["created_at", "2015-10-14 19:03:24.112269"], ["updated_at", "2015-10-14 19:03:24.112269"], ["activation_digest", "$2a$10$qd9MPZCb6boaBckb.ZEJ8eNzJA8ffgL0eJLf2oH8DFbWOcncHbSwa"]]
+  [1m[36m (126.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'malcolm_goyette@littlevandervort.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Malcolm Goyette"], ["email", "malcolm_goyette@littlevandervort.com"], ["password_digest", "$2a$10$NCcaWEbr16EK49GDa3Mha.tYbtB2M7DmIClDat3gaUrBx5Ex3Uyn."], ["activated", "t"], ["activated_at", "2015-10-14 19:03:24.398123"], ["created_at", "2015-10-14 19:03:24.480376"], ["updated_at", "2015-10-14 19:03:24.480376"], ["activation_digest", "$2a$10$JCR3sSARSacGJWpB9gTdxe3JrFVaOjQrITX7uyPWumNKb9KMgIJee"]]
+  [1m[36m (134.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'sandy_spinka@bogisich.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Sandy Spinka"], ["email", "sandy_spinka@bogisich.com"], ["password_digest", "$2a$10$wu5PPSigBcOcjhvu2uX/3e/8f5kWGqy9TwyhQ0yK.pdRnpYR4YlOu"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:24.776167"], ["created_at", "2015-10-14 19:03:24.859934"], ["updated_at", "2015-10-14 19:03:24.859934"], ["activation_digest", "$2a$10$Ah2ywBo/.zn.BTWSFgaLZO5GXgLhDJAKTF.qNxe4kQ2PPKoCWtI3q"]]
+  [1m[36m (166.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'erdman.vicky@hartmann.name' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Vicky Erdman"], ["email", "erdman.vicky@hartmann.name"], ["password_digest", "$2a$10$/Lz7Y6acuhQYHgKzZPU3xunBG82I.yfKHpcUh1vvlFiHqw70yd8dm"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:25.197596"], ["created_at", "2015-10-14 19:03:25.279120"], ["updated_at", "2015-10-14 19:03:25.279120"], ["activation_digest", "$2a$10$.R7v5bUSVxZAfqj9EUaPtOa2Yc583hWOrM1dzkZVsOGV6CAJW3DtK"]]
+  [1m[36m (190.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'murl.grady@hyatt.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Murl Grady"], ["email", "murl.grady@hyatt.name"], ["password_digest", "$2a$10$bmr65zm6DkVLOs/13qSyqeaRzzk4ruRGDl5yIbjVixkKCJpv8n99S"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:25.652281"], ["created_at", "2015-10-14 19:03:25.733486"], ["updated_at", "2015-10-14 19:03:25.733486"], ["activation_digest", "$2a$10$9WzWTQwrsEi5ZGEX0ILJcuNejJ.n7C.MWQ6b97qlGq/S6YUTbXNFS"]]
+  [1m[36m (243.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.5ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'noah.jakubowski@raynorschulist.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Noah Jakubowski"], ["email", "noah.jakubowski@raynorschulist.biz"], ["password_digest", "$2a$10$nIdqhxIvIYvTlpFEy/Auv.6URQPzGPn806tnJsYpjYccU2pyH600u"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:26.140481"], ["created_at", "2015-10-14 19:03:26.224495"], ["updated_at", "2015-10-14 19:03:26.224495"], ["activation_digest", "$2a$10$PvZUw2fddS8jc4Yj2Q9h4u0wqv5Tr8BpVwe8frqSK.Vn2OcPleu.S"]]
+  [1m[36m (175.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'thelma_ondricka@boehmjakubowski.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Thelma Ondricka"], ["email", "thelma_ondricka@boehmjakubowski.net"], ["password_digest", "$2a$10$IJQrXXs3UHhe5DMxDrawqOUQo2QwLrobdE.06uhtLR1yQvUML0/A2"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:26.562386"], ["created_at", "2015-10-14 19:03:26.649036"], ["updated_at", "2015-10-14 19:03:26.649036"], ["activation_digest", "$2a$10$HrDmkVnD1jB2D0edvK7n7OQl5qEQMon9G8iIwd04qVILOLOP8J5JG"]]
+  [1m[36m (171.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'leuschke_emilia@bins.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Emilia Leuschke"], ["email", "leuschke_emilia@bins.com"], ["password_digest", "$2a$10$HLjcr6i0ce5to6YQ9wIeEOnETBX.s6RQI2QTktpePAX13.IQeGlXq"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:26.983500"], ["created_at", "2015-10-14 19:03:27.070047"], ["updated_at", "2015-10-14 19:03:27.070047"], ["activation_digest", "$2a$10$qSu7MEHS8DRfZWjXiNdBWubWUWdpswbGBk9lzhBrvy2woYbr5awqm"]]
+  [1m[36m (160.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bridie.baumbach@ratke.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Bridie Baumbach"], ["email", "bridie.baumbach@ratke.name"], ["password_digest", "$2a$10$fPNIiO/Ju8kGp6pDpPNPW.o2bEtnJN9QBuR1pQMo5N0a.L/9PmfOG"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:27.405001"], ["created_at", "2015-10-14 19:03:27.490802"], ["updated_at", "2015-10-14 19:03:27.490802"], ["activation_digest", "$2a$10$lyGyPiqf/h/3DVDTlCBuOuRZaCuNy8fU9XhMoef5X.MdACo.gk3xq"]]
+  [1m[36m (146.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'blanda_valentine@monahan.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Valentine Blanda"], ["email", "blanda_valentine@monahan.net"], ["password_digest", "$2a$10$khyIlGI9fKy3jpo46diIHeenrg7e9zy898B7b5LyF5LCcEuwy5aWi"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:27.804103"], ["created_at", "2015-10-14 19:03:27.889236"], ["updated_at", "2015-10-14 19:03:27.889236"], ["activation_digest", "$2a$10$o2e/9M8o/5bhwXwuK9aLceplp.63PWe8GdrdeY113CgLO5b6BApL."]]
+  [1m[36m (141.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'elbert_schumm@hirthelesch.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Elbert Schumm"], ["email", "elbert_schumm@hirthelesch.name"], ["password_digest", "$2a$10$v1PLKL/yY/LUfUljWJXhMO13slPlO2aO9v201PNbHfpNEvBFI1sLS"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:28.192282"], ["created_at", "2015-10-14 19:03:28.282643"], ["updated_at", "2015-10-14 19:03:28.282643"], ["activation_digest", "$2a$10$Pb7nAwo7dVZ1KffnJpcuMOlAsdZlxmd.eA82Ky57ieQL4CsXxKWTe"]]
+  [1m[36m (138.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'christiansen.helmer@friesen.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Helmer Christiansen"], ["email", "christiansen.helmer@friesen.biz"], ["password_digest", "$2a$10$VNNduuGBAOt36j/A9zyAfOa6yClqMWZ8FC/AwGiRuC5hfJXUjOPjK"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:28.580383"], ["created_at", "2015-10-14 19:03:28.665775"], ["updated_at", "2015-10-14 19:03:28.665775"], ["activation_digest", "$2a$10$NJDWiqlWLx4/BSgFg7/32eHhLItAuoDGH9vIncXPp75PJwl0Ija92"]]
+  [1m[36m (149.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'labadie.skylar@heaney.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Skylar Labadie"], ["email", "labadie.skylar@heaney.org"], ["password_digest", "$2a$10$doZ8IwpxyrfR2pB/QqIiNODbxn4Mn8tApEqUehPpvN1Li37tnqBx6"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:28.991088"], ["created_at", "2015-10-14 19:03:29.078317"], ["updated_at", "2015-10-14 19:03:29.078317"], ["activation_digest", "$2a$10$EMCnyJH4t6gjDdUyHdYsaetseHOpwHzrCC0YX7LTu.dPD2yr9ITdy"]]
+  [1m[36m (134.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'sauer_donnell_dds@hettingerkoepp.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Donnell Sauer DDS"], ["email", "sauer_donnell_dds@hettingerkoepp.org"], ["password_digest", "$2a$10$/xC6lGv0kG/BbRZM5W9OeOgSELD.RYnj/rivuENQs7eZUZKRkG/Hq"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:29.378594"], ["created_at", "2015-10-14 19:03:29.488573"], ["updated_at", "2015-10-14 19:03:29.488573"], ["activation_digest", "$2a$10$rBb.N5TZUuU4cbyC8OR/heiJ0HUIm22aihFO71Alx3zplvRb5SmrO"]]
+  [1m[36m (159.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'larkin.rosalyn.phd@cristwitting.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Rosalyn Larkin PhD"], ["email", "larkin.rosalyn.phd@cristwitting.net"], ["password_digest", "$2a$10$ssB42t6TQMnB5I0Arg95BeQQXAwcvrj/cYg.Uis4oiW8SNaO5QIqW"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:29.811263"], ["created_at", "2015-10-14 19:03:29.892071"], ["updated_at", "2015-10-14 19:03:29.892071"], ["activation_digest", "$2a$10$C0AYnmXVy58L6tZUR7HVLOEV3homVWeOx58E2XbgTwBRHpn2aeC3i"]]
+  [1m[36m (442.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'hagenes.miss.ephraim@beatty.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Miss Ephraim Hagenes"], ["email", "hagenes.miss.ephraim@beatty.info"], ["password_digest", "$2a$10$DZ7xBRxHW8OcD/AK0lIaausNdgFMhFa3mDU975SQFW0/F1SCUaL8O"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:30.500089"], ["created_at", "2015-10-14 19:03:30.596233"], ["updated_at", "2015-10-14 19:03:30.596233"], ["activation_digest", "$2a$10$JmxUO3yjumPyzr6emnO58eGBsZbzLq01DD9URoOCDSZV6Dho4G32a"]]
+  [1m[36m (167.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'swift_joey@zulauf.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Joey Swift"], ["email", "swift_joey@zulauf.name"], ["password_digest", "$2a$10$YBk8z2Z83ig.1R.GiNjoqOdbgL1ceC77jr2wsjv8SaCQU3.8THcv."], ["activated", "t"], ["activated_at", "2015-10-14 19:03:30.931141"], ["created_at", "2015-10-14 19:03:31.018793"], ["updated_at", "2015-10-14 19:03:31.018793"], ["activation_digest", "$2a$10$AMVB3WJb8TQ3EqkY/UHW7.ocY8COz6bZWSFn/03XRV76wVwLoK7ae"]]
+  [1m[36m (286.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'greenholt_jacky@kohler.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Jacky Greenholt"], ["email", "greenholt_jacky@kohler.info"], ["password_digest", "$2a$10$QX3VEERZvaU1V.b0YB40ROMZZqOmyKQWxiKRtURPhKNKTks7jxhoW"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:31.487415"], ["created_at", "2015-10-14 19:03:31.570820"], ["updated_at", "2015-10-14 19:03:31.570820"], ["activation_digest", "$2a$10$fVjGIFY1QCtDJHLHXxvwEuiB.ZuxtQm5CDOJCzchx.hyuv9.u.1zG"]]
+  [1m[36m (144.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'schroeder.donavon@oconner.com' LIMIT 1[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Donavon Schroeder"], ["email", "schroeder.donavon@oconner.com"], ["password_digest", "$2a$10$X6zUMcb2kHF/GDggq6yPtO8EGWGwPpMa82MHp8joAEzGDfzStkxbu"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:31.878027"], ["created_at", "2015-10-14 19:03:31.990994"], ["updated_at", "2015-10-14 19:03:31.990994"], ["activation_digest", "$2a$10$/6iHZT2L/cEfkkXdKgjZMeqrif00OFx5fhAAcKXzMXlX1B8JzmB3W"]]
+  [1m[36m (164.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'ezra.robel@brakuskerluke.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Ezra Robel"], ["email", "ezra.robel@brakuskerluke.net"], ["password_digest", "$2a$10$zCU7ZToREDBzUckOXR5SAuLiSO3cq9c6Qm1Xex1NB0YuXYhg/z9xe"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:32.343179"], ["created_at", "2015-10-14 19:03:32.446937"], ["updated_at", "2015-10-14 19:03:32.446937"], ["activation_digest", "$2a$10$088mwP2Xf83Fd2swryS6ueHAhlGNzaem1EFOYBk6J1zHVdzvWVFiG"]]
+  [1m[36m (143.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'sr_arianna_lesch@ortizsenger.org' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Arianna Lesch Sr."], ["email", "sr_arianna_lesch@ortizsenger.org"], ["password_digest", "$2a$10$8bvSgM3Z0fPX8lEYbRHlSuIPwC6aJWn2.KHwa/F2sQpDUeS.BdCwO"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:32.776098"], ["created_at", "2015-10-14 19:03:32.866063"], ["updated_at", "2015-10-14 19:03:32.866063"], ["activation_digest", "$2a$10$HPD3XYHu/Wo012mv7H2nNucpP5AcUbIA6ntaJL528DHpVvNMgfVzC"]]
+  [1m[36m (118.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'corwin.edmond@schneider.net' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Edmond Corwin"], ["email", "corwin.edmond@schneider.net"], ["password_digest", "$2a$10$83txlxwmVk6rnVnSItgvCe0FBdXBVz.qHAes6gSNjWJhb425a96km"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:33.164135"], ["created_at", "2015-10-14 19:03:33.254202"], ["updated_at", "2015-10-14 19:03:33.254202"], ["activation_digest", "$2a$10$Zv3YRHTuBDifCsgE9zYX0un0qX2db5.QH5zrdOdf2j3uwEYmLseNa"]]
+  [1m[36m (193.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kristofer.funk@zulauf.org' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Kristofer Funk"], ["email", "kristofer.funk@zulauf.org"], ["password_digest", "$2a$10$46Edr6/hJl.t1fDTj0Fb3uCvI828BT5qQxuF74BHAhgliiAEgsEVi"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:33.630298"], ["created_at", "2015-10-14 19:03:33.750884"], ["updated_at", "2015-10-14 19:03:33.750884"], ["activation_digest", "$2a$10$PyQDQ7ZTYyIssXzpVhhQiuV4rRYBxbwtH0sV/QLQ5yzW5CZEAZfDS"]]
+  [1m[36m (193.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'oceane.auer@lubowitz.net' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Oceane Auer"], ["email", "oceane.auer@lubowitz.net"], ["password_digest", "$2a$10$LqYtrdMsW1cYFTnWJ8HmOe42KKQUxuBquiu65f70XzbW1cW8azYM."], ["activated", "t"], ["activated_at", "2015-10-14 19:03:34.129234"], ["created_at", "2015-10-14 19:03:34.241587"], ["updated_at", "2015-10-14 19:03:34.241587"], ["activation_digest", "$2a$10$FlQu95UgxpQ1Mghj39KZceFTggN7ztFh..PL47Gle9Wg1xPH82ZpK"]]
+  [1m[36m (221.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'mohr.emmitt@millerbashirian.org' LIMIT 1[0m
+  [1m[35mSQL (1.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Emmitt Mohr"], ["email", "mohr.emmitt@millerbashirian.org"], ["password_digest", "$2a$10$aY/f90W7I72Qv7V0xWrm.OaLp5Dx8IIKUvA7apZdovKVz/vCctFMO"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:34.651662"], ["created_at", "2015-10-14 19:03:34.746543"], ["updated_at", "2015-10-14 19:03:34.746543"], ["activation_digest", "$2a$10$bGVkvSJc10ed/VsUULvzqeVzsPSlsJlf73lQxXEY37yYpXuLm9hRK"]]
+  [1m[36m (186.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'jude_gerlach@nolan.info' LIMIT 1[0m
+  [1m[35mSQL (1.8ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Jude Gerlach"], ["email", "jude_gerlach@nolan.info"], ["password_digest", "$2a$10$.JZSVUVm4NW.3kwE7pbZtOkxwNcZKMxzUcuywkNB5zF1u8K8W8azG"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:35.117898"], ["created_at", "2015-10-14 19:03:35.211046"], ["updated_at", "2015-10-14 19:03:35.211046"], ["activation_digest", "$2a$10$P.nzsxZ4wIWH9a0X3F8FleZu8FI7mpD.f1Dpf15HK180BwRLLmn.W"]]
+  [1m[36m (286.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'beaulah_sipes_phd@thiel.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Beaulah Sipes PhD"], ["email", "beaulah_sipes_phd@thiel.net"], ["password_digest", "$2a$10$3f1iOjOcQbeyUDH1bhsnCuqCWgxFbvilxL8Uc.ZsF7HdtkwSFl2O2"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:35.683895"], ["created_at", "2015-10-14 19:03:35.796307"], ["updated_at", "2015-10-14 19:03:35.796307"], ["activation_digest", "$2a$10$aO6qGDqmGauPZBZ0NsajMu24ZRoO9jyF9sXu2t6fety/ZVtUqjC1W"]]
+  [1m[36m (137.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'haley_jake@faheyokon.biz' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Jake Haley"], ["email", "haley_jake@faheyokon.biz"], ["password_digest", "$2a$10$nCSsLs7kTMP.Qy//BRbfAO8fFKopV4PC/kZIwXIUXtYB0Kr7s87UC"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:36.117389"], ["created_at", "2015-10-14 19:03:36.212369"], ["updated_at", "2015-10-14 19:03:36.212369"], ["activation_digest", "$2a$10$OEyaD67hEpNDRYWgZ5Tdn.bFoIIbZcWIgxqSUW0auXtwhyv7fGbWC"]]
+  [1m[36m (174.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'rodriguez_dr_joany@eichmanntromp.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Dr. Joany Rodriguez"], ["email", "rodriguez_dr_joany@eichmanntromp.net"], ["password_digest", "$2a$10$6Yk0HiPRvom2b/xSNMkS1.uu6wcM6JZpRHuWC0p8W1MgJUXn22nmC"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:36.572500"], ["created_at", "2015-10-14 19:03:36.666712"], ["updated_at", "2015-10-14 19:03:36.666712"], ["activation_digest", "$2a$10$3UF4TL/NKYFLMLI4mE39SuHW1rLc8/LRxc/.Zw5w8LJ2J5bswgUpG"]]
+  [1m[36m (147.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'clarabelle.fritsch.miss@carrollkozey.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Miss Clarabelle Fritsch"], ["email", "clarabelle.fritsch.miss@carrollkozey.name"], ["password_digest", "$2a$10$8XE7un5SMh021MT9XfFWIu2uB97NepRaWg6OKAZ/LcNxbNXX99//a"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:36.995279"], ["created_at", "2015-10-14 19:03:37.092888"], ["updated_at", "2015-10-14 19:03:37.092888"], ["activation_digest", "$2a$10$0BAuFgFMC9JYGIm.V4j7Ie3KpxJhRV13tASUwSY5PIQSJSMMaENfu"]]
+  [1m[36m (124.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'asia_mayer@hermiston.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Asia Mayer"], ["email", "asia_mayer@hermiston.biz"], ["password_digest", "$2a$10$gvuIetZhYbLBpvx/b86fE.hdCOQXtNlI1cECrIBk8IPKFYrR0kLuC"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:37.405214"], ["created_at", "2015-10-14 19:03:37.495721"], ["updated_at", "2015-10-14 19:03:37.495721"], ["activation_digest", "$2a$10$zfcnly.6zPu53LVpN3UTbePBdK9bBMQMaM.lUWllF6VgPs.k.V8lO"]]
+  [1m[36m (151.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'quitzon.toni@koch.info' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Toni Quitzon"], ["email", "quitzon.toni@koch.info"], ["password_digest", "$2a$10$qHF3gJSKKWwdXZDgzRG1h.kizI3jcDEz6gZbI8T582fVe5jdGIx0e"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:37.827379"], ["created_at", "2015-10-14 19:03:37.921886"], ["updated_at", "2015-10-14 19:03:37.921886"], ["activation_digest", "$2a$10$DgaJvf2lNrSStPeZcgwtxONzEmihwTST7TU.arkPknVoLtsT3ZnXy"]]
+  [1m[36m (158.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'mrs.dylan.corkery@kerluke.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Mrs. Dylan Corkery"], ["email", "mrs.dylan.corkery@kerluke.com"], ["password_digest", "$2a$10$eyI2y9dh7ieEB9XrTq3mqubcSb82dvlK/jKjB0wdan7cFuR7dV/0O"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:38.270336"], ["created_at", "2015-10-14 19:03:38.373882"], ["updated_at", "2015-10-14 19:03:38.373882"], ["activation_digest", "$2a$10$DbD81cqCvll4D5vsX0MLf.wI7bntroix56I2F3pm90sV66VjEN8k2"]]
+  [1m[36m (270.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kunde_alena@weimann.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Alena Kunde"], ["email", "kunde_alena@weimann.info"], ["password_digest", "$2a$10$iOB2EK4ZcEf5.aOyPqjwb.94V/4Ryh3BEX8oNfThsNIPdU04JjOuG"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:38.824703"], ["created_at", "2015-10-14 19:03:38.913668"], ["updated_at", "2015-10-14 19:03:38.913668"], ["activation_digest", "$2a$10$LLHOMdGQusbW9rGbVu6esu9IsWAfwpjzruCh2o6Fun4kcsW57e3RO"]]
+  [1m[36m (226.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'lafayette.hoppe@carrollschmeler.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Lafayette Hoppe"], ["email", "lafayette.hoppe@carrollschmeler.org"], ["password_digest", "$2a$10$e/ri4gHa/BtvT4kd0WINvuPz3o0oEqNG1t9PEXCdZuH3LVX5oDZ2e"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:39.324137"], ["created_at", "2015-10-14 19:03:39.405025"], ["updated_at", "2015-10-14 19:03:39.405025"], ["activation_digest", "$2a$10$ZQoHohUI9cyRkilYC5e..u4axV84wn5RDYfU3nX74HEAXpeamxID2"]]
+  [1m[36m (159.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'andreanne.hoeger@davisrunolfon.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Andreanne Hoeger"], ["email", "andreanne.hoeger@davisrunolfon.name"], ["password_digest", "$2a$10$BUZu49GWnLGkKNctTuj.pucTUdzjmo4m5CCzEwKjZCXLsBIr4QJSe"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:39.724242"], ["created_at", "2015-10-14 19:03:39.807809"], ["updated_at", "2015-10-14 19:03:39.807809"], ["activation_digest", "$2a$10$bluCShHj3suYH5H3jSZel.FV4K4P9e2UJF4h../WKlsAx.AjrM6Ze"]]
+  [1m[36m (140.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'prosacco.reymundo@moore.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Reymundo Prosacco"], ["email", "prosacco.reymundo@moore.info"], ["password_digest", "$2a$10$pUYbQOj5OyfmgnXiD1dSj./JOJYfLbbxJs4pCNTPnv8Db3ZQIkK.i"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:40.113376"], ["created_at", "2015-10-14 19:03:40.195727"], ["updated_at", "2015-10-14 19:03:40.195727"], ["activation_digest", "$2a$10$vT9ZqfXOt8503egT.9Uv5utVA4fTVWASUWJKEbCDLAdkJA5V7IkXq"]]
+  [1m[36m (163.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'leannon_melisa@corkerystokes.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Melisa Leannon"], ["email", "leannon_melisa@corkerystokes.name"], ["password_digest", "$2a$10$BevcmEv3y16LyezC1d7L7ONJYS9BRUIcSj5zCcIqegJZahOv55qVq"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:40.523885"], ["created_at", "2015-10-14 19:03:40.606782"], ["updated_at", "2015-10-14 19:03:40.606782"], ["activation_digest", "$2a$10$3QXmJLiNIq0zSDwD5LDWwuftyBPMjku3i49RYWiC4nP.9VmwkFKT."]]
+  [1m[36m (417.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'rath.mrs.cathrine@glover.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Mrs. Cathrine Rath"], ["email", "rath.mrs.cathrine@glover.name"], ["password_digest", "$2a$10$E11zqDOUi5xn5j2MOOR91OOvwUGovdElXMnaEfEL921XQxW.7yxwy"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:41.189964"], ["created_at", "2015-10-14 19:03:41.274629"], ["updated_at", "2015-10-14 19:03:41.274629"], ["activation_digest", "$2a$10$CFcU7JLSRVVXIs1foxA6L.39VmxW35AysPaeguhxe.45wYc/fki2O"]]
+  [1m[36m (135.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'marks.eino.ii@hamill.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Eino Marks II"], ["email", "marks.eino.ii@hamill.biz"], ["password_digest", "$2a$10$fdqGlzpXfc.YDODvQkD/5OukaA1ftz8EKl1HwlYVJaoEc5HrLz1Hq"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:41.578409"], ["created_at", "2015-10-14 19:03:41.666552"], ["updated_at", "2015-10-14 19:03:41.666552"], ["activation_digest", "$2a$10$jXYOT7NtuE0JZ6BHdWzRleJ8GggGYwvi/18IvV0JIewzXh0G34asW"]]
+  [1m[36m (407.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'abshire.madalyn.i@runolfon.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Madalyn Abshire I"], ["email", "abshire.madalyn.i@runolfon.com"], ["password_digest", "$2a$10$laUJ.0BgT08ZN94yQ9r6O.bpV0CRH0JAcQyE.JAyJI4ShjI5BNSmK"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:42.245692"], ["created_at", "2015-10-14 19:03:42.336620"], ["updated_at", "2015-10-14 19:03:42.336620"], ["activation_digest", "$2a$10$Adtbi2KgOixE5xqsnHY50OAjM8/ihwp3QZTi72N17x8cYVHvgYVm2"]]
+  [1m[36m (150.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'mertz_cassie@howell.org' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Cassie Mertz"], ["email", "mertz_cassie@howell.org"], ["password_digest", "$2a$10$Y.xli7C8tdrGZAHcmHH9POIINLccTYVrAO3xTmmDD/TSxMW4pyd6G"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:42.668221"], ["created_at", "2015-10-14 19:03:42.752427"], ["updated_at", "2015-10-14 19:03:42.752427"], ["activation_digest", "$2a$10$lOb4JO1FyVoXdFzBaC88EOhsC0peNn2btowZG6HqtKIZKsEsG8Mmu"]]
+  [1m[36m (269.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'deckow_katlyn_ms@harris.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Ms. Katlyn Deckow"], ["email", "deckow_katlyn_ms@harris.info"], ["password_digest", "$2a$10$lFnfBomsipVizpr/OH4Shumw2NxBJJ/X8CF6Rzvwgr7nSnQz580UK"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:43.203180"], ["created_at", "2015-10-14 19:03:43.291444"], ["updated_at", "2015-10-14 19:03:43.291444"], ["activation_digest", "$2a$10$tPxlyv/xTPnOhchSQH62T.MtC.wC0nir6ExX3km.dFa9RpY65RtTm"]]
+  [1m[36m (193.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'jonathon_kiehn_ms@beerarmstrong.org' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Ms. Jonathon Kiehn"], ["email", "jonathon_kiehn_ms@beerarmstrong.org"], ["password_digest", "$2a$10$YaYM2xTgxqkt1YuuefasaeUgVOOpx/.hEzEAK9tJVYqAI7dReQoN2"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:43.657746"], ["created_at", "2015-10-14 19:03:43.744717"], ["updated_at", "2015-10-14 19:03:43.744717"], ["activation_digest", "$2a$10$mANvk5.BMqkmD54yy95db.kf/HKk4rrPdy5nEg2YzDdKCkOBDwriG"]]
+  [1m[36m (162.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'padberg.hans@johns.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Hans Padberg"], ["email", "padberg.hans@johns.info"], ["password_digest", "$2a$10$Aybym9PnoAo8v87U7le4aOy24alPPzEs6MjsuZZ6u9pdvDqLFl27C"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:44.089855"], ["created_at", "2015-10-14 19:03:44.179043"], ["updated_at", "2015-10-14 19:03:44.179043"], ["activation_digest", "$2a$10$5gRg4ZkK1JQAqXCoysz4Bea12YtF4fcSqXrevatWfV/Jt91DTF4CO"]]
+  [1m[36m (173.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'reanna.hickle.phd@hintz.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Reanna Hickle PhD"], ["email", "reanna.hickle.phd@hintz.com"], ["password_digest", "$2a$10$tzhvalac9auzxe5a.N22Auk.e2LGW/Zq0Wq50HMTWxGTGyPXSnUL."], ["activated", "t"], ["activated_at", "2015-10-14 19:03:44.522158"], ["created_at", "2015-10-14 19:03:44.612699"], ["updated_at", "2015-10-14 19:03:44.612699"], ["activation_digest", "$2a$10$GZBSo9YePG2dwj3X9qCnKeimbczURCJWZoNx8mRD6UqnIzVOLfBYa"]]
+  [1m[36m (144.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'roberto.hayes.jr@wiegandschaefer.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Roberto Hayes Jr."], ["email", "roberto.hayes.jr@wiegandschaefer.biz"], ["password_digest", "$2a$10$CQZn9krcyKFoxetG1SokQOWwIv8Gt4FQq7xUm7eKHRRKvH/7mfVFW"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:44.921413"], ["created_at", "2015-10-14 19:03:45.007518"], ["updated_at", "2015-10-14 19:03:45.007518"], ["activation_digest", "$2a$10$ku9yeTswqiJGSfw0MfeloeTYz96n8VWK4pG6U7Fj.lvdkXllarvGO"]]
+  [1m[36m (182.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'i.rosalee.yost@lednerjacobs.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Rosalee Yost I"], ["email", "i.rosalee.yost@lednerjacobs.biz"], ["password_digest", "$2a$10$wHTBLVdEXEjluuMuL.kaLuYb/7JJmPxctffmdPbJB/8g9amAEIQ9i"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:45.366308"], ["created_at", "2015-10-14 19:03:45.457318"], ["updated_at", "2015-10-14 19:03:45.457318"], ["activation_digest", "$2a$10$7MgAQH.4nEittKzBjrmy1ucECLuC0u6F2Uz5FNg/YvmHhQMlkMlTW"]]
+  [1m[36m (165.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'jr.konopelski.schuyler@lindsawayn.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Schuyler Konopelski Jr."], ["email", "jr.konopelski.schuyler@lindsawayn.com"], ["password_digest", "$2a$10$dtHYhb0Cjv1aL/fXjrVZ2uGEAbXa8b3dYr2DrNXA6Zb7l3trP4s.2"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:45.798877"], ["created_at", "2015-10-14 19:03:45.890228"], ["updated_at", "2015-10-14 19:03:45.890228"], ["activation_digest", "$2a$10$wqwU/DvVLa7PBEcqVfbLdeG71y9MjEQoxiwp5WpY60m0ZhW9vdoKK"]]
+  [1m[36m (121.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'alexandrea_leuschke@halvorson.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Alexandrea Leuschke"], ["email", "alexandrea_leuschke@halvorson.org"], ["password_digest", "$2a$10$zCbEGFJTB11FmIzBN/BpJuEj6EW0GzZvzNNALPCd5VzW.EGERZFOq"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:46.186144"], ["created_at", "2015-10-14 19:03:46.275499"], ["updated_at", "2015-10-14 19:03:46.275499"], ["activation_digest", "$2a$10$Z08RQ6HTTeS9KdYx4feVeerHoAhuTCgUTK1YWzNhpgffWi.rokOTG"]]
+  [1m[36m (140.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'schmitt_camille@dibbert.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Camille Schmitt"], ["email", "schmitt_camille@dibbert.name"], ["password_digest", "$2a$10$WLOd8Mljgfc5SyGcFV7cTuNs83WQTsp3bUQdc4RvIiuiUfWzOtMiW"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:46.585674"], ["created_at", "2015-10-14 19:03:46.672251"], ["updated_at", "2015-10-14 19:03:46.672251"], ["activation_digest", "$2a$10$VHSfzO4Tw7SJDiKgCrdBt.77P9tnUPeIPzMG7CNvkxQ2fhPfZYZ6G"]]
+  [1m[36m (148.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'johnston.ada@pfeffermuller.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Ada Johnston"], ["email", "johnston.ada@pfeffermuller.net"], ["password_digest", "$2a$10$doCNRF6pN5SVaW5Fu9g3zOTt2fxJw7sSQI4jQb0P9mVTgKKg/vn.e"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:46.996061"], ["created_at", "2015-10-14 19:03:47.088252"], ["updated_at", "2015-10-14 19:03:47.088252"], ["activation_digest", "$2a$10$DmxXfX8cw5vJ8rkplPaNIuQUTHZkcr4IEZdJzOxVphcI1ZtqoEpim"]]
+  [1m[36m (142.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'hintz.karlie@welchstiedemann.info' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Karlie Hintz"], ["email", "hintz.karlie@welchstiedemann.info"], ["password_digest", "$2a$10$spztbOY049STkUmUR0L7FO2mUkLXUR.eDJrR/Q.OpWgMH0H0DjoyC"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:47.406083"], ["created_at", "2015-10-14 19:03:47.496793"], ["updated_at", "2015-10-14 19:03:47.496793"], ["activation_digest", "$2a$10$MtYIIWmSZTEjGzTv.VNnCO7AVCQrBu5oSrXwLTQ45Omxry3QZJDOe"]]
+  [1m[36m (191.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'naomi_herzog@bayer.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Naomi Herzog"], ["email", "naomi_herzog@bayer.net"], ["password_digest", "$2a$10$.rfJmI4QURBIxxbA1ELyG.xO099i/OjodrlSXB075VJrqGVS8wZFe"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:47.861232"], ["created_at", "2015-10-14 19:03:47.943899"], ["updated_at", "2015-10-14 19:03:47.943899"], ["activation_digest", "$2a$10$FvPWdTWLkMSLBFJg42mLTOzbBw7rLVFhTAHJiU6Npoc1Wcog5vEVG"]]
+  [1m[36m (133.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'green_nelda_dvm@emmerich.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Nelda Green DVM"], ["email", "green_nelda_dvm@emmerich.org"], ["password_digest", "$2a$10$8GJpyzxwPwK3ANg1GpFa6.z4kuTpAbr8GiX3b6LDLKjyiebT3EAMq"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:48.239247"], ["created_at", "2015-10-14 19:03:48.322507"], ["updated_at", "2015-10-14 19:03:48.322507"], ["activation_digest", "$2a$10$gmiKUMv/pJ8qkx/BqCEqz.ErVT.YAYp2VCb31xZVbq6FYzNX.NUK2"]]
+  [1m[36m (142.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'streich.zora@macejkovic.name' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Zora Streich"], ["email", "streich.zora@macejkovic.name"], ["password_digest", "$2a$10$72dVZXI61XA.ooYEfc8bsOJWPWUjVx83MvUb4/I5Sv8LFHpUDw/9W"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:48.627394"], ["created_at", "2015-10-14 19:03:48.709566"], ["updated_at", "2015-10-14 19:03:48.709566"], ["activation_digest", "$2a$10$v8DUcsEKFIrgwCdjeLPrfuE03bcXL6JsaohAmwpjki0Hn06Ej6IOu"]]
+  [1m[36m (143.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'schumm_chris@fisherreynolds.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Chris Schumm"], ["email", "schumm_chris@fisherreynolds.name"], ["password_digest", "$2a$10$sBQnvhIVLQ1LEfSHjlkmgOOPemAc7lDrTDLfJLG9/m8Dni.cy5jvS"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:49.016135"], ["created_at", "2015-10-14 19:03:49.104585"], ["updated_at", "2015-10-14 19:03:49.104585"], ["activation_digest", "$2a$10$GggYR/YLmF6lOOzvJEJ57u2ZZMKzjScHhFCRiKIzHSQpDWjz2VJHO"]]
+  [1m[36m (137.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'sporer.beatrice@labadiekuvalis.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Beatrice Sporer"], ["email", "sporer.beatrice@labadiekuvalis.net"], ["password_digest", "$2a$10$QALjypskPIwg3Wgz.bgonuCy1hb6rreVOjil.E49kdCVzw9WCSTMy"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:49.403826"], ["created_at", "2015-10-14 19:03:49.485627"], ["updated_at", "2015-10-14 19:03:49.485627"], ["activation_digest", "$2a$10$xS48ykx7s4uyQYU65jUhWOJ0aZ6IOC97DgHdKVeydYhAaAgKX5Y2e"]]
+  [1m[36m (170.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'jose.miss.swift@gislason.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Miss Jose Swift"], ["email", "jose.miss.swift@gislason.biz"], ["password_digest", "$2a$10$GjzhA9I7eDHlswn42yauc.L1oWlikXIeHE2hoA5Zj0taPZ2cJVyAe"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:49.817609"], ["created_at", "2015-10-14 19:03:49.899797"], ["updated_at", "2015-10-14 19:03:49.899797"], ["activation_digest", "$2a$10$IGcY37JVX8x0Zovni30.YuRdzX8eHc3AI05Hug12qOGOMhcqAFYD."]]
+  [1m[36m (141.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'lysanne_bartell_sr@mills.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Lysanne Bartell Sr."], ["email", "lysanne_bartell_sr@mills.info"], ["password_digest", "$2a$10$lKNumb0xDq5.6Wpo8OyPk.KZl728X.7pf8RAyfPC83IiR9u.wQt4y"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:50.203196"], ["created_at", "2015-10-14 19:03:50.284829"], ["updated_at", "2015-10-14 19:03:50.284829"], ["activation_digest", "$2a$10$MHunF38rqccK.Ik2Dz2SiuK/I1wLp8lSuDm7/kTKswugVfMvpOR.a"]]
+  [1m[36m (143.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'huel.melany@keebler.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Melany Huel"], ["email", "huel.melany@keebler.info"], ["password_digest", "$2a$10$FZM5tyRriPwO.4w0QvOeXeDzkWko67tIGpoV4t1y4vgtfQZV57X4a"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:50.591483"], ["created_at", "2015-10-14 19:03:50.672629"], ["updated_at", "2015-10-14 19:03:50.672629"], ["activation_digest", "$2a$10$Jf0G1txKInuD.ohvA/tIiOOG3e5jVZ4DABPwtb.mBv7w7TNPMDgBy"]]
+  [1m[36m (123.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'glover_raleigh@olsonlesch.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Raleigh Glover"], ["email", "glover_raleigh@olsonlesch.info"], ["password_digest", "$2a$10$5YCwzr/9YZ4F42ANUlqL7us7EtJIMYGelCoMU4M493qEor.oDyzWq"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:50.957308"], ["created_at", "2015-10-14 19:03:51.042090"], ["updated_at", "2015-10-14 19:03:51.042090"], ["activation_digest", "$2a$10$/VjUfaEvXzjFPSmcDBlPge6bLghA2z/sVj8DAOxo25uUWY8ggCFB."]]
+  [1m[36m (156.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'hoppe_jalon@hoppe.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Jalon Hoppe"], ["email", "hoppe_jalon@hoppe.info"], ["password_digest", "$2a$10$wNOUrAwB78shBmh.nhNTrOCRV/d8SI14WwmZQzmmqwPWdZU19EnMW"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:51.367942"], ["created_at", "2015-10-14 19:03:51.448949"], ["updated_at", "2015-10-14 19:03:51.448949"], ["activation_digest", "$2a$10$YIbhcKa7SibKuKGz7YbgQ./ncTlMC9ra/C5sSUD7xuirhzn7FvL/W"]]
+  [1m[36m (144.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'zboncak_destany@windler.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Destany Zboncak"], ["email", "zboncak_destany@windler.biz"], ["password_digest", "$2a$10$AqB81UW5dngql3nadH0ImufpQ//EOdZzV6inc7g9FqISanPt03E0i"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:51.755793"], ["created_at", "2015-10-14 19:03:51.837436"], ["updated_at", "2015-10-14 19:03:51.837436"], ["activation_digest", "$2a$10$1txLRq3tXFTiqfZylgg7oOJwyqHoOl.29CRHgSa7CSGLopu.PeP1W"]]
+  [1m[36m (165.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'jack.bayer.v@torphytillman.org' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Jack Bayer V"], ["email", "jack.bayer.v@torphytillman.org"], ["password_digest", "$2a$10$Jnoo1MaPX1QzUNHS5Hl41O8m7v8miX6PNY0shyLfysDEl541x8NUK"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:52.166070"], ["created_at", "2015-10-14 19:03:52.248948"], ["updated_at", "2015-10-14 19:03:52.248948"], ["activation_digest", "$2a$10$sYE8sD4NyG1o9Im0NuVo2uEdBuxksu5MdgH9EVadtpW.prZKrVZ0S"]]
+  [1m[36m (186.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'robel_delia@considinetorp.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Delia Robel"], ["email", "robel_delia@considinetorp.org"], ["password_digest", "$2a$10$0lr8uYTWgcrA1cAi9H/l2ejkF3RSzsh6FeKt2FZ7vCcjPiHZzsSEe"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:52.599586"], ["created_at", "2015-10-14 19:03:52.680518"], ["updated_at", "2015-10-14 19:03:52.680518"], ["activation_digest", "$2a$10$92CylgVHICu9oJxq8euqHOj6S9iun/BBKJZQ8RLU/zd7u9x9GeZCq"]]
+  [1m[36m (159.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'mosciski.abdiel.dr@weber.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Dr. Abdiel Mosciski"], ["email", "mosciski.abdiel.dr@weber.biz"], ["password_digest", "$2a$10$U2wCH/ilRxJCO4jIhfKxUe1gXgwRg/g3fIwGDYGdMU6asD0PMhivW"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:53.000574"], ["created_at", "2015-10-14 19:03:53.092845"], ["updated_at", "2015-10-14 19:03:53.092845"], ["activation_digest", "$2a$10$PPo/QHkGNeJ9Lh/8tvQ4x.0bzyjYnBf.P5xJ6hY6Jsvoi8Vsu1CoS"]]
+  [1m[36m (163.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'aufderhar.amanda@langworth.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Amanda Aufderhar"], ["email", "aufderhar.amanda@langworth.biz"], ["password_digest", "$2a$10$7ToV9b73kiSiDrtw9rrW5uhgilXg0jhMwjnjimfOPm6l4Dbrz1BHK"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:53.422197"], ["created_at", "2015-10-14 19:03:53.503748"], ["updated_at", "2015-10-14 19:03:53.503748"], ["activation_digest", "$2a$10$TZBeBniyQ3N0tY7teJp4tOeBnc3A.BZ0zB/QMPVLf4m7iVUoBSjfe"]]
+  [1m[36m (133.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'rebeka_watsica@jacobsonkoch.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Rebeka Watsica"], ["email", "rebeka_watsica@jacobsonkoch.com"], ["password_digest", "$2a$10$ss0203tfdI3Lk.F/tFCLAOakId3Per11IJNMRv9BU6HAoweewCStu"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:53.799293"], ["created_at", "2015-10-14 19:03:53.880833"], ["updated_at", "2015-10-14 19:03:53.880833"], ["activation_digest", "$2a$10$iuIHCM3.VJIC0QWCC9ziXOce/vJpyi.Rd9pat.dzLb.p3ZZZFmq.C"]]
+  [1m[36m (133.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'edmond_feest@pfannerstill.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Edmond Feest"], ["email", "edmond_feest@pfannerstill.info"], ["password_digest", "$2a$10$KDktGzajzLFBUdyYTyIra.lvJ.cK5kMFzWigIIDUchsZMALee0u6C"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:54.176229"], ["created_at", "2015-10-14 19:03:54.259282"], ["updated_at", "2015-10-14 19:03:54.259282"], ["activation_digest", "$2a$10$MVQmmaM1uOi9f3U3slrSvO9hQkOj4lwuvkx8HdlCkRo4lTDpl6mSC"]]
+  [1m[36m (144.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'harber_quentin@thompson.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Quentin Harber"], ["email", "harber_quentin@thompson.info"], ["password_digest", "$2a$10$J1tgdVWW//Aid1bOr0nofOzjVWGz9Zwt6OizDw9O6iiK9UJEa4ovS"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:54.564409"], ["created_at", "2015-10-14 19:03:54.645212"], ["updated_at", "2015-10-14 19:03:54.645212"], ["activation_digest", "$2a$10$oxmQ8gk/R4Ua8Itj1cvRQ.VB1O70Rgn11nqaWUEXdIJ6ZNA7quWxK"]]
+  [1m[36m (145.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'hagenes.broderick@fritschswift.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Broderick Hagenes"], ["email", "hagenes.broderick@fritschswift.com"], ["password_digest", "$2a$10$vGk4r/bKlw5kVg2cz1yfxOP6mfwSHHcLDO2/ByPPkhOOIi5nn.cpW"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:54.952506"], ["created_at", "2015-10-14 19:03:55.035814"], ["updated_at", "2015-10-14 19:03:55.035814"], ["activation_digest", "$2a$10$lOEELxY9uOaHWAwTF5SFx.vMrqx2hiOqvmh2e74VDe04pGx4Q3AgW"]]
+  [1m[36m (238.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kyler_kihn@howell.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Kyler Kihn"], ["email", "kyler_kihn@howell.info"], ["password_digest", "$2a$10$OGKchMoatxBbksmwpuEmg..WmEp9/ikTtScp61Iv8cdBXf0wy3ZbK"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:55.440890"], ["created_at", "2015-10-14 19:03:55.528257"], ["updated_at", "2015-10-14 19:03:55.528257"], ["activation_digest", "$2a$10$VUnwDzgSa.BVhKMv9o3/Y.Yu2osEFDxtbnvrrYYuz7iJOHU6zZ7Fm"]]
+  [1m[36m (157.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'ms.dietrich.blaze@becker.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Ms. Blaze Dietrich"], ["email", "ms.dietrich.blaze@becker.biz"], ["password_digest", "$2a$10$B1tcykVTAQrAE.iwIr09au/mFCzqO148taqWN2yHErrdaL6B9VACG"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:55.852359"], ["created_at", "2015-10-14 19:03:55.935032"], ["updated_at", "2015-10-14 19:03:55.935032"], ["activation_digest", "$2a$10$O9fVm4modZvJ/XnfY9kGQuemUi1K8JtbPQ3HncQKUB1bTutxle3Jq"]]
+  [1m[36m (131.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'runolfsson_michelle@kochweber.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Michelle Runolfsson"], ["email", "runolfsson_michelle@kochweber.info"], ["password_digest", "$2a$10$fO1Xb8PxTu8lhgeYJfRfX.VfxPOpcuwfqaQ9IMomZNkS2oro9FBKK"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:56.229707"], ["created_at", "2015-10-14 19:03:56.312577"], ["updated_at", "2015-10-14 19:03:56.312577"], ["activation_digest", "$2a$10$E0Cdr4aY5wqfmHTcyzjUVunvx.HfCFv7o.Zcof3CD7NXwxIeBS.x6"]]
+  [1m[36m (120.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'tabitha.miss.ebert@strackehayes.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Miss Tabitha Ebert"], ["email", "tabitha.miss.ebert@strackehayes.biz"], ["password_digest", "$2a$10$EiC.1AcwH.MVGh20/rqhQuac10SakbsWuECFmNWsAuMLEf3LwiaAu"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:56.595392"], ["created_at", "2015-10-14 19:03:56.676510"], ["updated_at", "2015-10-14 19:03:56.676510"], ["activation_digest", "$2a$10$iRSAiQspCY28x2YBFvkUg.2eOwY9SToAEizB8r4Nd8WBU3EL6t5wm"]]
+  [1m[36m (135.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'botsford.charity@schmitt.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Charity Botsford"], ["email", "botsford.charity@schmitt.org"], ["password_digest", "$2a$10$e4BVdbxJE8N5OEZxXd288uyHQiNW8pCUwCmcKIWpUQh8SaNwoHeW6"], ["activated", "t"], ["activated_at", "2015-10-14 19:03:56.972556"], ["created_at", "2015-10-14 19:03:57.059254"], ["updated_at", "2015-10-14 19:03:57.059254"], ["activation_digest", "$2a$10$PTO42FQmR9FU2v5dpLggrO1HBKo6taSVAJD.8zOHp3WpTEcLgmBiu"]]
+  [1m[36m (135.4ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:35:33 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StaticPagesController#home as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (39.8ms)
+  Rendered layouts/_ie_files.html.erb (1.0ms)
+  Rendered layouts/_header.html.erb (1.6ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 4012ms (Views: 4001.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/custom.self-1b2de53bf75707e8f51ab82fabb93e6fcb43108fee5f921133d704f97da82e91.css?body=1" for 127.0.0.1 at 2015-10-15 00:35:38 +0530
+
+
+Started GET "/assets/scaffolds.self-4f1b1080bb8370186547cacb322943d1d92e04e0988141ba2626dddcdd4535de.css?body=1" for 127.0.0.1 at 2015-10-15 00:35:38 +0530
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:35:40 +0530
+Processing by StaticPagesController#home as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.4ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 81ms (Views: 80.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:36:26 +0530
+Processing by StaticPagesController#home as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (2.3ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.5ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 1432ms (Views: 1430.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/account_activations.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:36:27 +0530
+
+
+Started GET "/assets/custom.self-4411fd375db421d950879cc3fa1ae815be5897f1181ceb04e461a2ac5544ae61.css?body=1" for 127.0.0.1 at 2015-10-15 00:36:27 +0530
+
+
+Started GET "/assets/password_resets.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:36:27 +0530
+
+
+Started GET "/assets/posts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:36:27 +0530
+
+
+Started GET "/assets/scaffolds.self-4f1b1080bb8370186547cacb322943d1d92e04e0988141ba2626dddcdd4535de.css?body=1" for 127.0.0.1 at 2015-10-15 00:36:27 +0530
+
+
+Started GET "/assets/sessions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:36:27 +0530
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:36:27 +0530
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:36:27 +0530
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2015-10-15 00:36:27 +0530
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for 127.0.0.1 at 2015-10-15 00:36:27 +0530
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for 127.0.0.1 at 2015-10-15 00:36:27 +0530
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2015-10-15 00:36:27 +0530
+
+
+Started GET "/assets/password_resets.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:36:27 +0530
+
+
+Started GET "/assets/account_activations.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:36:28 +0530
+
+
+Started GET "/assets/posts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:36:28 +0530
+
+
+Started GET "/assets/sessions.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:36:28 +0530
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:36:28 +0530
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:36:28 +0530
+
+
+Started GET "/assets/bootstrap.self-cdea7efeac1597b89ddd6fd86b0e8e0bec5d5fb1fac9c6e8a045f2c59eef2d13.js?body=1" for 127.0.0.1 at 2015-10-15 00:36:28 +0530
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2015-10-15 00:36:28 +0530
+
+
+Started GET "/users/1" for 127.0.0.1 at 2015-10-15 00:36:32 +0530
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered users/show.html.erb within layouts/application (1.1ms)
+  Rendered layouts/_ie_files.html.erb (0.3ms)
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered layouts/_header.html.erb (1.3ms)
+  Rendered layouts/_footer.html.erb (0.4ms)
+Completed 200 OK in 106ms (Views: 103.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:36:34 +0530
+Processing by StaticPagesController#home as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (0.9ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.4ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 134ms (Views: 133.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:36:36 +0530
+Processing by StaticPagesController#home as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_ie_files.html.erb (0.1ms)
+  Rendered layouts/_header.html.erb (0.4ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 95ms (Views: 93.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:37:13 +0530
+Processing by StaticPagesController#home as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (1.0ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.5ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 89ms (Views: 88.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/account_activations.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:37:13 +0530
+
+
+Started GET "/assets/custom.self-4411fd375db421d950879cc3fa1ae815be5897f1181ceb04e461a2ac5544ae61.css?body=1" for 127.0.0.1 at 2015-10-15 00:37:13 +0530
+
+
+Started GET "/assets/password_resets.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:37:13 +0530
+
+
+Started GET "/assets/posts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:37:13 +0530
+
+
+Started GET "/assets/scaffolds.self-4f1b1080bb8370186547cacb322943d1d92e04e0988141ba2626dddcdd4535de.css?body=1" for 127.0.0.1 at 2015-10-15 00:37:13 +0530
+
+
+Started GET "/assets/sessions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:37:13 +0530
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:37:14 +0530
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for 127.0.0.1 at 2015-10-15 00:37:14 +0530
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for 127.0.0.1 at 2015-10-15 00:37:14 +0530
+
+
+Started GET "/assets/account_activations.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:37:14 +0530
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2015-10-15 00:37:14 +0530
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2015-10-15 00:37:14 +0530
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:37:14 +0530
+
+
+Started GET "/assets/password_resets.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:37:14 +0530
+
+
+Started GET "/assets/sessions.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:37:14 +0530
+
+
+Started GET "/assets/posts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:37:14 +0530
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:37:14 +0530
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:37:14 +0530
+
+
+Started GET "/assets/bootstrap.self-cdea7efeac1597b89ddd6fd86b0e8e0bec5d5fb1fac9c6e8a045f2c59eef2d13.js?body=1" for 127.0.0.1 at 2015-10-15 00:37:14 +0530
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2015-10-15 00:37:14 +0530
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:37:21 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StaticPagesController#home as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (21.8ms)
+  Rendered layouts/_ie_files.html.erb (0.4ms)
+  Rendered layouts/_header.html.erb (2.1ms)
+  Rendered layouts/_footer.html.erb (0.4ms)
+Completed 200 OK in 280ms (Views: 270.6ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:37:23 +0530
+Processing by StaticPagesController#home as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (0.9ms)
+  Rendered layouts/_ie_files.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 87ms (Views: 86.5ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:37:25 +0530
+Processing by StaticPagesController#home as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_ie_files.html.erb (0.1ms)
+  Rendered layouts/_header.html.erb (0.4ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 81ms (Views: 80.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/help" for 127.0.0.1 at 2015-10-15 00:37:26 +0530
+Processing by StaticPagesController#help as HTML
+  Rendered static_pages/help.html.erb within layouts/application (0.3ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 128ms (Views: 127.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2015-10-15 00:37:27 +0530
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "users"[0m
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" LIMIT 15 OFFSET 0
+  Rendered users/_user.html.erb (3.7ms)
+  Rendered users/index.html.erb within layouts/application (203.8ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.4ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 332ms (Views: 330.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2015-10-15 00:37:30 +0530
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered users/show.html.erb within layouts/application (0.9ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 87ms (Views: 85.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:37:31 +0530
+Processing by StaticPagesController#home as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.5ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 83ms (Views: 82.1ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:37:33 +0530
+Processing by StaticPagesController#home as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_ie_files.html.erb (0.1ms)
+  Rendered layouts/_header.html.erb (0.5ms)
+  Rendered layouts/_footer.html.erb (0.2ms)
+Completed 200 OK in 106ms (Views: 105.8ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:38:22 +0530
+Processing by StaticPagesController#home as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (1.8ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.6ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 101ms (Views: 100.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/account_activations.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:38:22 +0530
+
+
+Started GET "/assets/custom.self-4411fd375db421d950879cc3fa1ae815be5897f1181ceb04e461a2ac5544ae61.css?body=1" for 127.0.0.1 at 2015-10-15 00:38:22 +0530
+
+
+Started GET "/assets/password_resets.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/scaffolds.self-4f1b1080bb8370186547cacb322943d1d92e04e0988141ba2626dddcdd4535de.css?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/sessions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/posts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/account_activations.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/password_resets.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/posts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/sessions.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/assets/bootstrap.self-cdea7efeac1597b89ddd6fd86b0e8e0bec5d5fb1fac9c6e8a045f2c59eef2d13.js?body=1" for 127.0.0.1 at 2015-10-15 00:38:23 +0530
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+Processing by StaticPagesController#home as HTML
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (2.3ms)
+  Rendered layouts/_ie_files.html.erb (0.1ms)
+  Rendered layouts/_header.html.erb (0.6ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 115ms (Views: 114.5ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/account_activations.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/custom.self-4411fd375db421d950879cc3fa1ae815be5897f1181ceb04e461a2ac5544ae61.css?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/password_resets.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/posts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/scaffolds.self-4f1b1080bb8370186547cacb322943d1d92e04e0988141ba2626dddcdd4535de.css?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/sessions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/account_activations.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/password_resets.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/posts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/sessions.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/assets/bootstrap.self-cdea7efeac1597b89ddd6fd86b0e8e0bec5d5fb1fac9c6e8a045f2c59eef2d13.js?body=1" for 127.0.0.1 at 2015-10-15 00:39:29 +0530
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:40:24 +0530
+Processing by StaticPagesController#home as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_ie_files.html.erb (0.1ms)
+  Rendered layouts/_header.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 1426ms (Views: 1425.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/custom.self-1d15ee831880c4f0c0c252835807419f60ca1a1717acfb287ad230f6ae24cd21.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/account_activations.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/sessions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/posts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/scaffolds.self-4f1b1080bb8370186547cacb322943d1d92e04e0988141ba2626dddcdd4535de.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/password_resets.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/account_activations.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/password_resets.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/posts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/sessions.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/bootstrap.self-cdea7efeac1597b89ddd6fd86b0e8e0bec5d5fb1fac9c6e8a045f2c59eef2d13.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:26 +0530
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:40:35 +0530
+Processing by StaticPagesController#home as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (0.9ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 91ms (Views: 90.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/account_activations.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:35 +0530
+
+
+Started GET "/assets/custom.self-1d15ee831880c4f0c0c252835807419f60ca1a1717acfb287ad230f6ae24cd21.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:35 +0530
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:35 +0530
+
+
+Started GET "/assets/posts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:35 +0530
+
+
+Started GET "/assets/scaffolds.self-4f1b1080bb8370186547cacb322943d1d92e04e0988141ba2626dddcdd4535de.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:35 +0530
+
+
+Started GET "/assets/password_resets.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:35 +0530
+
+
+Started GET "/assets/sessions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:35 +0530
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:36 +0530
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:36 +0530
+
+
+Started GET "/assets/password_resets.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:36 +0530
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:36 +0530
+
+
+Started GET "/assets/sessions.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:36 +0530
+
+
+Started GET "/assets/account_activations.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:36 +0530
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2015-10-15 00:40:36 +0530
+
+
+Started GET "/assets/posts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:36 +0530
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:36 +0530
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:36 +0530
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:36 +0530
+
+
+Started GET "/assets/bootstrap.self-cdea7efeac1597b89ddd6fd86b0e8e0bec5d5fb1fac9c6e8a045f2c59eef2d13.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:36 +0530
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2015-10-15 00:40:36 +0530
+
+
+Started DELETE "/logout" for 127.0.0.1 at 2015-10-15 00:49:55 +0530
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"GgRsR8GlXSQdG/X3Mig+VrVwIyRV8Wb9U3f9Or1SfTZIRnV6czxpnB0VifgeMyu8nqPZJF3dKUIdH77qGKFlYg=="}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 4ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:49:55 +0530
+Processing by StaticPagesController#home as HTML
+  Rendered static_pages/home.html.erb within layouts/application (5.9ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.2ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 91ms (Views: 90.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/images/aditya.png" for 127.0.0.1 at 2015-10-15 00:49:55 +0530
+
+ActionController::RoutingError (No route matches [GET] "/images/aditya.png"):
+  web-console (2.0.0.beta3) lib/action_dispatch/debug_exceptions.rb:22:in `middleware_call'
+  web-console (2.0.0.beta3) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.3) lib/rails/engine.rb:518:in `call'
+  railties (4.2.3) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  puma (2.11.1) lib/puma/server.rb:507:in `handle_request'
+  puma (2.11.1) lib/puma/server.rb:375:in `process_client'
+  puma (2.11.1) lib/puma/server.rb:262:in `block in run'
+  puma (2.11.1) lib/puma/thread_pool.rb:104:in `call'
+  puma (2.11.1) lib/puma/thread_pool.rb:104:in `block in spawn_thread'
+
+
+  Rendered /var/lib/gems/2.1.0/gems/web-console-2.0.0.beta3/lib/action_dispatch/templates/rescues/_trace.html.erb (4.4ms)
+  Rendered /var/lib/gems/2.1.0/gems/web-console-2.0.0.beta3/lib/action_dispatch/templates/rescues/routing_error.html.erb within rescues/layout (33.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+Processing by StaticPagesController#home as HTML
+  Rendered static_pages/home.html.erb within layouts/application (3.5ms)
+  Rendered layouts/_ie_files.html.erb (0.1ms)
+  Rendered layouts/_header.html.erb (0.2ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 216ms (Views: 215.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/custom.self-1d15ee831880c4f0c0c252835807419f60ca1a1717acfb287ad230f6ae24cd21.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/account_activations.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/password_resets.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/posts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/scaffolds.self-4f1b1080bb8370186547cacb322943d1d92e04e0988141ba2626dddcdd4535de.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/sessions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/account_activations.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/password_resets.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/posts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/sessions.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/bootstrap.self-cdea7efeac1597b89ddd6fd86b0e8e0bec5d5fb1fac9c6e8a045f2c59eef2d13.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+
+Started GET "/images/aditya.png" for 127.0.0.1 at 2015-10-15 00:50:12 +0530
+
+ActionController::RoutingError (No route matches [GET] "/images/aditya.png"):
+  web-console (2.0.0.beta3) lib/action_dispatch/debug_exceptions.rb:22:in `middleware_call'
+  web-console (2.0.0.beta3) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.3) lib/rails/engine.rb:518:in `call'
+  railties (4.2.3) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  puma (2.11.1) lib/puma/server.rb:507:in `handle_request'
+  puma (2.11.1) lib/puma/server.rb:375:in `process_client'
+  puma (2.11.1) lib/puma/server.rb:262:in `block in run'
+  puma (2.11.1) lib/puma/thread_pool.rb:104:in `call'
+  puma (2.11.1) lib/puma/thread_pool.rb:104:in `block in spawn_thread'
+
+
+  Rendered /var/lib/gems/2.1.0/gems/web-console-2.0.0.beta3/lib/action_dispatch/templates/rescues/_trace.html.erb (2.9ms)
+  Rendered /var/lib/gems/2.1.0/gems/web-console-2.0.0.beta3/lib/action_dispatch/templates/rescues/routing_error.html.erb within rescues/layout (35.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+Processing by StaticPagesController#home as HTML
+  Rendered static_pages/home.html.erb within layouts/application (0.8ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.2ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 78ms (Views: 77.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/account_activations.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/custom.self-1d15ee831880c4f0c0c252835807419f60ca1a1717acfb287ad230f6ae24cd21.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/posts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/password_resets.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/sessions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/scaffolds.self-4f1b1080bb8370186547cacb322943d1d92e04e0988141ba2626dddcdd4535de.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/account_activations.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/password_resets.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/posts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/sessions.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/bootstrap.self-cdea7efeac1597b89ddd6fd86b0e8e0bec5d5fb1fac9c6e8a045f2c59eef2d13.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2015-10-15 00:50:26 +0530
+
+
+Started GET "/login" for 127.0.0.1 at 2015-10-15 00:50:39 +0530
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (233.1ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.7ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 309ms (Views: 308.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2015-10-15 00:50:41 +0530
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wtaAjVSCbdbpWhFLUXfdQcUjpwwLcyHR9/CsEJCShI2QlJmw5htZbulUbUR9bMir7vBdDANfbm65mO/ANWGc2Q==", "session"=>{"email"=>"example@aditya.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1  [["email", "example@aditya.com"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+Redirected to http://localhost:3000/users/1
+Completed 302 Found in 87ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2015-10-15 00:50:41 +0530
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered users/show.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered layouts/_header.html.erb (0.8ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 78ms (Views: 77.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered users/show.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered layouts/_header.html.erb (1.8ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 97ms (Views: 86.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/account_activations.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/custom.self-1d15ee831880c4f0c0c252835807419f60ca1a1717acfb287ad230f6ae24cd21.css?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/password_resets.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/posts.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/scaffolds.self-4f1b1080bb8370186547cacb322943d1d92e04e0988141ba2626dddcdd4535de.css?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/sessions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/static_pages.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/account_activations.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/password_resets.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/posts.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/sessions.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/static_pages.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/bootstrap.self-cdea7efeac1597b89ddd6fd86b0e8e0bec5d5fb1fac9c6e8a045f2c59eef2d13.js?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started GET "/assets/application.self-f8806224e027f3e3f0138ea9ce99319e298dfdb323304d1f1be6eae8e8c74724.js?body=1" for 127.0.0.1 at 2015-10-15 00:51:52 +0530
+
+
+Started DELETE "/logout" for 127.0.0.1 at 2015-10-15 00:51:56 +0530
+Processing by SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"jQMzWSJGSbp3mjgO2lLOh3BVsq++zBdLQpcTzjLUc73fQSpkkN99AneURAH2SdttW4ZIr7bgWPQM/1Aelydr6Q=="}
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.1ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 4ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-10-15 00:51:56 +0530
+Processing by StaticPagesController#home as HTML
+  Rendered static_pages/home.html.erb within layouts/application (0.2ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.2ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 158ms (Views: 157.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2015-10-15 00:51:57 +0530
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.1ms)
+  Rendered layouts/_ie_files.html.erb (0.1ms)
+  Rendered layouts/_header.html.erb (0.4ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 83ms (Views: 82.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 127.0.0.1 at 2015-10-15 00:51:58 +0530
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"MTtq04XZXaPyMpksL0C1ik7BKwF+VXFUW9Ocp8v5ltJjeXPuN0BpG/I85SMDW6BgZRLRAXZ5PusVu993bgqOhg==", "session"=>{"email"=>"example@aditya.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT 1  [["email", "example@aditya.com"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/home
+Completed 302 Found in 89ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/home" for 127.0.0.1 at 2015-10-15 00:51:58 +0530
+Processing by StaticPagesController#home as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (0.4ms)
+  Rendered layouts/_ie_files.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.4ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 77ms (Views: 76.6ms | ActiveRecord: 0.1ms)

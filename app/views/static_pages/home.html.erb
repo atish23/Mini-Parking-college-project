@@ -1,0 +1,72 @@
+<%if logged_in?%>
+<div id="wrapper">
+      <div id="content">
+          <div id="map"></div>
+      </div>
+  </div>
+    <script>
+
+var map;
+function initMap() {
+  var bounds = new google.maps.LatLngBounds();
+  var DelhiCenter = {lat: 28.6100, lng: 77.2300};
+  var coordinates= [{lat:28.6629,lng:77.2100},{lat:28.5472, lng:77.2508},{lat:28.6328, lng:77.2197},{lat:28.5789, lng:77.2439},{lat:28.5769, lng:77.1961},{lat:28.5290, lng:77.2191}];
+  var info=["Karol Bagh","Nehru Place", "Connaught Place", "Lajpat Nagar", "Sarojni Nagar", "Select City Walk"];
+    //1. Karol Bagh 1.Nehru place 2.Connaught Place 3.Lajpat Nagar 4.Sarojni Nagar 5.Select City Walk
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: DelhiCenter,
+    zoom: 12
+  });
+
+
+  var marker = new google.maps.Marker({
+      position: DelhiCenter,
+      map: map,
+      title: 'Hello World!'
+    });
+      setMarkers(map,coordinates,info);
+       bounds.extend(marker.position);
+       map.fitBounds(bounds);
+       var listener = google.maps.event.addListener(map, "idle", function () {
+         map.setZoom(12);
+    google.maps.event.removeListener(listener);
+    });
+
+  //var contentString = //Hit a url here to get data!;
+
+}
+
+function setMarkers(map,coordinates,info){
+
+      var marker, i
+
+for (i = 0; i < coordinates.length; i++){
+
+  var marker = new google.maps.Marker({
+          map: map, title: info[i] , position: coordinates[i]
+        });
+        map.setCenter(marker.getPosition())
+
+  }
+}
+
+
+
+
+    </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6UmP5y2ulrLl7wgkjMi9A-WyeYyPbJBs&callback=initMap"
+        async defer></script>
+
+<%else%>
+
+<% provide(:title, "Home") %>
+<div class="center jumbotron">
+<h1>Welcome to ParkEasy</h1>
+<p>
+  Description goes here!.
+</p>
+
+<%= link_to "Sign up now!", signup_path,class: "btn btn-lg btn-primary"%>
+</div>
+<%=link_to image_tag("aditya.png", alt: "Rails logo"), 'https://github.com/Aditya-Chowdhry/'%>
+<%end%>
