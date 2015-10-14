@@ -1452,3 +1452,532 @@ Processing by StaticPagesController#home as HTML
   Rendered layouts/_header.html.erb (0.4ms)
   Rendered layouts/_footer.html.erb (0.1ms)
 Completed 200 OK in 77ms (Views: 76.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/home" for 127.0.0.1 at 2015-10-15 01:11:27 +0530
+
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+	bin/rake db:migrate RAILS_ENV=development
+
+):
+  activerecord (4.2.3) lib/active_record/migration.rb:392:in `check_pending!'
+  activerecord (4.2.3) lib/active_record/migration.rb:373:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.3) lib/active_support/callbacks.rb:84:in `run_callbacks'
+  actionpack (4.2.3) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  web-console (2.0.0.beta3) lib/action_dispatch/debug_exceptions.rb:18:in `middleware_call'
+  web-console (2.0.0.beta3) lib/action_dispatch/debug_exceptions.rb:13:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.3) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.3) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.4) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.4) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.4) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.3) lib/action_dispatch/middleware/static.rb:116:in `call'
+  rack (1.6.4) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.3) lib/rails/engine.rb:518:in `call'
+  railties (4.2.3) lib/rails/application.rb:165:in `call'
+  rack (1.6.4) lib/rack/content_length.rb:15:in `call'
+  puma (2.11.1) lib/puma/server.rb:507:in `handle_request'
+  puma (2.11.1) lib/puma/server.rb:375:in `process_client'
+  puma (2.11.1) lib/puma/server.rb:262:in `block in run'
+  puma (2.11.1) lib/puma/thread_pool.rb:104:in `call'
+  puma (2.11.1) lib/puma/thread_pool.rb:104:in `block in spawn_thread'
+
+
+  Rendered /var/lib/gems/2.1.0/gems/web-console-2.0.0.beta3/lib/action_dispatch/templates/rescues/_source.erb (2.7ms)
+  Rendered /var/lib/gems/2.1.0/gems/web-console-2.0.0.beta3/lib/action_dispatch/templates/rescues/_trace.html.erb (1.9ms)
+  Rendered /var/lib/gems/2.1.0/gems/web-console-2.0.0.beta3/lib/action_dispatch/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /var/lib/gems/2.1.0/gems/web-console-2.0.0.beta3/lib/action_dispatch/templates/rescues/_web_console.html.erb (1.3ms)
+  Rendered /var/lib/gems/2.1.0/gems/web-console-2.0.0.beta3/lib/action_dispatch/templates/rescues/diagnostics.html.erb within rescues/layout (20.2ms)
+  [1m[36m (148.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  select sqlite_version(*)
+  [1m[36m (121.1ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateUsers (20151012113554)
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35m (1.0ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151012113554"]]
+  [1m[35m (155.7ms)[0m  commit transaction
+Migrating to CreatePosts (20151012113952)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "content" text, "user_id" integer, "image_file_name" varchar, "image_content_type" varchar, "image_file_size" integer, "image_updated_at" datetime, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_posts_on_user_id_and_created_at" ON "posts" ("user_id", "created_at")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151012113952"]]
+  [1m[36m (130.2ms)[0m  [1mcommit transaction[0m
+Migrating to AddIndexToUsersEmail (20151012174212)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151012174212"]]
+  [1m[36m (175.5ms)[0m  [1mcommit transaction[0m
+Migrating to AddPasswordDigestToUsers (20151012174437)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mALTER TABLE "users" ADD "password_digest" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151012174437"]]
+  [1m[36m (152.3ms)[0m  [1mcommit transaction[0m
+Migrating to AddRememberDigestToUsers (20151013090741)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "remember_digest" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151013090741"]]
+  [1m[36m (153.4ms)[0m  [1mcommit transaction[0m
+Migrating to AddAdminToUsers (20151013124211)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "admin" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151013124211"]]
+  [1m[36m (131.1ms)[0m  [1mcommit transaction[0m
+Migrating to AddActivationToUsers (20151013140655)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "activation_digest" varchar[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "activated" boolean DEFAULT 'f'
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "activated_at" datetime[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151013140655"]]
+  [1m[36m (174.8ms)[0m  [1mcommit transaction[0m
+Migrating to AddResetToUsers (20151013153419)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "users" ADD "reset_digest" varchar[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "reset_sent_at" datetime
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151013153419"]]
+  [1m[35m (153.0ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_posts_on_user_id_and_created_at' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_posts_on_user_id_and_created_at' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'example@aditya.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "admin", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Example User"], ["email", "example@aditya.com"], ["password_digest", "$2a$10$fEbEAHNAxVHfwoJuw5Z/L.qTAKAiIFyQwQvNQXVYsAUEGbVOUoPOS"], ["admin", "t"], ["activated", "t"], ["activated_at", "2015-10-14 19:42:53.057894"], ["created_at", "2015-10-14 19:42:53.158943"], ["updated_at", "2015-10-14 19:42:53.158943"], ["activation_digest", "$2a$10$TM30ed/gbwHGikpIkJ77G.d.FL0Tnty3FsffFpxNNQ0yCIIWpOgOG"]]
+  [1m[36m (204.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'oswaldo_conroy@marquardt.org' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Oswaldo Conroy"], ["email", "oswaldo_conroy@marquardt.org"], ["password_digest", "$2a$10$Vvpw9teLsnh4A3XCDVyF3OEnahus6viDnsmUNjuYW9RA7Y3qo5g/."], ["activated", "t"], ["activated_at", "2015-10-14 19:42:53.755538"], ["created_at", "2015-10-14 19:42:53.835586"], ["updated_at", "2015-10-14 19:42:53.835586"], ["activation_digest", "$2a$10$HC7Lpf/v4PSFAcpFALXzPOSijZStKM7RSn6ElchMgW7z3iuK4wbjC"]]
+  [1m[36m (280.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'dvm.connelly.aiden@raynorhahn.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Aiden Connelly DVM"], ["email", "dvm.connelly.aiden@raynorhahn.net"], ["password_digest", "$2a$10$ln/U0VyE5HkRRCbMfQcAOO.0SkPdZFn.Ww2GCAfI86t5KjhS4cwki"], ["activated", "t"], ["activated_at", "2015-10-14 19:42:54.280003"], ["created_at", "2015-10-14 19:42:54.383762"], ["updated_at", "2015-10-14 19:42:54.383762"], ["activation_digest", "$2a$10$1SqkFIcaYxOC/btMq2KtruzMytnZxUJvQnyd9tk3kpxyEFq5uQzhe"]]
+  [1m[36m (178.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'prohaska.pedro.sr@rippinsmith.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Pedro Prohaska Sr."], ["email", "prohaska.pedro.sr@rippinsmith.info"], ["password_digest", "$2a$10$LDpWeCT5mSSV7eC.4i7WbOyCjCvlDWO3vD3qixFGgI.wCj9vdgwhm"], ["activated", "t"], ["activated_at", "2015-10-14 19:42:54.723627"], ["created_at", "2015-10-14 19:42:54.808054"], ["updated_at", "2015-10-14 19:42:54.808054"], ["activation_digest", "$2a$10$xmZ/gY4M15Z4sLr3aogTOOnvAzyCjDUkDd3vNWbzuyTsGir50t5QK"]]
+  [1m[36m (175.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'conroy.jerald@wittinggleichner.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Jerald Conroy"], ["email", "conroy.jerald@wittinggleichner.name"], ["password_digest", "$2a$10$N/5WVyJT6xC1VIh8H0zK2u1STpZebJAkP5C6NI.1EJw1Q7X7RCzaC"], ["activated", "t"], ["activated_at", "2015-10-14 19:42:55.145292"], ["created_at", "2015-10-14 19:42:55.233747"], ["updated_at", "2015-10-14 19:42:55.233747"], ["activation_digest", "$2a$10$XSVlEGxcqh65a8ZpDMHVH.XfLtph3bNRzHHOTqcsX3//EtdUphQ7i"]]
+  [1m[36m (183.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'iv.clinton.kirlin@douglaskris.org' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Clinton Kirlin IV"], ["email", "iv.clinton.kirlin@douglaskris.org"], ["password_digest", "$2a$10$qyKntY8qJWC.an3iETrpXesFtt7E5pPYdgXScYlara9oMBp4iQj4a"], ["activated", "t"], ["activated_at", "2015-10-14 19:42:55.579196"], ["created_at", "2015-10-14 19:42:55.667091"], ["updated_at", "2015-10-14 19:42:55.667091"], ["activation_digest", "$2a$10$ZkN1LkwzdpfxqZ0T3.q.8e6j9sZ3ntoPmHn2uu353Is8nTvBM5HIG"]]
+  [1m[36m (170.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'krajcik_dr_breanna@mitchellondricka.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Dr. Breanna Krajcik"], ["email", "krajcik_dr_breanna@mitchellondricka.info"], ["password_digest", "$2a$10$owEthdgzjPioRgHPM.ayIOcR4OYKRuTTTL/XH78lvs8e34lISVksW"], ["activated", "t"], ["activated_at", "2015-10-14 19:42:56.000786"], ["created_at", "2015-10-14 19:42:56.086855"], ["updated_at", "2015-10-14 19:42:56.086855"], ["activation_digest", "$2a$10$TDtGsqmKg3pVQHG7Z3QzxeAsJSTGIIQOUvUe1.kd8dZGcvXeP0O4K"]]
+  [1m[36m (159.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'carter_adele_ms@deckowhegmann.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Ms. Adele Carter"], ["email", "carter_adele_ms@deckowhegmann.biz"], ["password_digest", "$2a$10$CYRDJ9bWna1OIatiQKv4beeyF/bnLU7.BaZvog82UEA7wz9FCtuLG"], ["activated", "t"], ["activated_at", "2015-10-14 19:42:56.411691"], ["created_at", "2015-10-14 19:42:56.537607"], ["updated_at", "2015-10-14 19:42:56.537607"], ["activation_digest", "$2a$10$BZ8vFeVxaF6G3ojWvSGB5OkoxrZIEMvdAa/ARUscicRizKTio8MsC"]]
+  [1m[36m (164.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'keeling_frances@cartwright.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Frances Keeling"], ["email", "keeling_frances@cartwright.biz"], ["password_digest", "$2a$10$SIUpu.8KFjyHMLZG66pPle7xXabJHevHSxKVHJVUFNLVfc/yJyNKK"], ["activated", "t"], ["activated_at", "2015-10-14 19:42:56.865703"], ["created_at", "2015-10-14 19:42:56.952321"], ["updated_at", "2015-10-14 19:42:56.952321"], ["activation_digest", "$2a$10$k6ATwM0RqcjSrrYf7k90h.SbAE4ZZSC9DTRp9tzNLPEz1ZRALh/oq"]]
+  [1m[36m (192.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'ondricka_sheila@hane.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Sheila Ondricka"], ["email", "ondricka_sheila@hane.name"], ["password_digest", "$2a$10$E8l/CKHTIBXWzq.9iDU6NeDEtx.f1oOHSn800OI8r6tA7DBawA3ZW"], ["activated", "t"], ["activated_at", "2015-10-14 19:42:57.309293"], ["created_at", "2015-10-14 19:42:57.394176"], ["updated_at", "2015-10-14 19:42:57.394176"], ["activation_digest", "$2a$10$6SLQsR8/14jyZGTPJ8o7.eJQknL3XhNzqWbD82oLOhJekIeiJwoJa"]]
+  [1m[36m (185.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'corine.koss@altenwerthfeil.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Corine Koss"], ["email", "corine.koss@altenwerthfeil.name"], ["password_digest", "$2a$10$zctx9RPWqKZcOQt95E7j4.uAdaZtup2RCvS5Nr9kHzVJRBg9WRbbK"], ["activated", "t"], ["activated_at", "2015-10-14 19:42:57.742406"], ["created_at", "2015-10-14 19:42:57.863638"], ["updated_at", "2015-10-14 19:42:57.863638"], ["activation_digest", "$2a$10$XmCGnk1DzbdQQZkcPqq2su0dvasK7Ms7kUiSx2DRroZV1YBerZn0W"]]
+  [1m[36m (236.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'larkin_mr_jonas@quitzonzieme.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Mr. Jonas Larkin"], ["email", "larkin_mr_jonas@quitzonzieme.net"], ["password_digest", "$2a$10$.FUQDaZwRieYfSyA3cUcpeSEtBWw6ylPOQXUhvlQu1EeKzUkNESOy"], ["activated", "t"], ["activated_at", "2015-10-14 19:42:58.263652"], ["created_at", "2015-10-14 19:42:58.353337"], ["updated_at", "2015-10-14 19:42:58.353337"], ["activation_digest", "$2a$10$k7M946.SBlFJo9L5DFBQiO5VboPdBHgeXzdhqqFUhHnnacegqK/FG"]]
+  [1m[36m (136.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'aryanna.reilly@lesch.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Aryanna Reilly"], ["email", "aryanna.reilly@lesch.net"], ["password_digest", "$2a$10$AjudK8llzm7kxHqvWgocauMiJ3ijtYNUNHAradjOeo98QlFNPax6y"], ["activated", "t"], ["activated_at", "2015-10-14 19:42:58.651265"], ["created_at", "2015-10-14 19:42:58.742343"], ["updated_at", "2015-10-14 19:42:58.742343"], ["activation_digest", "$2a$10$28YHQCATfj0PxwzCXhJvQuH2nrvCy5M8u0FVpXBTcGNwldctUCOai"]]
+  [1m[36m (235.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'lamar.corkery@lubowitzlowe.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Lamar Corkery"], ["email", "lamar.corkery@lubowitzlowe.org"], ["password_digest", "$2a$10$aoJTVRngUP09JyxtnTjxD.h/xTxlwgjRxHprgvUsJPS1ic.adXUrW"], ["activated", "t"], ["activated_at", "2015-10-14 19:42:59.139170"], ["created_at", "2015-10-14 19:42:59.224471"], ["updated_at", "2015-10-14 19:42:59.224471"], ["activation_digest", "$2a$10$2Ir5uQkQzJG3nQL.vOeQ7u9vyHegcm/eBv/Yt.kLPQA94jvHiIrDa"]]
+  [1m[36m (184.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'taurean_howe@quitzonkeeling.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Taurean Howe"], ["email", "taurean_howe@quitzonkeeling.info"], ["password_digest", "$2a$10$fC/PZjsc9FoREIUc0xdA2uPjeWNp2xcIH6Z/yxp3LXXNhT8mcpUGq"], ["activated", "t"], ["activated_at", "2015-10-14 19:42:59.571510"], ["created_at", "2015-10-14 19:42:59.664990"], ["updated_at", "2015-10-14 19:42:59.664990"], ["activation_digest", "$2a$10$1IW4C/wwm8q.9Ki.kN62fOLWEhT6xWdSfSLOFWEw9KjTjfJKneOEu"]]
+  [1m[36m (177.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'greenholt_lukas@bogan.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Lukas Greenholt"], ["email", "greenholt_lukas@bogan.org"], ["password_digest", "$2a$10$vIilc3CScw/KNerRJKHgkux4BGQG8Rcz97Db0DiFuogkJvmvt3ng2"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:00.003907"], ["created_at", "2015-10-14 19:43:00.089193"], ["updated_at", "2015-10-14 19:43:00.089193"], ["activation_digest", "$2a$10$Y1lcAhXGHJniCAg0448VV.EWnHBtk/bjIfpgKGZnEoywPJbhZ0v6y"]]
+  [1m[36m (184.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'erdman_phd_estel@mohr.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Estel Erdman PhD"], ["email", "erdman_phd_estel@mohr.info"], ["password_digest", "$2a$10$82Qg2xX5fUlCkihYFF7IbeCIp3Rcqo9FhmVkOvl.GFuuktClZfwX2"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:00.436462"], ["created_at", "2015-10-14 19:43:00.521000"], ["updated_at", "2015-10-14 19:43:00.521000"], ["activation_digest", "$2a$10$D3v88pkjQcEetS8Zaug6melrC67/jCNQua.l3K98etGfNItoDwSR."]]
+  [1m[36m (182.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'walter_estelle@daugherty.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Estelle Walter"], ["email", "walter_estelle@daugherty.name"], ["password_digest", "$2a$10$rVKGhzhrZbXegXNXCi8k2eVHu/kfUTDwc146d.XLCN3Tt1bJb0bKq"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:00.869056"], ["created_at", "2015-10-14 19:43:00.955292"], ["updated_at", "2015-10-14 19:43:00.955292"], ["activation_digest", "$2a$10$N.rTTqk92SyHvd5//GIOgOJqh77vxdNHO0IbbhwjduRwV6JkRjG4O"]]
+  [1m[36m (155.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'heath.roob@olsonkemmer.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Heath Roob"], ["email", "heath.roob@olsonkemmer.com"], ["password_digest", "$2a$10$5mDrOkB/B1SDxdOPOO16GuwRt4NKcw96aMu/IDVNgO9/JETHQaQs6"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:01.279484"], ["created_at", "2015-10-14 19:43:01.368455"], ["updated_at", "2015-10-14 19:43:01.368455"], ["activation_digest", "$2a$10$H6lmR9BDqjuLEo0WMNaI9u2DHd5AB2FKpuRWuBZ8F68GkYx2RIKfa"]]
+  [1m[36m (234.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bogisich.elaina@simonis.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Elaina Bogisich"], ["email", "bogisich.elaina@simonis.org"], ["password_digest", "$2a$10$XPhpNXdvVJe3GzEqTYbIxuw4U9EGwKFKO1vXkdyScst7pFujAjPdu"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:01.780147"], ["created_at", "2015-10-14 19:43:01.870011"], ["updated_at", "2015-10-14 19:43:01.870011"], ["activation_digest", "$2a$10$32iSnZvwSAD.loyv8h1nEuKpUmaMIMNSpo3NNr2AmrGaSIwSCsiqe"]]
+  [1m[36m (149.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'schuyler.schmitt@ryan.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Schuyler Schmitt"], ["email", "schuyler.schmitt@ryan.biz"], ["password_digest", "$2a$10$qbL6SjMTxL5xH5Ip2emth.Dt8PGySGFfARrBiEq4fHogHfxAHt8Ui"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:02.190183"], ["created_at", "2015-10-14 19:43:02.281531"], ["updated_at", "2015-10-14 19:43:02.281531"], ["activation_digest", "$2a$10$ULnm/WqYW/Z4HCpg4hr2R.SQmzGQaZfR82eQ1EuKnZSEAQ7hYHnCO"]]
+  [1m[36m (158.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'trenton.gutmann.mr@rosenbaumschinner.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Mr. Trenton Gutmann"], ["email", "trenton.gutmann.mr@rosenbaumschinner.net"], ["password_digest", "$2a$10$58X02indCPpFeIBcz/FnPerVQUwvSvya4Qk.KZiLTF9H8vmno8peC"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:02.611934"], ["created_at", "2015-10-14 19:43:02.701542"], ["updated_at", "2015-10-14 19:43:02.701542"], ["activation_digest", "$2a$10$KNj62/AkZsn8Zwih7Q7Pdu2ElC7ZIWFUbMvBA1etHbqoUBW8C..Qa"]]
+  [1m[36m (285.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'okuneva_holly_sr@blandamcclure.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Holly Okuneva Sr."], ["email", "okuneva_holly_sr@blandamcclure.org"], ["password_digest", "$2a$10$ni8DeIOF2YSIl495nP0epuojeOd9j78r0OeYsbhkEIAzeMt6puYW."], ["activated", "t"], ["activated_at", "2015-10-14 19:43:03.155549"], ["created_at", "2015-10-14 19:43:03.241658"], ["updated_at", "2015-10-14 19:43:03.241658"], ["activation_digest", "$2a$10$DFdXot4b7Vai88xs4P3ZRODbv5WPMiNf6Z3dMTMK4QNz3d2Azc1wa"]]
+  [1m[36m (129.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'pollich_golda@mayer.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Golda Pollich"], ["email", "pollich_golda@mayer.name"], ["password_digest", "$2a$10$dNCINgAGz.7DkVpIi37BK.W36P66vrwjEQNoeg7eOjaeKjGKMZbRC"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:03.533663"], ["created_at", "2015-10-14 19:43:03.620013"], ["updated_at", "2015-10-14 19:43:03.620013"], ["activation_digest", "$2a$10$xvyJE.wMlne.XIXOwniIRuyb/ys9LbxIIVrhYeY6OgoSpdh.ml8bq"]]
+  [1m[36m (150.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'jordyn_cummings@reillymante.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Jordyn Cummings"], ["email", "jordyn_cummings@reillymante.net"], ["password_digest", "$2a$10$e6rCeKN2N4rb6AAGgLR6kepgncaSXqZqHjQ6aXHU1o.LKF175q.tK"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:03.932787"], ["created_at", "2015-10-14 19:43:04.017126"], ["updated_at", "2015-10-14 19:43:04.017126"], ["activation_digest", "$2a$10$qS2VqmM/8/JQ3HFjrJw/Qe.D9zX.u7azPpFYQIOG6eb/0Y8t0JTUK"]]
+  [1m[36m (150.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'hegmann_morgan_md@baumbach.org' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Morgan Hegmann MD"], ["email", "hegmann_morgan_md@baumbach.org"], ["password_digest", "$2a$10$IIhyqBEByPf7louAnhd87etvXcbadAyam09FMfxOXMn38ioAtq9Tu"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:04.332377"], ["created_at", "2015-10-14 19:43:04.421781"], ["updated_at", "2015-10-14 19:43:04.421781"], ["activation_digest", "$2a$10$REsiYZM1Lw0jPS7JUJyecO4j2U/.DHLf5dJYo0NQKDCZ/jQF7dYLO"]]
+  [1m[36m (157.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'hoeger.alessandra@stracke.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Alessandra Hoeger"], ["email", "hoeger.alessandra@stracke.com"], ["password_digest", "$2a$10$CEffvRvq./U39HhEqCLfRuf6djneYlEk12ya7IWMr4vggnQgfHGky"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:04.753887"], ["created_at", "2015-10-14 19:43:04.846302"], ["updated_at", "2015-10-14 19:43:04.846302"], ["activation_digest", "$2a$10$NfH5QjZjKlM5.zAssqcvueEoZUZFFKHmHshcpNttgOk52Tjvl2TTy"]]
+  [1m[36m (163.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'rene_stark@rohan.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Rene Stark"], ["email", "rene_stark@rohan.name"], ["password_digest", "$2a$10$QdXKbhRx.15t.V0PMclKE.pwckjX5IT9BTETRrpyReFGKyDxcDZFa"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:05.175992"], ["created_at", "2015-10-14 19:43:05.271499"], ["updated_at", "2015-10-14 19:43:05.271499"], ["activation_digest", "$2a$10$oK8chcB9Ape2NkHHITBX1.9a8RoHLkwAjthYSjKWnMCjFyNqRC8G."]]
+  [1m[36m (153.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'zulauf.kendra.miss@robel.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Miss Kendra Zulauf"], ["email", "zulauf.kendra.miss@robel.org"], ["password_digest", "$2a$10$ixK5neV.TNn0Zk53YtG1OOguNpzIo1A0VZMwNVJ0TwPo7gKnKYe8."], ["activated", "t"], ["activated_at", "2015-10-14 19:43:05.597003"], ["created_at", "2015-10-14 19:43:05.685365"], ["updated_at", "2015-10-14 19:43:05.685365"], ["activation_digest", "$2a$10$OeJiqOpVwZFq9c4fbupUWuRYjW2POQLXB91W0LptVyC4e21T6oMm2"]]
+  [1m[36m (181.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'nathan_md_schroeder@spencer.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Nathan Schroeder MD"], ["email", "nathan_md_schroeder@spencer.info"], ["password_digest", "$2a$10$iuE2Nl9fwEDk2EUXZrtl0uZVUQJ/rdNeiw6MvKF.rAv4R2QBXXv4K"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:06.031050"], ["created_at", "2015-10-14 19:43:06.122010"], ["updated_at", "2015-10-14 19:43:06.122010"], ["activation_digest", "$2a$10$d.ab0VKGGOCTjDehq30nIOK3M4arS.Qw0qRQa8MIxZq5YobVibJWC"]]
+  [1m[36m (136.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'schmitt_ii_candice@feeneywolf.biz' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Candice Schmitt II"], ["email", "schmitt_ii_candice@feeneywolf.biz"], ["password_digest", "$2a$10$yyhVbUlW5t7XvCJWpgFXH.c7VT3ORaFuU/k.l3vOxAF6Yeuz39Vwa"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:06.430883"], ["created_at", "2015-10-14 19:43:06.519210"], ["updated_at", "2015-10-14 19:43:06.519210"], ["activation_digest", "$2a$10$CcZEgl9Yi7QPnXT8PPQdle/.Bj3AQUvU0dPF4HvKlLmbmLHMRgmSK"]]
+  [1m[36m (236.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'camila_wilkinson@sauerkshlerin.org' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Camila Wilkinson"], ["email", "camila_wilkinson@sauerkshlerin.org"], ["password_digest", "$2a$10$7u.So8NsAT4KncUM6U7PTOSIN/rNE6b6ItqE/dneBGOeqWYKGWsV6"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:06.941837"], ["created_at", "2015-10-14 19:43:07.042469"], ["updated_at", "2015-10-14 19:43:07.042469"], ["activation_digest", "$2a$10$ZPk.Irgeb6rDrnYZvRlUiuYth9LFJBHGVAmxwl7JAGNuP8EppWmu6"]]
+  [1m[36m (161.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'jr.delphia.rempel@schinner.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Delphia Rempel Jr."], ["email", "jr.delphia.rempel@schinner.name"], ["password_digest", "$2a$10$4FT.jEkyZFlJEoxxjlSrBuRg130B5pO.DV.1ts5nnsyfMITlNHsba"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:07.385657"], ["created_at", "2015-10-14 19:43:07.481599"], ["updated_at", "2015-10-14 19:43:07.481599"], ["activation_digest", "$2a$10$orb1854i35/4QDU2w7e8lO0YUp9noXldnVzOpsHjW5ZG2/IlW9aHa"]]
+  [1m[36m (139.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'ankunding_edmond@hoppe.net' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Edmond Ankunding"], ["email", "ankunding_edmond@hoppe.net"], ["password_digest", "$2a$10$b27FQiu8hpXjizOChGzpYeWKPLKsv3ZadxPCpD0zA/c2.OeDOyVMO"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:07.807223"], ["created_at", "2015-10-14 19:43:07.902096"], ["updated_at", "2015-10-14 19:43:07.902096"], ["activation_digest", "$2a$10$tWi.3wt.dnHTj2OtX9GER.zO/31jQfg8xKE9fimYi9gglFKZOaFR."]]
+  [1m[36m (186.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'simonis.ii.dejon@douglasreichel.info' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Dejon Simonis II"], ["email", "simonis.ii.dejon@douglasreichel.info"], ["password_digest", "$2a$10$aj63B5kAUo8JtJLIEMlTeOsSTjg9k3VLNqIxMFO4GBDzKGQiLGssm"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:08.272620"], ["created_at", "2015-10-14 19:43:08.367151"], ["updated_at", "2015-10-14 19:43:08.367151"], ["activation_digest", "$2a$10$WduOhVaVp9pK5sqGPbD/IOF0Kr5FdOQJaAnmsJizkezutcEwqNSTi"]]
+  [1m[36m (186.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'metz.md.kamryn@mcdermott.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Kamryn Metz MD"], ["email", "metz.md.kamryn@mcdermott.com"], ["password_digest", "$2a$10$Tv2HYezpA4FgISrriYue0u6uufauBPckg3M7TasNhM/w2Da9whXzq"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:08.749853"], ["created_at", "2015-10-14 19:43:08.868431"], ["updated_at", "2015-10-14 19:43:08.868431"], ["activation_digest", "$2a$10$fg9iPtwteRbsvQJVh5na7eP51BUME7Lv4Qos0k0Llyg7NcnicT1w."]]
+  [1m[36m (145.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'frederick_bradtke_dr@nitzschehowell.org' LIMIT 1[0m
+  [1m[35mSQL (6.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Dr. Frederick Bradtke"], ["email", "frederick_bradtke_dr@nitzschehowell.org"], ["password_digest", "$2a$10$hNNd/NSKkSUkNbVbV/Xbju8.nNOiLDrdEwD7KfPJKwVk4JkV.1g6G"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:09.204378"], ["created_at", "2015-10-14 19:43:09.301224"], ["updated_at", "2015-10-14 19:43:09.301224"], ["activation_digest", "$2a$10$NoaoB33gktnnNzXoejxq0e8pINIzo6ABuH2NyQ15fSv9A7kIpdn7q"]]
+  [1m[36m (156.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'torphy.ms.hortense@torphy.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Ms. Hortense Torphy"], ["email", "torphy.ms.hortense@torphy.info"], ["password_digest", "$2a$10$OjVk820vSemM3ti/2bVMhuRzj07z62GEsx14gvLP5DgtAmNLOhnT."], ["activated", "t"], ["activated_at", "2015-10-14 19:43:09.648086"], ["created_at", "2015-10-14 19:43:09.741490"], ["updated_at", "2015-10-14 19:43:09.741490"], ["activation_digest", "$2a$10$n07Iqqh818l2wvS7Tt/qn.Vcj.XS/K4fBNGMFNJR1.7jncEluMlPK"]]
+  [1m[36m (186.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'langosh.jada@hilllthompson.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Jada Langosh"], ["email", "langosh.jada@hilllthompson.biz"], ["password_digest", "$2a$10$Ur.sILMipk9Eh..MJLkjPOKU2gw7luGgZg8yxiCKzrV/FW6iCl.wW"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:10.115630"], ["created_at", "2015-10-14 19:43:10.225414"], ["updated_at", "2015-10-14 19:43:10.225414"], ["activation_digest", "$2a$10$Nxd8htHsNHpWBPjo7b8B1.xmoCc9qywbgfGFlYevD5a4fwDY6j7NO"]]
+  [1m[36m (428.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'michelle.hauck.md@hirthebode.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Michelle Hauck MD"], ["email", "michelle.hauck.md@hirthebode.info"], ["password_digest", "$2a$10$wh2ILgAzAI4IjfwxgJ5WhO.UAoo9xkqUcdJNiWPpklbpUSUnG8byK"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:10.858753"], ["created_at", "2015-10-14 19:43:10.977780"], ["updated_at", "2015-10-14 19:43:10.977780"], ["activation_digest", "$2a$10$SrDiRqOl1GlW6EPB2fguC.gti7T0KqzRizbPqF8M7jgjjuBs6S/.K"]]
+  [1m[36m (177.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'dvm_keeling_rodrigo@littel.name' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Rodrigo Keeling DVM"], ["email", "dvm_keeling_rodrigo@littel.name"], ["password_digest", "$2a$10$85hhsBmKVRmEhvvo2/K.AeAK0MD6h5XF2fZt.PJhiM.19x2uQiWmW"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:11.347652"], ["created_at", "2015-10-14 19:43:11.443340"], ["updated_at", "2015-10-14 19:43:11.443340"], ["activation_digest", "$2a$10$/g9cstuENcNizwx7.Ur.3.6Mnr.PkFDDm2J4A5olL3ikixsRDEDPa"]]
+  [1m[36m (175.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'lelia_ebert_dds@smithamthompson.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Lelia Ebert DDS"], ["email", "lelia_ebert_dds@smithamthompson.net"], ["password_digest", "$2a$10$ei.kqnn.rHdaY3A62bANreEuHhGdPODk3TK/Ffh3b0TjCyZWsPhle"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:11.823842"], ["created_at", "2015-10-14 19:43:11.932621"], ["updated_at", "2015-10-14 19:43:11.932621"], ["activation_digest", "$2a$10$WlJ6cWE54FPaIzwPbO6VJuiBhpSe2A2uHjSFfAm8WFrwP9fsqtIQu"]]
+  [1m[36m (138.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'hassan_friesen@kiehn.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Hassan Friesen"], ["email", "hassan_friesen@kiehn.net"], ["password_digest", "$2a$10$QCdgZYpyLzZZt9tpMsoGveNghx.MCXoSd/tPNa8SKw2UkMgPrc2pC"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:12.258422"], ["created_at", "2015-10-14 19:43:12.353709"], ["updated_at", "2015-10-14 19:43:12.353709"], ["activation_digest", "$2a$10$H4IboUr5UwpcoEOjKcV2B.FDwawvgq8nTffDwLCmR6oyS.5Zju3G2"]]
+  [1m[36m (143.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'hartmann_elinore@gutmann.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Elinore Hartmann"], ["email", "hartmann_elinore@gutmann.com"], ["password_digest", "$2a$10$zy.3fsJswH7KShO/AC4VFucdl/tjbc7vHZ5vB8N5G8rB9KjUGRCjq"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:12.679031"], ["created_at", "2015-10-14 19:43:12.777161"], ["updated_at", "2015-10-14 19:43:12.777161"], ["activation_digest", "$2a$10$rl4WS9U9UJUk9az14mv7R.koVEk.ZhMi9yEZT5E/12NmXMglGCi7K"]]
+  [1m[36m (142.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bill_mrs_king@swaniawskihaag.org' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Mrs. Bill King"], ["email", "bill_mrs_king@swaniawskihaag.org"], ["password_digest", "$2a$10$QlZi5S/n.Z58B35cBZ9bmu.DIQOIsoaxy6acqZqy/AFh2oGPxJnFi"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:13.100619"], ["created_at", "2015-10-14 19:43:13.201292"], ["updated_at", "2015-10-14 19:43:13.201292"], ["activation_digest", "$2a$10$SGZxfZHfP9lJFmYqniY5LucKwfszlXJ2flYNpCI0kIdZOVufEhWK6"]]
+  [1m[36m (185.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kirlin.casey.jr@goyette.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Casey Kirlin Jr."], ["email", "kirlin.casey.jr@goyette.net"], ["password_digest", "$2a$10$rg2TMiMEbnhtT8Z4YTLZMOkuS.QAHBY8DDmVw52rp7lJQIRoJ33bO"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:13.589139"], ["created_at", "2015-10-14 19:43:13.692393"], ["updated_at", "2015-10-14 19:43:13.692393"], ["activation_digest", "$2a$10$98ZjHC3xlFij4u9E9PCQiuVUY6gXL7.H2WDPWsaedyy6X7SDh2LTO"]]
+  [1m[36m (138.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'tate_anderson@blanda.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Tate Anderson"], ["email", "tate_anderson@blanda.biz"], ["password_digest", "$2a$10$t1cS1qYMFmids6RIhueJFeBOk6R3.UBA2qCNg7mu4XMgd1WwDedBK"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:14.021216"], ["created_at", "2015-10-14 19:43:14.117997"], ["updated_at", "2015-10-14 19:43:14.117997"], ["activation_digest", "$2a$10$hxX.VxjxBnZnxUBTWMUbOe0q6j7vOC0fbg90D42DkxrKDlOyRblwu"]]
+  [1m[36m (307.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'connor_nader@goldner.net' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Connor Nader"], ["email", "connor_nader@goldner.net"], ["password_digest", "$2a$10$3nDUyVRMlmDHQDafr0VWruyDSrNKjaRbqHvp4rvUPwOJwaQZF6hgm"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:14.621646"], ["created_at", "2015-10-14 19:43:14.720285"], ["updated_at", "2015-10-14 19:43:14.720285"], ["activation_digest", "$2a$10$PEHTSSQPmWAzhtGTOKzOxeKZLN0BXnOZrg0MYXDYSguhBiw6Bctfe"]]
+  [1m[36m (169.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'murphy_elton@trantowrice.biz' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Elton Murphy"], ["email", "murphy_elton@trantowrice.biz"], ["password_digest", "$2a$10$PXB0gh6iAAN58Atx.Hp23uo2QVamLQRFsO561oQNL0dXo44oqgSOa"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:15.078933"], ["created_at", "2015-10-14 19:43:15.176052"], ["updated_at", "2015-10-14 19:43:15.176052"], ["activation_digest", "$2a$10$QgxMCdf2JtBOfGujcoIvD..HQqo7IX/TwOIxTrUPRMaJ1bRYVGwxC"]]
+  [1m[36m (162.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'camilla_block_iii@durganrempel.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Camilla Block III"], ["email", "camilla_block_iii@durganrempel.com"], ["password_digest", "$2a$10$CQLg9hGzCRAA0UUcaVOrfeY9kIAAVuBJeK362JLOxhsOalRHXRijm"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:15.523354"], ["created_at", "2015-10-14 19:43:15.630688"], ["updated_at", "2015-10-14 19:43:15.630688"], ["activation_digest", "$2a$10$ygqZ/4OdNlPDX4r3bjZrZ.LS2KglOyH26VpPrj56lpU/O5G3mxkyu"]]
+  [1m[36m (172.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'grace_leuschke@daniel.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Grace Leuschke"], ["email", "grace_leuschke@daniel.name"], ["password_digest", "$2a$10$ToUJYEoot9b2tZOuZ8bOMuzwDdBcqU7GFWA6a/iCryL8uLPRYeAbu"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:15.989084"], ["created_at", "2015-10-14 19:43:16.076855"], ["updated_at", "2015-10-14 19:43:16.076855"], ["activation_digest", "$2a$10$rlZcm0liIHklLBH.uqnPv.bE92jLcGhGW0mj5zIHj7/TlaunimpPy"]]
+  [1m[36m (136.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'glenda.denesik@considine.info' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Glenda Denesik"], ["email", "glenda.denesik@considine.info"], ["password_digest", "$2a$10$EhxXgEA6Toat05frIuQqaemzE7fgPUoIRFBbRQEGe30WdDfPgGCwu"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:16.377497"], ["created_at", "2015-10-14 19:43:16.472481"], ["updated_at", "2015-10-14 19:43:16.472481"], ["activation_digest", "$2a$10$4.SdIrAAz416y/XLlSNLeucTJBpl6.LwGKvNM8Jlwr17gzBoQVJz6"]]
+  [1m[36m (292.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'mariah_corwin@gerholddaniel.org' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Mariah Corwin"], ["email", "mariah_corwin@gerholddaniel.org"], ["password_digest", "$2a$10$WDuvpyyggoKru3U2E.nohu4Jymd2VOEbqtzltFNgEuldjTYIRQEuu"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:16.932804"], ["created_at", "2015-10-14 19:43:17.026120"], ["updated_at", "2015-10-14 19:43:17.026120"], ["activation_digest", "$2a$10$urJQhygzwl1Hj5clDUP.k.t/z8cJ9CmBzNp.IZa7FcPkAcLzr1fZW"]]
+  [1m[36m (193.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'mr.zboncak.maxie@okuneva.info' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Mr. Maxie Zboncak"], ["email", "mr.zboncak.maxie@okuneva.info"], ["password_digest", "$2a$10$OrsGmcVVmVzd5G7vNCu6Wudh/Yfq7nhuyLJBJZxfnZjBoKTBI6YoC"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:17.400630"], ["created_at", "2015-10-14 19:43:17.496159"], ["updated_at", "2015-10-14 19:43:17.496159"], ["activation_digest", "$2a$10$aXt4DjkjE6dGlpEdZLbX..DkRC9G8z.skkS71ehqN91LhJd8dMSA2"]]
+  [1m[36m (149.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'emerson_gibson@dickinson.org' LIMIT 1[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Emerson Gibson"], ["email", "emerson_gibson@dickinson.org"], ["password_digest", "$2a$10$uMZWJ3akACsgt5wexErih..qAWlleqBvAz7HeXS.3uo.12ZQiMf5O"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:17.822073"], ["created_at", "2015-10-14 19:43:17.927648"], ["updated_at", "2015-10-14 19:43:17.927648"], ["activation_digest", "$2a$10$R.L0G6EuHmetAgvFk7n8NuIiTSsWtcPNaPEQuwjKfk9gKD3lGJp6i"]]
+  [1m[36m (159.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'lucas.halvorson@douglas.net' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Lucas Halvorson"], ["email", "lucas.halvorson@douglas.net"], ["password_digest", "$2a$10$jGKtvWhKXMWXzrPcLSg8BO3JU3iebOeEDVgHUB/8pKl6oFLXph/xS"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:18.268050"], ["created_at", "2015-10-14 19:43:18.360478"], ["updated_at", "2015-10-14 19:43:18.360478"], ["activation_digest", "$2a$10$Mc4YDCzuqCfzDN6urnxnXephQ5DDZ..hIlN1McApA22W82py/A0qO"]]
+  [1m[36m (174.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'tracey.gerlach@cronindonnelly.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Tracey Gerlach"], ["email", "tracey.gerlach@cronindonnelly.com"], ["password_digest", "$2a$10$oP8kzveIq6a63UnWrZDpj.jlf.C83iJHOgyJQFQiP1YLDyIz9bmJe"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:18.722892"], ["created_at", "2015-10-14 19:43:18.824950"], ["updated_at", "2015-10-14 19:43:18.824950"], ["activation_digest", "$2a$10$PGXnBwIoUmrx4DF73/YQVuxTxqCTiBPqrVpB7EwvaWqfNnCS/t.Zi"]]
+  [1m[36m (163.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kulas.erna.i@gerlach.info' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Erna Kulas I"], ["email", "kulas.erna.i@gerlach.info"], ["password_digest", "$2a$10$ubu8xils4n2J0yryiop.O.0oM9JCtCi4Hb61y0wSg6/mj6d8GERFK"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:19.177327"], ["created_at", "2015-10-14 19:43:19.282534"], ["updated_at", "2015-10-14 19:43:19.282534"], ["activation_digest", "$2a$10$7ymd01aAgFofG2g4xXkocuxeMNAR09b8spfrWKRl2Zq/HibzHBMB."]]
+  [1m[36m (172.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'brandi.tillman.mrs@lednerschmitt.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Mrs. Brandi Tillman"], ["email", "brandi.tillman.mrs@lednerschmitt.biz"], ["password_digest", "$2a$10$ECcoopVzqNHjVyPV97bqx.FEAVMoi4En2dEch8MlnVNeyVT6c6BfW"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:19.644149"], ["created_at", "2015-10-14 19:43:19.748094"], ["updated_at", "2015-10-14 19:43:19.748094"], ["activation_digest", "$2a$10$m0vIEvV/2DJjWIMri0JyuuNQ04JoKwpEp3eJdScSzrk.6W7mfyTe6"]]
+  [1m[36m (144.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'harber.curtis.phd@runolfon.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Curtis Harber PhD"], ["email", "harber.curtis.phd@runolfon.info"], ["password_digest", "$2a$10$9ixel5vaOZeGkoIYu2zshue4dCtsBWbumPpvoj05gZ/xaq.2QAI36"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:20.065768"], ["created_at", "2015-10-14 19:43:20.152467"], ["updated_at", "2015-10-14 19:43:20.152467"], ["activation_digest", "$2a$10$pFiarR6KUDCCYpUASypsyOOkNeb7heno7EHS10x4u2q12HEwqzTYi"]]
+  [1m[36m (192.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bailey.santos@murphy.com' LIMIT 1[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Santos Bailey"], ["email", "bailey.santos@murphy.com"], ["password_digest", "$2a$10$7RvnfD/tc3WdJ/mSnlFPXO/k2zFockUURML6s14PrO66OiWNlsNy."], ["activated", "t"], ["activated_at", "2015-10-14 19:43:20.509303"], ["created_at", "2015-10-14 19:43:20.599611"], ["updated_at", "2015-10-14 19:43:20.599611"], ["activation_digest", "$2a$10$g85GHhuOXDOXBFE84.P3WuMIYfPsmkdOM22uz2cLr7inoZ2Xv1Qaa"]]
+  [1m[36m (157.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'goyette.doug.phd@kuhlman.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Doug Goyette PhD"], ["email", "goyette.doug.phd@kuhlman.com"], ["password_digest", "$2a$10$lzCa5AHLHQIol1gl.NTI3eRQQZM0aAsPzqhZk.mm2r44BC7dODzcy"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:20.953248"], ["created_at", "2015-10-14 19:43:21.048106"], ["updated_at", "2015-10-14 19:43:21.048106"], ["activation_digest", "$2a$10$HZ7ukk8rmk9S98sw1115ueGPhCuuwyCmXLK9835TStQPmIOe1fcdm"]]
+  [1m[36m (234.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'tyrell.hintz@schmittlehner.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Tyrell Hintz"], ["email", "tyrell.hintz@schmittlehner.info"], ["password_digest", "$2a$10$8nmll04QUr6xKBmnrAZiDOArdjO.hWBbDQESnVMRpB70gQ6AR3vTq"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:21.452074"], ["created_at", "2015-10-14 19:43:21.546803"], ["updated_at", "2015-10-14 19:43:21.546803"], ["activation_digest", "$2a$10$F8GR9de9NrpxrnatRSF1gOrTCeQNJBKPosjieYTCixXkFyxr5EwWa"]]
+  [1m[36m (609.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bednar_shanel@mayert.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Shanel Bednar"], ["email", "bednar_shanel@mayert.info"], ["password_digest", "$2a$10$Tl6KU/8kvuTXqkYBy50BQ.BUbSnCzps5dG/ZChDKPlXQ72xFEQbby"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:22.330850"], ["created_at", "2015-10-14 19:43:22.426504"], ["updated_at", "2015-10-14 19:43:22.426504"], ["activation_digest", "$2a$10$yZxb1iRMX8Bnr1feAKJZae3LYSEgUxEgEf6KBZ3zSkT6eiCEMAEKy"]]
+  [1m[36m (233.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'mr_casper_randy@gibson.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Mr. Randy Casper"], ["email", "mr_casper_randy@gibson.net"], ["password_digest", "$2a$10$AOroWusFRIDDloIhWDr03ugCeWkAUpMkORxuJUqyfcRr3Shac6Ttm"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:22.827120"], ["created_at", "2015-10-14 19:43:22.931088"], ["updated_at", "2015-10-14 19:43:22.931088"], ["activation_digest", "$2a$10$r3GZyWMkuPM9.ZKZLyXkZeSvE87FSxw4ndyIlHVJ7MKm6YxkgXY2a"]]
+  [1m[36m (147.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'elta_wolff@ernser.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Elta Wolff"], ["email", "elta_wolff@ernser.name"], ["password_digest", "$2a$10$HBWhw8gizAzP487qG8Vreehq/A03tA7Fv1RAFH7B.177OKEFUJV3S"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:23.260786"], ["created_at", "2015-10-14 19:43:23.349976"], ["updated_at", "2015-10-14 19:43:23.349976"], ["activation_digest", "$2a$10$slCSZcoMFm5pUfM14H8JC.wQrN.eHHfFW4IX/lNxrlM4UZVWWF5Sy"]]
+  [1m[36m (202.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'lonzo.harris@gutmannrohan.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Lonzo Harris"], ["email", "lonzo.harris@gutmannrohan.name"], ["password_digest", "$2a$10$NVWDjUu4CztcGEHi5qsFl.kshWfqy8Zc7ibAXMJKnoSSVpexIpvda"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:23.726787"], ["created_at", "2015-10-14 19:43:23.823993"], ["updated_at", "2015-10-14 19:43:23.823993"], ["activation_digest", "$2a$10$2XDV1U25T0.ZNpYQKs/o3ux3TUJNBSzEV7zqUDCYPkv/QzzRgOH22"]]
+  [1m[36m (168.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'greenfelder.diana@hilll.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Diana Greenfelder"], ["email", "greenfelder.diana@hilll.com"], ["password_digest", "$2a$10$jfyYfshPHMW/Gax2PyuzLO27PGJ21nI89yrCLNrUo5QXpjQK4SeEO"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:24.159363"], ["created_at", "2015-10-14 19:43:24.254356"], ["updated_at", "2015-10-14 19:43:24.254356"], ["activation_digest", "$2a$10$1.iE5RYw5E5QtaZBCY3F4udzcW3Bua23/sn/5RTQrXRlE9dfakg4."]]
+  [1m[36m (173.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'melissa.skiles@smithtrantow.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Melissa Skiles"], ["email", "melissa.skiles@smithtrantow.org"], ["password_digest", "$2a$10$PbYdS3xE9fZyVyFoFYcdpeVUuAeZTFnWGIBTKcA.IlIUGZwjofoZO"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:24.614308"], ["created_at", "2015-10-14 19:43:24.705468"], ["updated_at", "2015-10-14 19:43:24.705468"], ["activation_digest", "$2a$10$0mx2hlmFmIyeAdsdShqdLu6DZfgJq0MFItenEMVKZnNUM62AEwE1K"]]
+  [1m[36m (158.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'rippin_md_milo@marks.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Milo Rippin MD"], ["email", "rippin_md_milo@marks.biz"], ["password_digest", "$2a$10$zziL0x2YpBAGY2aTY.Jan.xdgg5YCtXdM3dipv4ubIOyuDFYF0WCK"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:25.037422"], ["created_at", "2015-10-14 19:43:25.126739"], ["updated_at", "2015-10-14 19:43:25.126739"], ["activation_digest", "$2a$10$Ie2/we9GUFmJQMoDONqixeVcC3pVHRektVortLOy7sTxWb.QOGbzO"]]
+  [1m[36m (160.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'brigitte.schultz@hane.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Brigitte Schultz"], ["email", "brigitte.schultz@hane.net"], ["password_digest", "$2a$10$U9WQYSnfm6zjMj9d6bQ4zOmIgAJrW5UKpmVjLaydfdD9OokSOsoBW"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:25.458421"], ["created_at", "2015-10-14 19:43:25.574370"], ["updated_at", "2015-10-14 19:43:25.574370"], ["activation_digest", "$2a$10$Y7cciwprg1tGb3kdnTgz7.QudR2Nivna//xjy7Brhm36YFkR170Ke"]]
+  [1m[36m (172.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'dickinson.mr.august@walkerbode.info' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Mr. August Dickinson"], ["email", "dickinson.mr.august@walkerbode.info"], ["password_digest", "$2a$10$1vGrSxYQc64MA5jhjHkcyeGt0.tzLg9/8DdFTPZj/br8OyY9CjWsq"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:25.924299"], ["created_at", "2015-10-14 19:43:26.014927"], ["updated_at", "2015-10-14 19:43:26.014927"], ["activation_digest", "$2a$10$qxG8s/0HrIGhRt.dd94hfeau1e3DjEm0x/fhv.8B.I5/14Q8T7KJG"]]
+  [1m[36m (164.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'tillman.deborah@marquardt.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Deborah Tillman"], ["email", "tillman.deborah@marquardt.net"], ["password_digest", "$2a$10$6ZGGRx2Y8qZTCH7O5cdn2eYPq7QEgTqvYzy8u3EDij1DK0FtvNv2q"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:26.368389"], ["created_at", "2015-10-14 19:43:26.475158"], ["updated_at", "2015-10-14 19:43:26.475158"], ["activation_digest", "$2a$10$qz8GcKmMwcesJyov1hsIye0boazEhyMa.PSMR6FDrxrfRxhnKZEwS"]]
+  [1m[36m (296.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'ivah.kreiger@tromp.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Ivah Kreiger"], ["email", "ivah.kreiger@tromp.net"], ["password_digest", "$2a$10$X7pa/7UrW5G4sTRpj9TXy.On5YMP372BMiL6w64lh/qIkdJl7rku2"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:26.956200"], ["created_at", "2015-10-14 19:43:27.043117"], ["updated_at", "2015-10-14 19:43:27.043117"], ["activation_digest", "$2a$10$Ds2KxPO./jpwVc1FAGHbw.M0A57Sbr5QxdUrXNLmqmyfPHcBn0nxi"]]
+  [1m[36m (186.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'jannie_miss_mclaughlin@brakus.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Miss Jannie McLaughlin"], ["email", "jannie_miss_mclaughlin@brakus.net"], ["password_digest", "$2a$10$FMaiStdSj4BbLvEQBKyPfOxvSdxYWI88jSzFv57tcZ08b9xyGpSPu"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:27.399970"], ["created_at", "2015-10-14 19:43:27.491236"], ["updated_at", "2015-10-14 19:43:27.491236"], ["activation_digest", "$2a$10$mciCXxBuGX27rnYJ/JG.TOZtknrdAd/t7pd6yCGlRSwfoe7Q.G/f."]]
+  [1m[36m (184.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'luettgen.april@kling.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "April Luettgen"], ["email", "luettgen.april@kling.info"], ["password_digest", "$2a$10$Ola0267bT7QoSZhf0uhUf.umirMl4UEayZuYXBdAhGB4XsP1580SS"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:27.856433"], ["created_at", "2015-10-14 19:43:27.945158"], ["updated_at", "2015-10-14 19:43:27.945158"], ["activation_digest", "$2a$10$RkWpB2HKPs9b1mlIs/izueTWNUBh2ORE3reKDLWekFo0TMNyg3EPq"]]
+  [1m[36m (220.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'keith_sanford_ms@lemke.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Ms. Keith Sanford"], ["email", "keith_sanford_ms@lemke.com"], ["password_digest", "$2a$10$D/.2tC38thpVOqX2cajEHeOulATqRnejrZmmK/AE9I3cXr.CnTqKy"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:28.344779"], ["created_at", "2015-10-14 19:43:28.435537"], ["updated_at", "2015-10-14 19:43:28.435537"], ["activation_digest", "$2a$10$LlMAVvMb.x35iZfdiNVDUOKI0m48VU8GtMjf2ZneAH..fQVfXDF8C"]]
+  [1m[36m (169.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'koch.fatima.md@ziememurphy.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Fatima Koch MD"], ["email", "koch.fatima.md@ziememurphy.info"], ["password_digest", "$2a$10$UO4cfjZXDpj/TOZWEjamIOEoEHS/fmRN.03uorttJrASDeLpS.n1S"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:28.777881"], ["created_at", "2015-10-14 19:43:28.864863"], ["updated_at", "2015-10-14 19:43:28.864863"], ["activation_digest", "$2a$10$bKT9AtWuhWaLlYLEnlBAcuOL0f2OUTAMjGbpr1BUobxMwU7Oll/3u"]]
+  [1m[36m (133.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'bergstrom.zoe@rutherford.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Zoe Bergstrom"], ["email", "bergstrom.zoe@rutherford.name"], ["password_digest", "$2a$10$3hN6lIA.LdhWWqlQhfwoLewaKewYP1hfjzxGOAiW2S3PZXPUWbVZe"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:29.166454"], ["created_at", "2015-10-14 19:43:29.254110"], ["updated_at", "2015-10-14 19:43:29.254110"], ["activation_digest", "$2a$10$1L2X.7qewM6pYDlH1GrfDODoyW.K.aZMfBM9UoE6QPTPNXwylSk.y"]]
+  [1m[36m (144.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'dr.sandrine.haley@grady.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Dr. Sandrine Haley"], ["email", "dr.sandrine.haley@grady.biz"], ["password_digest", "$2a$10$7iBF0e0BnRpTEVCLipixu.7DopiXYdhwVM1qcvniF67d5mj9pY452"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:29.566012"], ["created_at", "2015-10-14 19:43:29.653531"], ["updated_at", "2015-10-14 19:43:29.653531"], ["activation_digest", "$2a$10$aBYLo4iKFKiSPQYAMWbxuuBnB1T/pWJS19cZxgWcDhkC7wBed.uN."]]
+  [1m[36m (342.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'roosevelt.stoltenberg.phd@kirlindibbert.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Roosevelt Stoltenberg PhD"], ["email", "roosevelt.stoltenberg.phd@kirlindibbert.net"], ["password_digest", "$2a$10$aTCar2pQ11XXF.LlH9h5gu0t8odPj0pkgoKCRf2gasdwVhg2MWlHG"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:30.165644"], ["created_at", "2015-10-14 19:43:30.258863"], ["updated_at", "2015-10-14 19:43:30.258863"], ["activation_digest", "$2a$10$4A.XhUBwj60BvodR5oFuceIqBc/whyFrPmhJvKrBR5LxVb17RXrC."]]
+  [1m[36m (192.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'ella.gerhold@jaskolskiwintheiser.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Ella Gerhold"], ["email", "ella.gerhold@jaskolskiwintheiser.com"], ["password_digest", "$2a$10$9oIWXZbgsEBaGA7c2CM0m.nEKzhjwUKZZIiLF81KFgsYFdtC/1ZbO"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:30.621495"], ["created_at", "2015-10-14 19:43:30.711394"], ["updated_at", "2015-10-14 19:43:30.711394"], ["activation_digest", "$2a$10$idDew3ahCJNeGq35yNv7O.JbkdZUhydnLIQUd/iumf4OgtPVbccTS"]]
+  [1m[36m (176.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'harris_delilah@walterschoen.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Delilah Harris"], ["email", "harris_delilah@walterschoen.biz"], ["password_digest", "$2a$10$IVyMU6CwTVJYVSmgcK9G8OALFyG5oKPCBrKW.avUQerxN.GCwdRAG"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:31.057106"], ["created_at", "2015-10-14 19:43:31.143809"], ["updated_at", "2015-10-14 19:43:31.143809"], ["activation_digest", "$2a$10$otcDKvNGZz9Yfhu8NWyHquGlB790FZ8..2nJW8mFZniiQl9pWG6Ry"]]
+  [1m[36m (180.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'kilback.efrain@gaylord.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Efrain Kilback"], ["email", "kilback.efrain@gaylord.net"], ["password_digest", "$2a$10$nyOAS9aatB8dQtvOmZcm1O9vCPwU7w9j5eAWnvWUhVjBIXF0HgpwO"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:31.489514"], ["created_at", "2015-10-14 19:43:31.584444"], ["updated_at", "2015-10-14 19:43:31.584444"], ["activation_digest", "$2a$10$yDB28OH.mnMTn4PKVcz4LuSVIcpFpuzl8cqA1TpEz7KUpRD4Q7Zhi"]]
+  [1m[36m (150.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'cassin_tressie_ms@hettinger.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Ms. Tressie Cassin"], ["email", "cassin_tressie_ms@hettinger.biz"], ["password_digest", "$2a$10$YWQGhjpGzI4x3Nc2m4m4.up927f.UZXjBA9HD1iaIOxF/eUkdxeZS"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:31.900089"], ["created_at", "2015-10-14 19:43:31.986623"], ["updated_at", "2015-10-14 19:43:31.986623"], ["activation_digest", "$2a$10$MoJHLxwHkPNaKcPAx1K1juXkAaP1T6DIzxV7omcINm32nDJVXjKPu"]]
+  [1m[36m (191.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'dorthy.sawayn@schaefer.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Dorthy Sawayn"], ["email", "dorthy.sawayn@schaefer.name"], ["password_digest", "$2a$10$COiLoFw8raPfgfaf9uvkS.ifPP/PlL/crUJ2r6uguJFeXGYZzxEve"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:32.343779"], ["created_at", "2015-10-14 19:43:32.429772"], ["updated_at", "2015-10-14 19:43:32.429772"], ["activation_digest", "$2a$10$Dvi.wIkuOpUv5CKiGLWy7eex4fMWvx74RZW2IYcPQ08fWdR1phini"]]
+  [1m[36m (217.1ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'julian.i.quitzon@kovacekdach.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Julian Quitzon I"], ["email", "julian.i.quitzon@kovacekdach.com"], ["password_digest", "$2a$10$W974yK7OJd91xaZw8jbA2OzWvnDExCIRYN55qxy5Nx3LJ8uGbb1E."], ["activated", "t"], ["activated_at", "2015-10-14 19:43:32.811584"], ["created_at", "2015-10-14 19:43:32.897456"], ["updated_at", "2015-10-14 19:43:32.897456"], ["activation_digest", "$2a$10$PtKfKcfo0hFzA/0R7hWwOOzLg44o5toeXOVszY6kgmBCSki4f2y92"]]
+  [1m[36m (159.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'roberts.odell@pfeffer.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Odell Roberts"], ["email", "roberts.odell@pfeffer.net"], ["password_digest", "$2a$10$EmdLqCSW03SxVjTfluyBs.Y0NLmr35rDhCkekLdEUhILf5q/0qJ0q"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:33.221880"], ["created_at", "2015-10-14 19:43:33.309149"], ["updated_at", "2015-10-14 19:43:33.309149"], ["activation_digest", "$2a$10$2g/4rn9mj.YV5RJvj2Pl.uX0HT40.HEDzuzJvswhWrWpjt6YE.Kiu"]]
+  [1m[36m (200.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'waelchi.forest@goyettedaugherty.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Forest Waelchi"], ["email", "waelchi.forest@goyettedaugherty.name"], ["password_digest", "$2a$10$7koqszA8YPJIr5GBMRQNc.ZBh7uDaWqHOslISMmfI2eq9iy3whBoO"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:33.676911"], ["created_at", "2015-10-14 19:43:33.765173"], ["updated_at", "2015-10-14 19:43:33.765173"], ["activation_digest", "$2a$10$iiBURY4drMUrsr/bysSDG.pb.A9twHj/Ej70zUaCgeVDNf5zyYUpO"]]
+  [1m[36m (198.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'howe_carley@labadie.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Carley Howe"], ["email", "howe_carley@labadie.info"], ["password_digest", "$2a$10$jKKL.ZblBbFKOTdfjNBHMuoDKOwZDX4RBH5Dwzc9TABVc7v/CE1Bm"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:34.132071"], ["created_at", "2015-10-14 19:43:34.221022"], ["updated_at", "2015-10-14 19:43:34.221022"], ["activation_digest", "$2a$10$IqDdRs0kVYoAkxfwWZmac.bj0Y6s2X5rvJbwIBboWeSHi8/6cUdvG"]]
+  [1m[36m (186.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'runte_mckenna@mertzjacobson.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Mckenna Runte"], ["email", "runte_mckenna@mertzjacobson.net"], ["password_digest", "$2a$10$Mma6VxfCwJEIj6AJ7gewdOCxBCBeGnqdHKIQNXASDUoCRQp77joIa"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:34.575255"], ["created_at", "2015-10-14 19:43:34.662714"], ["updated_at", "2015-10-14 19:43:34.662714"], ["activation_digest", "$2a$10$/TcWM5ygrSKOd63xt7BsN.TRLY4.pkYtzhDw978hdjDi1Mgk/cYNG"]]
+  [1m[36m (215.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'orn_georgette@jenkinshills.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Georgette Orn"], ["email", "orn_georgette@jenkinshills.net"], ["password_digest", "$2a$10$Ren4FMrCxm80wl9ImD1xEuTPJnFlePowRjZbpArfxUy9N5.ZCp3n2"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:35.043000"], ["created_at", "2015-10-14 19:43:35.129406"], ["updated_at", "2015-10-14 19:43:35.129406"], ["activation_digest", "$2a$10$PiCf4ZhHkhD2hbDvUJQEG.zeuVGW54/Zpw1O0vWN529ufuNAAWT0O"]]
+  [1m[36m (1034.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'md.homenick.trudie@upton.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Trudie Homenick MD"], ["email", "md.homenick.trudie@upton.net"], ["password_digest", "$2a$10$AX2H1moPhCvVjAr0AV3jv..OGwI0WlsEFoUN9nCaMKrqSyEJjyIfy"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:36.329306"], ["created_at", "2015-10-14 19:43:36.415136"], ["updated_at", "2015-10-14 19:43:36.415136"], ["activation_digest", "$2a$10$3Lx5TYy4A8ExfTMYSPdtxuc4gNrjgjpm5x8wE0b6/S9K5VxTpjqjO"]]
+  [1m[36m (139.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'romaguera_callie@harvey.name' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Callie Romaguera"], ["email", "romaguera_callie@harvey.name"], ["password_digest", "$2a$10$HA4OVS0qGzpe1XObwqj9o.XCdCI5RVBNZfvIoegGuoTPmVCrThr.e"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:36.728772"], ["created_at", "2015-10-14 19:43:36.815662"], ["updated_at", "2015-10-14 19:43:36.815662"], ["activation_digest", "$2a$10$HaKOsLrNY7SypJEImEHzSOqCcOpxQX0H3MsTQKXMd1zjCEVNCOJHm"]]
+  [1m[36m (167.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'v.gerlach.lindsey@watsica.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Lindsey Gerlach V"], ["email", "v.gerlach.lindsey@watsica.com"], ["password_digest", "$2a$10$nYPvgFna5lMw/7VClJh80OHhxjze/qOmimLpavh3arH62NfgXvIB."], ["activated", "t"], ["activated_at", "2015-10-14 19:43:37.150355"], ["created_at", "2015-10-14 19:43:37.239448"], ["updated_at", "2015-10-14 19:43:37.239448"], ["activation_digest", "$2a$10$S7jNIsGv4XANAz2TGU9qmeZlY9lTp5OObFKztks2rJdp8SKg6kJG6"]]
+  [1m[36m (180.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'mrs_thompson_davon@wolff.org' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Mrs. Davon Thompson"], ["email", "mrs_thompson_davon@wolff.org"], ["password_digest", "$2a$10$hsOzL9EiC2hmFojEpI9zW.2T8d8R3g2ek1kpHmYTj2VoNU0ne6HRy"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:37.604896"], ["created_at", "2015-10-14 19:43:37.695641"], ["updated_at", "2015-10-14 19:43:37.695641"], ["activation_digest", "$2a$10$1/9eqsQsx0B7z9Bvgx3cnOypghfPp296WDJa3zzQbIoxbR7j7YCfu"]]
+  [1m[36m (205.2ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'johnson.judah@rodriguez.com' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Judah Johnson"], ["email", "johnson.judah@rodriguez.com"], ["password_digest", "$2a$10$CcqS/nd4DlCRPAyYN3rncec3vpoIk7dP2/xuxWgaPP4lkaCE8zURa"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:38.070922"], ["created_at", "2015-10-14 19:43:38.159297"], ["updated_at", "2015-10-14 19:43:38.159297"], ["activation_digest", "$2a$10$5SE954QTRz9CHy3v9zf3Gu6u/ltyCj0hDDNZzq/jAF29e48sVCj/a"]]
+  [1m[36m (222.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'eladio.hodkiewicz@nienowkunze.info' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Eladio Hodkiewicz"], ["email", "eladio.hodkiewicz@nienowkunze.info"], ["password_digest", "$2a$10$E2oBCwrIQxmY3qlue7pB3.HWAZFtpWHpzrzN6bKqVI1resTqsPF4O"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:38.548060"], ["created_at", "2015-10-14 19:43:38.636375"], ["updated_at", "2015-10-14 19:43:38.636375"], ["activation_digest", "$2a$10$9Mcc8YBE1IY9t/s917sbvuofanddtH5QjtnvTbBgvSmNQUSjVVV7u"]]
+  [1m[36m (177.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'curt.gulgowski@jaskolskihodkiewicz.biz' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Curt Gulgowski"], ["email", "curt.gulgowski@jaskolskihodkiewicz.biz"], ["password_digest", "$2a$10$EVVNPkxzgG/2X./6RiUO5ueSTVYb/3pIB7QCeC2j5CykeW7mvDHKe"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:38.981000"], ["created_at", "2015-10-14 19:43:39.067527"], ["updated_at", "2015-10-14 19:43:39.067527"], ["activation_digest", "$2a$10$Tds38tLVhwPsyr/BIekh0uuWIRXpYiKNJCnfyC1OoDmrx/UAdPnyu"]]
+  [1m[36m (274.8ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "users" WHERE "users"."email" = 'wisozk_tod@schoenlowe.net' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "users" ("name", "email", "password_digest", "activated", "activated_at", "created_at", "updated_at", "activation_digest") VALUES (?, ?, ?, ?, ?, ?, ?, ?)  [["name", "Tod Wisozk"], ["email", "wisozk_tod@schoenlowe.net"], ["password_digest", "$2a$10$NPR9xTzM9N7WnVTy4kFkMuhjiQoLeOnL4NI5eKbpANQoGQ35aHqNS"], ["activated", "t"], ["activated_at", "2015-10-14 19:43:39.510972"], ["created_at", "2015-10-14 19:43:39.602998"], ["updated_at", "2015-10-14 19:43:39.602998"], ["activation_digest", "$2a$10$N/pql20NSiXUD7JKvf0.1.3ZmN4zaW4.sgOKrRmo5bBYCA/KjnnCO"]]
+  [1m[36m (186.6ms)[0m  [1mcommit transaction[0m
+
+
+Started GET "/home" for 127.0.0.1 at 2015-10-15 01:15:02 +0530
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StaticPagesController#home as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1  [["id", 1]]
+  Rendered static_pages/home.html.erb within layouts/application (50.6ms)
+  Rendered layouts/_ie_files.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (1.6ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 1744ms (Views: 1731.6ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/custom.self-e2697b225a44bbdde90bcd4d83f33bf5a228a0cca6c50807c7478954f3d9eacc.css?body=1" for 127.0.0.1 at 2015-10-15 01:15:04 +0530
