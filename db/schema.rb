@@ -11,21 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014195132) do
+ActiveRecord::Schema.define(version: 20151015095625) do
 
-  create_table "posts", force: :cascade do |t|
-    t.string   "title"
-    t.text     "content"
-    t.integer  "user_id"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+  create_table "parkings", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "lat",            precision: 10, scale: 6
+    t.decimal  "lng",            precision: 10, scale: 6
+    t.integer  "total_capacity"
+    t.integer  "filled"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
-  add_index "posts", ["user_id", "created_at"], name: "index_posts_on_user_id_and_created_at"
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.time     "in"
+    t.time     "out"
+    t.date     "date"
+    t.integer  "payment"
+    t.boolean  "payment_type"
+    t.integer  "parking_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "transactions", ["parking_id"], name: "index_transactions_on_parking_id"
+  add_index "transactions", ["user_id"], name: "index_transactions_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

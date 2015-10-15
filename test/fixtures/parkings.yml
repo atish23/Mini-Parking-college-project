@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  lat: 9.99
+  lng: 9.99
+  total_capacity: 1
+  filled: 1
+
+two:
+  name: MyString
+  lat: 9.99
+  lng: 9.99
+  total_capacity: 1
+  filled: 1

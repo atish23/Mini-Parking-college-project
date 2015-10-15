@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  User_id: 
+  in: 2015-10-15 03:20:55
+  out: 2015-10-15 03:20:55
+  payment: 1
+  payment_type: false
+  parking_location: MyString
+
+two:
+  User_id: 
+  in: 2015-10-15 03:20:55
+  out: 2015-10-15 03:20:55
+  payment: 1
+  payment_type: false
+  parking_location: MyString

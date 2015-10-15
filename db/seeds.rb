@@ -45,3 +45,28 @@ end
                activated: true,
                activated_at: Time.zone.now)
 end
+
+names=["Karol Bagh","Nehru Place", "Connaught Place", "Lajpat Nagar", "Sarojni Nagar", "Select City Walk"]
+lats=[28.6629,28.5472,28.6328,28.5789,28.5769,28.5290]
+lngs=[77.2100,77.2508,77.2197,77.2439,77.1961,77.2191]
+6.times do |n|
+  name =names[n]
+  lat =lats[n]
+  lng =lngs[n]
+  Parking.create!(name:name,lat:lat,lng:lng,total_capacity:100,filled:0)
+end
+
+require 'active_support/core_ext'
+
+users = User.order(:created_at).take(6)
+50.times do
+  datetime=Faker::Time.between(2.days.ago, Time.now, :all)
+  date= datetime.to_date
+  in_time = datetime.to_time
+  out = in_time + 2.hours
+  payment = Faker::Number.number(2)
+  parking_id = Faker::Number.between(1, 6) #=> 7
+  payment_type =false
+  
+  users.each { |user| user.transactions.create!(in:in_time,out:out,payment:payment,date:date,payment_type:payment_type,parking_id:parking_id) }
+end
