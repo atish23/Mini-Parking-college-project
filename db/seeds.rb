@@ -53,7 +53,11 @@ lngs=[77.2100,77.2508,77.2197,77.2439,77.1961,77.2191]
   name =names[n]
   lat =lats[n]
   lng =lngs[n]
-  Parking.create!(name:name,lat:lat,lng:lng,total_capacity:100,filled:0)
+  total_capacity=Faker::Number.between(10,20)
+  p=Parking.create!(name:name,lat:lat,lng:lng,total_capacity:total_capacity,filled:0)
+  total_capacity.times do |i|
+  p.parking_lots.create!(availaible:true,slot_id:i)
+  end
 end
 
 require 'active_support/core_ext'
@@ -67,6 +71,6 @@ users = User.order(:created_at).take(6)
   payment = Faker::Number.number(2)
   parking_id = Faker::Number.between(1, 6) #=> 7
   payment_type =false
-  
+
   users.each { |user| user.transactions.create!(in:in_time,out:out,payment:payment,date:date,payment_type:payment_type,parking_id:parking_id) }
 end

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  parking_id: 
+  availaible: false
+
+two:
+  parking_id: 
+  availaible: false

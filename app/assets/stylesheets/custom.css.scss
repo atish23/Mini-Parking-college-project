@@ -1,5 +1,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+
+.navbar{
+  background-color: #455A64;
+}
+.nav.navbar-nav.navbar-right li a {
+    color: #D9D9D7;
+}
+.nav.navbar-nav.navbar-left li a {
+    color: #D9D9D7;
+}
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;
@@ -24,6 +35,13 @@ textarea {
     margin-bottom: 10px;
   }
 }
+
+
+//
+.text-container {
+  overflow: scroll;
+}
+//
 
 /* typography */
 
@@ -59,10 +77,10 @@ p {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: white;
+  color: #D9D9D7;
 //  text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
+  padding-top: 15px;
   font-weight: bold;
   &:hover {
     color: white;
@@ -70,53 +88,73 @@ p {
   }
 }
 
+
+.placeholder{
+  margin-top: 40px;
+}
+
 /* footer */
 
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid $gray-medium-light;
-  color: $gray-light;
-  a {
-    color: $gray;
-    &:hover {
-      color: $gray-darker;
-    }
-  }
-  small {
-    float: left;
-  }
-  ul {
-    float: right;
-    list-style: none;
-    li {
-      float: left;
-      margin-left: 15px;
-    }
-  }
+
+//Maps
+#map-container {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  bottom: 50px;
+  right: 0;
 }
 
-#wrapper {
-            left: 0px;
-            top: 40px;
-            bottom: 18px;
-            right: 0;
-            position: absolute;
-        }
-
-        #content {
-            top: 1px;
-            bottom: 0px;
-            /*padding-left: 10px;*/
-            overflow: auto;
-            position: absolute;
-            left: 0;
-            right: 0;
-        }
-#map{
-  height:100%;
+#map {
+  height: 100%;
 }
 
+
+#right-panel {
+ font-family: 'Roboto','sans-serif';
+ line-height: 30px;
+ padding-left: 10px;
+ background-color: #E3E3E3;
+}
+
+#right-panel select, #right-panel input {
+ font-size: 15px;
+}
+
+#right-panel select {
+ width: 100%;
+}
+
+#right-panel i {
+ font-size: 12px;
+}
+
+     #right-panel {
+       height: 100%;
+       float: right;
+       width: 390px;
+       overflow: auto;
+     }
+
+     #map {
+       margin-right: 200px;
+     }
+
+
+
+     @media print {
+       #map {
+         height: 500px;
+         margin: 0;
+       }
+
+       #right-panel {
+         float: none;
+         width: auto;
+       }
+     }
+
+//
 
 /* mixins, variables, etc. */
 

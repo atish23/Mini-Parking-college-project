@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  get 'parking_lots/update'
+
   get 'password_resets/new'
 
   get 'password_resets/edit'
@@ -15,6 +17,8 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
+  get '/book_now/:id' => 'parking_lots#update' ,:as => :book_now
+
   resources :parkings
   resources :transactions
   resources :users

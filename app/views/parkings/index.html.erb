@@ -1,9 +1,6 @@
 <%if logged_in?%>
-<div id="wrapper">
-      <div id="content">
+          <div id="right-panel"></div>
           <div id="map"></div>
-      </div>
-  </div>
     <script>
 
 var map;
@@ -17,8 +14,6 @@ function initMap() {
     center: DelhiCenter,
     zoom: 12
   });
-
-
   var marker = new google.maps.Marker({
       position: DelhiCenter,
       map: map,
@@ -32,7 +27,75 @@ function initMap() {
     google.maps.event.removeListener(listener);
     });
 
-  //var contentString = //Hit a url here to get data!;
+      //var contentString = //Hit a url here to get data!;
+    // Create the DIV to hold the control and call the CenterControl() constructor
+  // passing in this DIV.
+  var centerControlDiv = document.createElement('div');
+  var centerControl = new CenterControl(centerControlDiv, map,DelhiCenter);
+
+  centerControlDiv.index = 1;
+  map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(centerControlDiv);
+}
+
+/**
+ * The CenterControl adds a control to the map that recenters the map on Chicago.
+ * This constructor takes the control DIV as an argument.
+ * @constructor
+ */
+ function findPath(start,end,map){
+  var directionsDisplay = new google.maps.DirectionsRenderer;
+  var directionsService = new google.maps.DirectionsService;
+  directionsDisplay.setMap(map);
+  directionsDisplay.setPanel(document.getElementById('right-panel'));
+    calculateAndDisplayRoute(directionsService, directionsDisplay,start,end);
+ }
+
+ function calculateAndDisplayRoute(directionsService, directionsDisplay,startLoc,endLoc) {
+  var start = startLoc;
+  var end = endLoc;
+  directionsService.route({
+    origin: start,
+    destination: end,
+    travelMode: google.maps.TravelMode.DRIVING
+  }, function(response, status) {
+    if (status === google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    } else {
+      window.alert('Directions request failed due to ' + status);
+    }
+  });
+}
+
+
+function CenterControl(controlDiv, map,DelhiCenter) {
+
+  // Set CSS for the control border.
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundColor = '#607D8B';
+  controlUI.style.border = '2px solid  #D9D9D7';
+  controlUI.style.borderRadius = '3px';
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.marginBottom = '22px';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'Click to recenter the map';
+  controlDiv.appendChild(controlUI);
+
+  // Set CSS for the control interior.
+  var controlText = document.createElement('div');
+  controlText.style.color = '#D9D9D7';
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontSize = '16px';
+  controlText.style.lineHeight = '38px';
+  controlText.style.paddingLeft = '5px';
+  controlText.style.paddingRight = '5px';
+  controlText.innerHTML = 'Click to find nearest parking to your location!';
+  controlUI.appendChild(controlText);
+
+  // Setup the click event listeners: simply set the map to Chicago.
+  controlUI.addEventListener('click', function() {
+    var location=getGeolocation(DelhiCenter);
+  });
 
 }
 
@@ -81,12 +144,85 @@ function setMarkers(map){
   <% end %>
 }
 
+function getGeolocation(DelhiCenter){
+var initialLocation;
+var browserSupportFlag =  new Boolean();
+var end = {lat: 28.6100, lng: 77.2300};
 
+  // Try W3C Geolocation (Preferred)
+  if(navigator.geolocation) {
+    browserSupportFlag = true;
+    navigator.geolocation.getCurrentPosition(function(position) {
+      initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+      map.setCenter(initialLocation);
+      findPath(initialLocation,end,map);
+      start=initialLocation;
+    }, function() {
+      handleNoGeolocation(browserSupportFlag);
+    });
+  }
+  // Browser doesn't support Geolocation
+  else {
+    browserSupportFlag = false;
+    handleNoGeolocation(browserSupportFlag);
+  }
 
+  function handleNoGeolocation(errorFlag) {
+    if (errorFlag == true) {
+      alert("Geolocation service failed.");
+      initialLocation = DelhiCenter;
+    } else {
+      alert("Your browser doesn't support geolocation. We've placed you in Siberia.");
+      initialLocation = DelhiCenter;
+    }
+    map.setCenter(initialLocation);
+  }
+  return initialLocation;
+}
+
+function calulateDistance(data,initialLocation){
+
+  var service = new google.maps.DistanceMatrixService();
+  service.getDistanceMatrix(
+    {
+      origins: data,
+      destinations: [destination],
+      travelMode: google.maps.TravelMode.DRIVING,
+      transitOptions: TransitOptions,
+      unitSystem: UnitSystem,
+      durationInTraffic: false,
+      avoidHighways: true,
+      avoidTolls: true,
+    }, callback);
+
+  function callback(response, status) {
+    if (status == google.maps.DistanceMatrixStatus.OK) {
+    var origins = response.originAddresses;
+    var destinations = response.destinationAddresses;
+
+    for (var i = 0; i < origins.length; i++) {
+      var results = response.rows[i].elements;
+      for (var j = 0; j < results.length; j++) {
+        var element = results[j];
+        var distance = element.distance.text;
+        var duration = element.duration.text;
+        var from = origins[i];
+        var to = destinations[j];
+      }
+    }
+  }
+
+  }
+
+}
 
     </script>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6UmP5y2ulrLl7wgkjMi9A-WyeYyPbJBs&callback=initMap"
         async defer></script>
+
+
+
+
 
 <%else%>
 
