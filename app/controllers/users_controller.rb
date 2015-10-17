@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :correct_user, only:[:edit, :update]
   before_action :admin_user,     only: :destroy
 
+    require 'rqrcode_png'
   # GET /users
   # GET /users.json
   def index
@@ -34,6 +35,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+  str=@user.to_json
+  qr = RQRCode::QRCode.new( "#{str}", :size => 8, :level => :h )
+  png = qr.to_img                                             # returns an instance of ChunkyPNG
+
+  png.resize(150, 150).save("#{Rails.root}/public/qrcodes/user#{@user.id}.png")
   @user.send_activation_email
   flash[:info] = "Please check your email to activate your account."
   redirect_to root_url

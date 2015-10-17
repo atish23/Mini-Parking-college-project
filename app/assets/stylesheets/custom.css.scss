@@ -14,10 +14,21 @@
 }
 .nav.navbar-nav.navbar-left li a {
     color: #D9D9D7;
+
     &:hover {
       color: white;
       text-decoration: none;
     }
+}
+
+.navbar-nav > li > .dropdown-menu {
+  background-color: #455A64;
+  ul{
+  &:active{
+    color: red;
+    text-decoration: none;
+  }
+}
 }
 /* mixins, variables, etc. */
 
