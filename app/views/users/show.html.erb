@@ -12,7 +12,7 @@
 <p class="lead">Please show this QR code at check-in and check-out</p>
 
 <div class="row">
-  <%=image_tag("#{Rails.root}/public/user#{user.id}.png")%>
+  <%=image_tag("#{Rails.root}/public/user#{@user.id}.png")%>
 </div>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
