@@ -1,6 +1,13 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "ParkEasy", root_path, id: "logo" %>
+
+    <a href="<%=root_path%>" id="logo">
+        <i class="fa fa-car fa-1x">ParkEasy</i>
+    </a>
+
+
+    <!--<%= link_to "ParkEasy" , root_path, id: "logo" %>
+    -->
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>

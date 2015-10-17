@@ -7,9 +7,17 @@
 }
 .nav.navbar-nav.navbar-right li a {
     color: #D9D9D7;
+    &:hover {
+      color: white;
+      text-decoration: none;
+    }
 }
 .nav.navbar-nav.navbar-left li a {
     color: #D9D9D7;
+    &:hover {
+      color: white;
+      text-decoration: none;
+    }
 }
 /* mixins, variables, etc. */
 
@@ -80,7 +88,7 @@ p {
   color: #D9D9D7;
 //  text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 15px;
+  padding-top: 12px;
   font-weight: bold;
   &:hover {
     color: white;
