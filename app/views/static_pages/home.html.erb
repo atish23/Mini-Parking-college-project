@@ -33,7 +33,7 @@ function initMap() {
   //var contentString = //Hit a url here to get data!;
     var infowindow;
       $( document ).ready(function() {
-        $.getJSON("http://aditya.com:3000/parkings.json", function(data, status){
+        $.getJSON("https://vast-wave-6400.herokuapp.com/parkings.json", function(data, status){
             markers=setMarkers(map,data);
              infowindow=setInfoWindows(markers,data);
          });
@@ -47,7 +47,7 @@ function initMap() {
 var i=0;
   window.setInterval(function(){
     $( document ).ready(function() {
-      $.getJSON("http://aditya.com:3000/parkings.json", function(data, status){
+      $.getJSON("https://vast-wave-6400.herokuapp.com/parkings.json", function(data, status){
           // alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
           infowindow.close()
           infowindow=setInfoWindows(markers,data);
