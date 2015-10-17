@@ -18,7 +18,7 @@ user=User.create!(name:  "Example User",
              str="#{user.id}"+","+"#{user.name}"+","+"#{user.car_number}"
              qr = RQRCode::QRCode.new( str, :size => 6, :level => :h )
              png = qr.to_img                                             # returns an instance of ChunkyPNG
-             png.resize(300, 300).save("#{Rails.root}/public/user#{user.id}.png")
+             png.resize(300, 300).save("#{Rails.root}/public/qrcodes/user#{user.id}.png")
 
 9.times do |n|
   name  = Faker::Name.name
@@ -37,7 +37,7 @@ user=User.create!(name:  "Example User",
                str="#{user.id}"+","+"#{user.name}"+","+"#{user.car_number}"
                qr = RQRCode::QRCode.new( str, :size => 6, :level => :h )
                png = qr.to_img                                             # returns an instance of ChunkyPNG
-               png.resize(300, 300).save("#{Rails.root}/public/user#{user.id}.png")
+               png.resize(300, 300).save("#{Rails.root}/public/qrcodes/user#{user.id}.png")
 end
 50.times do |n|
   name  = Faker::Name.name
@@ -56,7 +56,7 @@ end
                str="#{user.id}"+","+"#{user.name}"+","+"#{user.car_number}"
                qr = RQRCode::QRCode.new( str, :size => 6, :level => :h )
                png = qr.to_img                                             # returns an instance of ChunkyPNG
-               png.resize(300, 300).save("#{Rails.root}/public/user#{user.id}.png")
+               png.resize(300, 300).save("#{Rails.root}/public/qrcodes/user#{user.id}.png")
 end
 
 names=["Karol Bagh","Nehru Place", "Connaught Place", "Lajpat Nagar", "Sarojni Nagar", "Select City Walk"]

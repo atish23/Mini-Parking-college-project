@@ -4,9 +4,9 @@
 
        <%if (lot.availaible)%>
 
-        <%= link_to "#{i}", book_now_path(lot.id) , :class => "btn btn-primary",:data => {:confirm => 'Are you sure?You will be billed from now'} %>
+        <%= link_to "#{lot.slot_id}", book_now_path(lot.id) , :class => "btn btn-primary",:data => {:confirm => 'Are you sure?You will be billed from now'} %>
        <%else%>
-        <%= link_to "#{i}",book_now_path(lot.id) ,:class => "btn btn-primary disabled", :method => :get  %>
+        <%= link_to "#{lot.slot_id}",book_now_path(lot.id) ,:class => "btn btn-primary disabled", :method => :get  %>
        <%end%>
        <%i=i+1%>
   <%end%>
