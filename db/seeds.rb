@@ -34,9 +34,9 @@ user.update_attribute :qrcode, png.to_string
   password = "password"
   car_number="MP 09 AB 123#{n}"
   str="#{user.id}"+","+"#{user.name}"+","+"#{user.car_number}"
-  qr = RQRCode::QRCode.new( str, :size => 8, :level => :h )
+  qr = RQRCode::QRCode.new( str, :size => 6, :level => :h )
   png = qr.to_img                                             # returns an instance of ChunkyPNG
-  png.resize(300,300)
+    png=png.resize(300, 300)
   user=User.create!(name:  name,
                email: email,
                mobile: number,

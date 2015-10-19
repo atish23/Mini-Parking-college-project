@@ -28,7 +28,7 @@ class TransactionsController < ApplicationController
   end
 
   private
-  # Confirms a valid user.
+
 
     def transaction_params
       params.require(:transaction).permit(:in,:out,:payment, :payment_type)
