@@ -1,6 +1,8 @@
 class TransactionsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
+  before_action :valid_user, only: [:edit, :update]
+
   def new
   end
 
@@ -24,6 +26,13 @@ class TransactionsController < ApplicationController
   end
 
   private
+  # Confirms a valid user.
+  def valid_user
+    unless (@user && @user.activated? &&
+            @user.authenticated?(:reset, params[:id]))
+      redirect_to root_url
+    end
+  end
 
     def transaction_params
       params.require(:transaction).permit(:in,:out,:payment, :payment_type)

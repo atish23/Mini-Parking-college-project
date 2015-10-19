@@ -1,4 +1,6 @@
 class ParkingsController < ApplicationController
+  before_action :valid_user, only: [:edit, :update]
+
   def index
     @parkings=Parking.all
 
@@ -21,6 +23,13 @@ class ParkingsController < ApplicationController
 
 
   private
+  # Confirms a valid user.
+  def valid_user
+    unless (@user && @user.activated? &&
+            @user.authenticated?(:reset, params[:id]))
+      redirect_to root_url
+    end
+  end
 
 
 end

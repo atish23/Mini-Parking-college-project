@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :transactions
   before_save   :downcase_email
   before_create :create_activation_digest
-
+ require 'dragonfly'
   validates :name, presence: true
   NUMBER_REGEX =/\A[789]\d{9}\z/
   validates :mobile, presence:true, length:{is: 10}, format: {with: NUMBER_REGEX}
@@ -18,7 +18,8 @@ class User < ActiveRecord::Base
                     uniqueness: true
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-
+#  has_attached_file :qrcode, styles: { medium: "300x300>" }, default_url: "/images/:style/missing.png"
+  dragonfly_accessor :qrcode
   # Returns the hash digest of the given string.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

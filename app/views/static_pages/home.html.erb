@@ -118,10 +118,7 @@ function CenterControl(controlDiv, map,DelhiCenter) {
 
  // Setup the click event listeners: simply set the map to Chicago.
  controlUI.addEventListener('click', function() {
-   var node = document.getElementById("placeholder");
-   if (node.parentNode) {
-     node.parentNode.removeChild(node);
-   }
+
   var location=getGeolocation(DelhiCenter);
 
  });
@@ -141,6 +138,10 @@ var end = {lat: 28.6100, lng: 77.2300};
       map.setCenter(initialLocation);
       findPath(initialLocation,end,map);
       start=initialLocation;
+      var node = document.getElementById("placeholder");
+      if (node.parentNode) {
+        node.parentNode.removeChild(node);
+      }
     }, function() {
       handleNoGeolocation(browserSupportFlag);
     });

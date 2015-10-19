@@ -27,8 +27,9 @@ gem 'rqrcode_png'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
-gem 'paperclip', '~> 4.2.1'   # For uploading images, thumbnails etc (requires ImageMagick)
-
+#gem 'paperclip', '~> 4.2.1'   # For uploading images, thumbnails etc (requires ImageMagick)
+gem 'dragonfly', '~> 1.0.12'
+gem 'colorbox-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'bcrypt',               '3.1.7' #for hashing password

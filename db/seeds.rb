@@ -6,6 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'rqrcode_png'
+require 'dragonfly'
+
+str="1,Example User,MP 09 AB 1234"#{user.name}"+","+"#{user.car_number}"
+qr = RQRCode::QRCode.new( str, :size => 8, :level => :h )
+png = qr.to_img                                             # returns an instance of ChunkyPNG
+png.resize(300,300)
+
 user=User.create!(name:  "Example User",
              email: "example@aditya.com",
              password:              "foobar",
@@ -14,11 +21,11 @@ user=User.create!(name:  "Example User",
              car_number:"MP 09 AB 1234",
              admin: true,
              activated: true,
-             activated_at: Time.zone.now)
-             str="#{user.id}"+","+"#{user.name}"+","+"#{user.car_number}"
-             qr = RQRCode::QRCode.new( str, :size => 6, :level => :h )
-             png = qr.to_img                                             # returns an instance of ChunkyPNG
-             png.resize(300, 300).save("#{Rails.root}/public/qrcodes/user#{user.id}.png")
+             activated_at: Time.zone.now,
+             )
+
+user.update_attribute :qrcode, png.to_string
+
 
 9.times do |n|
   name  = Faker::Name.name
@@ -26,6 +33,10 @@ user=User.create!(name:  "Example User",
   number= (9910101000+n)
   password = "password"
   car_number="MP 09 AB 123#{n}"
+  str="#{user.id}"+","+"#{user.name}"+","+"#{user.car_number}"
+  qr = RQRCode::QRCode.new( str, :size => 8, :level => :h )
+  png = qr.to_img                                             # returns an instance of ChunkyPNG
+  png.resize(300,300)
   user=User.create!(name:  name,
                email: email,
                mobile: number,
@@ -33,11 +44,10 @@ user=User.create!(name:  "Example User",
                password:              password,
                password_confirmation: password,
                activated: true,
-               activated_at: Time.zone.now)
-               str="#{user.id}"+","+"#{user.name}"+","+"#{user.car_number}"
-               qr = RQRCode::QRCode.new( str, :size => 6, :level => :h )
-               png = qr.to_img                                             # returns an instance of ChunkyPNG
-               png.resize(300, 300).save("#{Rails.root}/public/qrcodes/user#{user.id}.png")
+               activated_at: Time.zone.now,
+               )
+
+               user.update_attribute :qrcode, png.to_string
 end
 50.times do |n|
   name  = Faker::Name.name
@@ -45,6 +55,10 @@ end
   number= (9910101000+n)
   password = "password"
   car_number="MP 09 AB 12#{n}"
+  str="#{user.id}"+","+"#{user.name}"+","+"#{user.car_number}"
+  qr = RQRCode::QRCode.new( str, :size => 8, :level => :h )
+  png = qr.to_img
+  png.resize(300,300)
   user=User.create!(name:  name,
                email: email,
                mobile: number,
@@ -53,11 +67,9 @@ end
                password_confirmation: password,
                activated: true,
                activated_at: Time.zone.now)
-               str="#{user.id}"+","+"#{user.name}"+","+"#{user.car_number}"
-               qr = RQRCode::QRCode.new( str, :size => 6, :level => :h )
-               png = qr.to_img                                             # returns an instance of ChunkyPNG
-               png.resize(300, 300).save("#{Rails.root}/public/qrcodes/user#{user.id}.png")
-end
+
+               user.update_attribute :qrcode, png.to_string
+  end
 
 names=["Karol Bagh","Nehru Place", "Connaught Place", "Lajpat Nagar", "Sarojni Nagar", "Select City Walk"]
 lats=[28.6629,28.5472,28.6328,28.5789,28.5769,28.5290]

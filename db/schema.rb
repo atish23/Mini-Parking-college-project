@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015204757) do
+ActiveRecord::Schema.define(version: 20151019134512) do
 
   create_table "parking_lots", force: :cascade do |t|
     t.integer  "parking_id"
@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 20151015204757) do
     t.datetime "reset_sent_at"
     t.string   "car_number"
     t.integer  "mobile",            limit: 8
+    t.string   "qrcode_uid"
+    t.string   "qrcode_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

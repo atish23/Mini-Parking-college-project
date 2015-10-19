@@ -5,6 +5,7 @@
 .navbar{
   background-color: #455A64;
 }
+
 .nav.navbar-nav.navbar-right li a {
     color: #D9D9D7;
     &:hover {
@@ -35,11 +36,17 @@
 $gray-medium-light: #eaeaea;
 
 /* universal */
-
+html,
 body {
-  padding-top: 60px;
+ margin:0;
+ padding:0;
+ padding-top: 24px;
+ height:100%;
 }
-
+.container {
+ min-height:100%;
+ position:relative;
+}
 section {
   overflow: auto;
 }
@@ -106,7 +113,7 @@ p {
     text-decoration: none;
   }
 }
-
+s
 
 .placeholder{
   margin-top: 40px;
@@ -287,3 +294,35 @@ input {
     border-bottom: 1px solid $gray-lighter;
   }
 }
+
+#container {
+   min-height:100%;
+   position:relative;
+}
+/*#header {
+   background:#ff0;
+   padding:10px;
+}*/
+#body {
+   padding:10px;
+   padding-bottom:60px;   /* Height of the footer */
+}
+
+#footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:50px;   /* Height of the footer */
+   background:#455A64;
+   &:hover {
+     color: white;
+     text-decoration: none;
+   }
+
+}
+
+
+/* IE 6 and down:
+#container {
+   height:100%;
+}*/

@@ -11,8 +11,9 @@
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "Help", help_path %></li>
         <% if logged_in? %>
+        <li><%= link_to "QR code", current_user.qrcode.thumb('200x200').url , :data => { :colorbox => true, :colorbox_height => '300px', :colorbox_width => '300px', :colorbox_photo => true } %>
+      </li>
 
         <li><%= link_to "My transactions", transactions_path %></li>
         <li><%= link_to "Users", users_path %></li>

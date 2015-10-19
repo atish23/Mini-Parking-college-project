@@ -3,8 +3,10 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user, only:[:edit, :update]
   before_action :admin_user,     only: :destroy
+  before_action :valid_user, only: [:edit, :update]
 
-    require 'rqrcode_png'
+
+  require 'rqrcode_png'
   # GET /users
   # GET /users.json
   def index
@@ -34,12 +36,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    if @user.save
-  str=@user.to_json
-  qr = RQRCode::QRCode.new( "#{str}", :size => 8, :level => :h )
+  if @user.save
+  str="#{@user.id}"+","+"#{@user.name}"+","+"#{@user.car_number}"
+  qr = RQRCode::QRCode.new( "#{str}", :size => 6, :level => :h )
   png = qr.to_img                                             # returns an instance of ChunkyPNG
-
-  png.resize(150, 150).save("#{Rails.root}/public/qrcodes/user#{@user.id}.png")
+  png=png.resize(300, 300)
+  @user.update_attribute :qrcode, png.to_string
   @user.send_activation_email
   flash[:info] = "Please check your email to activate your account."
   redirect_to root_url
@@ -93,4 +95,13 @@ end
     def admin_user
       redirect_to(root_url) unless current_user.admin?
     end
+
+    # Confirms a valid user.
+    def valid_user
+      unless (@user && @user.activated? &&
+              @user.authenticated?(:reset, params[:id]))
+        redirect_to root_url
+      end
+    end
+
 end

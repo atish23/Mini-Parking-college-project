@@ -12,7 +12,10 @@
 <p class="lead">Please show this QR code at check-in and check-out</p>
 
 <div class="row">
-  <%=image_tag("#{Rails.root}/public/user#{@user.id}.png")%>
+  <%= image_tag @user.qrcode.thumb('200x200').url %>
 </div>
-<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to "show photo", @user.qrcode.thumb('200x200').url , :data => { :colorbox => true, :colorbox_height => '300px', :colorbox_width => '300px', :colorbox_photo => true } %>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %>
 <%= link_to 'Back', users_path %>
