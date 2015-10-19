@@ -21,5 +21,10 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  production:
+  adapter: postgresql
+  host: ENV['RDS_POSTGRES_HOST']
+  port: ENV['RDS_POSTGRES_PORT']
+  username: ENV['RDS_POSTGRES_USERNAME']
+  password: ENV['RDS_POSTGRES_PASSWORD']
+  database: ENV['RDS_POSTGRES_DATABASE']
