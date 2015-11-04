@@ -6,7 +6,7 @@ class CreateParkings < ActiveRecord::Migration
       t.decimal :lng ,{:precision=>10, :scale=>6}
       t.integer :total_capacity
       t.integer :filled
-
+      t.integer :cost
       t.timestamps null: false
     end
   end

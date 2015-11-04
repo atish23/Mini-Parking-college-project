@@ -2,7 +2,7 @@
 <%if logged_in?%>
 <div id="right-panel">
   <div id="placeholder"  >
-  <h1 class="center jumbotron">Welocome to ParkEasy</h2>
+  <h1 class="center jumbotron">Welcome to ParkEasy</h2>
   <h1><small>Click on parkings to view latest updates!</small></h1>
   <p align="left">Your details are:<br>
       <ul align="left">
@@ -33,7 +33,11 @@ function initMap() {
   //var contentString = //Hit a url here to get data!;
     var infowindow;
       $( document ).ready(function() {
-        $.getJSON("https://vast-wave-6400.herokuapp.com/parkings.json", function(data, status){
+        //$.getJSON("https://vast-wave-6400.herokuapp.com/parkings.json", function(data, status){
+        $.getJSON("http://aditya.com:3000/parkings.json", function(data, status){
+
+
+
             markers=setMarkers(map,data);
              infowindow=setInfoWindows(markers,data);
          });
@@ -47,7 +51,9 @@ function initMap() {
 var i=0;
   window.setInterval(function(){
     $( document ).ready(function() {
-      $.getJSON("https://vast-wave-6400.herokuapp.com/parkings.json", function(data, status){
+      //$.getJSON("https://vast-wave-6400.herokuapp.com/parkings.json", function(data, status){
+      $.getJSON("http://aditya.com:3000/parkings.json", function(data, status){
+
           // alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
           infowindow.close()
           infowindow=setInfoWindows(markers,data);
@@ -197,7 +203,7 @@ function setInfoWindows(markers,data){
  '<div id="bodyContent">'+
  '<p> Total Capacity:'+data[i].total_capacity+'</p>'+
  '<p> Filled: '+data[i].filled+'</p>'+
- '<p> Current Rate(per hour):'+0+'</p>'+
+ '<p> Current Rate(per hour):'+data[i].cost+'</p>'+
  '</div>'+
  '<a href="/parkings/'+data[i].id+'" class="btn btn-primary">Show Complete Status</a>';
 // '<a href="http://localhost:3000/parkings/'+data[i].id+'" class="btn btn-primary">Show Complete Status</a>';

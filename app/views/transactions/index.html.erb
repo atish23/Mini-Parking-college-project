@@ -1,10 +1,37 @@
 <% provide(:title, 'All transactions') %>
+<%if @active_transaction%>
+<h1>Your current active transaction</h1>
 
-<h1>Your recent transactioms</h1>
+<table class="table" width="100%">
+  <thead>
+    <tr>
+    <th>T.Id</th>
+    <th>Date</th>
+    <th>In (time)</th>
+    <th>Payment type</th>
+    <th>Parking Name </th>
+    <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%=@active_transaction.id%></td>
+      <td><%=@active_transaction.date%></td>
+      <td><%=@active_transaction.in.strftime("%I:%M%p")%></td>
+      <% if @active_transaction.payment_type %>
+      <td>Cash</td>
+      <%else%>
+      <td>Online</td>
+      <%end%>
+      <%name=Parking.find_by(id:@active_transaction.parking_id).name%>
+      <td><%=name%></td>
+      <td><%=link_to "End Transaction",end_transaction_path(@active_transaction.id), class: "btn btn-md btn-primary",:method => :get %><td>
+    </tr>
+  </tbody>
+</table>
+<%end%>
+<h1>Your recent transactions</h1>
 <%= link_to current_user.name, current_user %>
-
-
-
 
   <table class="table" width="100%">
     <thead>

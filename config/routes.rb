@@ -18,9 +18,10 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
   get '/book_now/:id' => 'parking_lots#update' ,:as => :book_now
-
+  get '/book_slot/:id' => 'parking_lots#update_app'
   resources :parkings
   resources :transactions
+  get 'end_transaction/:id' =>'transactions#update', :as=> :end_transaction
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]

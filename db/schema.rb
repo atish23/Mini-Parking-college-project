@@ -29,20 +29,22 @@ ActiveRecord::Schema.define(version: 20151019134512) do
     t.decimal  "lng",            precision: 10, scale: 6
     t.integer  "total_capacity"
     t.integer  "filled"
+    t.integer  "cost"
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
   end
 
   create_table "transactions", force: :cascade do |t|
     t.integer  "user_id"
-    t.time     "in"
-    t.time     "out"
-    t.date     "date"
+    t.datetime "in"
+    t.datetime "out"
+    t.datetime "date"
     t.integer  "payment"
     t.boolean  "payment_type"
+    t.boolean  "current_transaction"
     t.integer  "parking_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   add_index "transactions", ["parking_id"], name: "index_transactions_on_parking_id"
