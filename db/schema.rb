@@ -43,11 +43,14 @@ ActiveRecord::Schema.define(version: 20151019134512) do
     t.boolean  "payment_type"
     t.boolean  "current_transaction"
     t.integer  "parking_id"
+    t.integer  "parking_lot_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.boolean  "currently_in"
   end
 
   add_index "transactions", ["parking_id"], name: "index_transactions_on_parking_id"
+  add_index "transactions", ["parking_lot_id"], name: "index_transactions_on_parking_lot_id"
   add_index "transactions", ["user_id"], name: "index_transactions_on_user_id"
 
   create_table "users", force: :cascade do |t|

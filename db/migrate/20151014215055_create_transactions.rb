@@ -8,9 +8,10 @@ class CreateTransactions < ActiveRecord::Migration
       t.integer :payment
       t.boolean :payment_type
       t.boolean :current_transaction
-      t.references :parking, index:true, foreign_key:true
-
+      t.references :parking,index:true,foreign_key:true
+      t.references :parking_lot,index:true,foreign_key:true
       t.timestamps null: false
+      t.boolean :currently_in 
     end
   end
 end

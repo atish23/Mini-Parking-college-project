@@ -25,7 +25,11 @@
       <%end%>
       <%name=Parking.find_by(id:@active_transaction.parking_id).name%>
       <td><%=name%></td>
+      <%if !@active_transaction.currently_in %>
       <td><%=link_to "End Transaction",end_transaction_path(@active_transaction.id), class: "btn btn-md btn-primary",:method => :get %><td>
+      <%else%>
+      <td>You are currently inside parking lot</td>
+      <%end%>
     </tr>
   </tbody>
 </table>

@@ -18,7 +18,7 @@ class ParkingLotsController < ApplicationController
         out=datetime
         payment=0
 
-        current_user.transactions.create!(in:in_time,out:out,payment:payment,date:date,payment_type:payment_type,parking_id:parking_id,current_transaction:true)
+        current_user.transactions.create!(in:in_time,out:out,payment:payment,date:date,payment_type:payment_type,parking_lot_id:id,parking_id:parking_id,current_transaction:true,currently_in:true)
         parking=Parking.find_by(id: parking_id)
         parking.update(filled:parking.filled+1)
         redirect_to request.referrer

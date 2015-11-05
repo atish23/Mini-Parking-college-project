@@ -95,8 +95,9 @@ users = User.order(:created_at).take(6)
   in_time = datetime
   out = in_time + 2.hours
   payment = Faker::Number.number(2)
-  parking_id = Faker::Number.between(1, 6) #=> 7
+  parking_id=Faker::Number.between(1, 6) #=> 7
+  parking_lot_id = Faker::Number.between(1, 10) #=> 7
   payment_type =false
 
-  users.each { |user| user.transactions.create!(in:in_time,out:out,payment:payment,date:date,payment_type:payment_type,parking_id:parking_id,current_transaction:false) }
+  users.each { |user| user.transactions.create!(in:in_time,out:out,payment:payment,date:date,payment_type:payment_type,parking_id:parking_id,parking_lot_id:parking_lot_id,current_transaction:false,currently_in:false) }
 end
