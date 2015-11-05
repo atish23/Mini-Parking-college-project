@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019134512) do
+ActiveRecord::Schema.define(version: 20151105103752) do
+
+  create_table "admin_users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.integer  "parking_id"
+    t.string   "password_digest"
+    t.integer  "mobile",          limit: 8
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "admin_users", ["parking_id"], name: "index_admin_users_on_parking_id"
 
   create_table "parking_lots", force: :cascade do |t|
     t.integer  "parking_id"

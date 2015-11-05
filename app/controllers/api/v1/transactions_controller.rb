@@ -1,3 +1,4 @@
+module Api::V1
 class TransactionsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
@@ -11,8 +12,8 @@ class TransactionsController < ApplicationController
   def index
     #@user=current_user
     @transactions=current_user.transactions.order("created_at desc")
-    @active_transaction=current_user.transactions.find_by(current_transaction:true).where(currently_in:false)
-
+    @active_transaction=current_user.transactions.find_by(current_transaction:true)
+    #.where(currently_in:false)
   #  debugger
   end
 
@@ -62,4 +63,5 @@ class TransactionsController < ApplicationController
       redirect_to(root_url) if @transaction.nil?
     end
 
+end
 end

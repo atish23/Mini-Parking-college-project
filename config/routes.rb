@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
 
 
+  get 'admin_users/create'
+
+  get 'admin_users/read'
+
+  get 'admin_users/update'
+
+  get 'admin_users/delete'
+
   get 'parking_lots/update'
 
   get 'password_resets/new'
@@ -39,7 +47,7 @@ Rails.application.routes.draw do
 
 namespace :api, defaults: {format: 'json'} do
   namespace :v1 do
-    resources :parking_lots
+    get 'book_now/:id' => 'parking_lots#update', :as =>:book_now_api 
     resources :parkings
     resources :transactions
     end

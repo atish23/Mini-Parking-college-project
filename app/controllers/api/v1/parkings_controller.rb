@@ -1,5 +1,6 @@
+module Api::V1
 class ParkingsController < ApplicationController
-  
+
   def index
     @parkings=Parking.all
 
@@ -24,4 +25,5 @@ class ParkingsController < ApplicationController
   private
 
 
+end
 end

@@ -26,6 +26,14 @@ user=User.create!(name:  "Example User",
 
 user.update_attribute :qrcode, png.to_string
 
+#6.times do |n|
+#  name="admin#{n}"
+#  email="admin#{n}@admin.com"
+#  password="admin123"
+#  mobile=9910714777
+#  AdminUser.create!(name:name,email:email,password:password,password_confirmation:password,mobile:mobile,parking_id:n)
+#end
+#
 
 9.times do |n|
   name  = Faker::Name.name

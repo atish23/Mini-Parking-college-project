@@ -12,7 +12,7 @@ class TransactionsController < ApplicationController
     #@user=current_user
     @transactions=current_user.transactions.order("created_at desc")
     @active_transaction=current_user.transactions.find_by(current_transaction:true)
-
+    
   #  debugger
   end
 
@@ -37,12 +37,13 @@ class TransactionsController < ApplicationController
     if(time_taken==0)
       time_taken=time_taken+1
     end
+    out=Time.now.to_time
     parking=Parking.find_by(id: @transaction.parking_id)
     parking_lot=ParkingLot.find_by(id: @transaction.parking_lot_id)
 
     cost=time_taken*parking.cost
     Rails.logger.debug("My time: #{cost.inspect}")
-    @transaction.update!(current_transaction:false,payment:cost)
+    @transaction.update!(current_transaction:false,payment:cost,out:out)
     parking.update(filled:parking.filled-1)
     parking_lot.update!(availaible:true)
 
