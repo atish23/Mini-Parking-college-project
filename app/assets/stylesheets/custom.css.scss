@@ -321,7 +321,48 @@ input {
 
 }
 
+	
+tbody{
+background-color:#FFFD00;
+}
+	table{
+	border: 2px dashed;
+	margin-top:20px;
+	margin-bottom:20px;
+	width:50%;
+	border-collapse: collapse;
+	}
 
+	tr{
+	margin:5px;
+	background-color:#FFFD00;
+	}
+
+	td{
+	text-align:center;
+	padding:0px;
+	border: none;
+	height:200px;
+	width:50px;
+	}
+	.btn{
+	width:180px;
+	height:120px;
+	transform:rotate(-90deg);
+	}
+	.vertical{
+	transform:rotate(90deg);
+	}
+	.horizontal{
+	width:50%;
+	align:left;
+	align-content:center;
+	color:yellow;
+	radius:5cm;
+	}
+	hr{
+	color:yellow;
+	}
 /* IE 6 and down:
 #container {
    height:100%;
