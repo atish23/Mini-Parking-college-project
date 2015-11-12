@@ -8,6 +8,9 @@
 require 'rqrcode_png'
 require 'dragonfly'
 
+6.times do |n|
+AdminUser.create!(email: "admin#{n}@example.com", password:"password",parking_id: n)
+end
 str="1,Example User,MP 09 AB 1234"#{user.name}"+","+"#{user.car_number}"
 qr = RQRCode::QRCode.new( str, :size => 8, :level => :h )
 png = qr.to_img                                             # returns an instance of ChunkyPNG
@@ -19,7 +22,6 @@ user=User.create!(name:  "Example User",
              password_confirmation: "foobar",
              mobile: 9910991022,
              car_number:"MP 09 AB 1234",
-             admin: true,
              activated: true,
              activated_at: Time.zone.now,
              )
@@ -97,7 +99,7 @@ end
 require 'active_support/core_ext'
 
 users = User.order(:created_at).take(6)
-50.times do
+10.times do
   datetime=Faker::Time.between(2.days.ago, Time.now, :all)
   date= datetime
   in_time = datetime

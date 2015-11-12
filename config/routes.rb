@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   get 'admin_users/create'
 
   get 'admin_users/read'
@@ -47,9 +49,12 @@ Rails.application.routes.draw do
 
 namespace :api, defaults: {format: 'json'} do
   namespace :v1 do
-    get 'book_now/:id' => 'parking_lots#update', :as =>:book_now_api 
-    resources :parkings
-    resources :transactions
+    get 'book_now/:id' => 'parking_lots#update', :as =>:book_now_api
+    get 'booked_online/:id' => 'transactions#booked_online'
+    get 'parking_status/:id' => 'parking_lots#parking_status'
+    get 'entry/' => 'parking_lots#entry'
+    get 'exit/:id' => 'transactions#exit'
+
     end
 
 end

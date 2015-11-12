@@ -3,11 +3,14 @@ class ParkingLotsController < ApplicationController
 
 
   def update
+    transaction=current_user.transactions.where(:current_transaction => true).first
+    Rails.logger.debug { transaction }
+    if transaction.nil?
     id=params[:id]
     @parking_lot=ParkingLot.find(id)
     # debugger
     if @parking_lot.update!(:availaible => false)
-        flash[:info] = "You have successfully booked your spot.Your parking slot number is #{@parking_lot.slot_id+1}. Your entry time has started now."
+        flash[:success] = "You have successfully booked your spot.Your parking slot number is #{@parking_lot.slot_id+1}. Your entry time has started now."
         datetime=Time.now
         date= datetime
         in_time = datetime
@@ -24,8 +27,14 @@ class ParkingLotsController < ApplicationController
         redirect_to request.referrer
     else
       flash[:info] = "Not updated!"
-      redirect_back
+      redirect_to request.referrer
     end
+  else
+    Rails.logger.debug { "transaction.id " }
+    flash[:danger] = "You already have an Active Transaction"
+    redirect_to request.referrer
+  end
+
   end
 
 
