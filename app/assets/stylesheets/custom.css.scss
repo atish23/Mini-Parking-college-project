@@ -322,7 +322,8 @@ input {
 }
 //
 .ptbody{
-background-color:#FFFD00;
+
+    background-color: #455A64;
 }
 	.ptable{
 	border: 2px dashed;
@@ -334,7 +335,7 @@ background-color:#FFFD00;
 
 	.ptr{
 	margin:5px;
-	background-color:#FFFD00;
+	background-color: #E3E3E3;
 	}
 
 	.ptd{
@@ -356,7 +357,7 @@ background-color:#FFFD00;
 	width:50%;
 	align:left;
 	align-content:center;
-	color:yellow;
+	//color:yellow;
 	radius:5cm;
 	}
 	hr{

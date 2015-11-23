@@ -7,7 +7,7 @@
 
         <%= link_to "#{lot.slot_id+1}", book_now_path(lot.id) , :class => "btn btn-primary",:data => {:confirm => 'Are you sure?You will be billed from now'} %>
        <%else%>
-        <%= link_to "#{lot.slot_id+1}",book_now_path(lot.id) ,:class => "btn btn-primary disabled", :method => :get  %>
+        <%= link_to "#{lot.slot_id}",book_now_path(lot.id) ,:class => "btn btn-primary disabled", :method => :get  %>
        <%end%>
        <%i=i+1%>
   <%end%>
@@ -16,24 +16,87 @@
   <table align="center" class="ptable">
 
   <tr class="ptr">
-    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success">1</button></td>
-    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success">2</button></td>
-    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success">3</button></td>
-    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success">4</button></td>
-    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success">5</button><!--<img src="C:\Users\admin\Desktop\ADI\images\s1.png">--></td>
-    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success">6</button></td>
+    <td class="ptd">
 
+    <%if (@parkinglots[0].availaible)%>
+      <%= link_to "#{@parkinglots[0].slot_id}", book_now_path(@parkinglots[0].id) , :id => "pbtn",:class => "btn btn-success",:data => {:confirm => 'Are you sure?You will be billed from now'} %>
+    <%else%>
+      <%= link_to "#{@parkinglots[0].slot_id}",book_now_path(@parkinglots[0].id) ,id => "pbtn",:class => "btn btn-primary disabled", :method => :get  %>
+    <%end%>
+
+   </td>
+   <td class="ptd">
+
+   <%if (@parkinglots[1].availaible)%>
+     <%= link_to "#{@parkinglots[1].slot_id}", book_now_path(@parkinglots[1].id) , :id => "pbtn",:class => "btn btn-success",:data => {:confirm => 'Are you sure?You will be billed from now'} %>
+   <%else%>
+     <%= link_to "#{@parkinglots[1].slot_id}",book_now_path(@parkinglots[1].id) ,id => "pbtn",:class => "btn btn-primary disabled", :method => :get  %>
+   <%end%>
+
+  </td>
+  <td class="ptd">
+
+  <%if (@parkinglots[2].availaible)%>
+    <%= link_to "#{@parkinglots[2].slot_id}", book_now_path(@parkinglots[2].id) , :id => "pbtn",:class => "btn btn-success",:data => {:confirm => 'Are you sure?You will be billed from now'} %>
+  <%else%>
+    <%= link_to "#{@parkinglots[2].slot_id}",book_now_path(@parkinglots[2].id) ,id => "pbtn",:class => "btn btn-primary disabled", :method => :get  %>
+  <%end%>
+
+ </td>
+ <td class="ptd">
+
+ <%if (@parkinglots[3].availaible)%>
+   <%= link_to "#{@parkinglots[3].slot_id}", book_now_path(@parkinglots[3].id) , :id => "pbtn",:class => "btn btn-success",:data => {:confirm => 'Are you sure?You will be billed from now'} %>
+ <%else%>
+   <%= link_to "#{@parkinglots[3].slot_id}",book_now_path(@parkinglots[3].id) ,id => "pbtn",:class => "btn btn-primary disabled", :method => :get  %>
+ <%end%>
+
+</td>
+<td class="ptd">
+
+<%if (@parkinglots[4].availaible)%>
+  <%= link_to "#{@parkinglots[4].slot_id}", book_now_path(@parkinglots[4].id) , :id => "pbtn",:class => "btn btn-success",:data => {:confirm => 'Are you sure?You will be billed from now'} %>
+<%else%>
+  <%= link_to "#{@parkinglots[4].slot_id}",book_now_path(@parkinglots[4].id) ,id => "pbtn",:class => "btn btn-primary disabled", :method => :get  %>
+<%end%>
+
+</td>
+<td class="ptd">
+
+<%if (@parkinglots[5].availaible)%>
+  <%= link_to "#{@parkinglots[5].slot_id}", book_now_path(@parkinglots[5].id) , :id => "pbtn",:class => "btn btn-success",:data => {:confirm => 'Are you sure?You will be billed from now'} %>
+<%else%>
+  <%= link_to "#{@parkinglots[5].slot_id}",book_now_path(@parkinglots[5].id) ,id => "pbtn",:class => "btn btn-primary disabled", :method => :get  %>
+<%end%>
+
+</td>
+
+
+<!--    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success"><%=@parkinglots[1].slot_id%></button></td>
+    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success"><%=@parkinglots[2].slot_id%></button></td>
+    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success"><%=@parkinglots[3].slot_id%></button></td>
+    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success"><%=@parkinglots[4].slot_id%></button><-<img src="C:\Users\admin\Desktop\ADI\images\s1.png">-</td>
+    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success"><%=@parkinglots[5].slot_id%></button></td>
+-->
 
   </tr>
   <tr class="ptr">
-    <td style="background-color:crimson; border:none;width:1000px;" class="ptd">EXIT | HERE</td>
+    <td style="background-color:#455A64; border:none;width:1000px;" class="ptd">EXIT | HERE</td>
     <td style="background-color:lightgrey; border:none;" class="ptd"></td>
     <td style="background-color:lightgrey; border:none;" class="ptd"></td>
     <td style="background-color:lightgrey; border:none;" class="ptd"></td>
     <td style="background-color:lightgrey; border:none;" class="ptd"></td>
-    <td><button type="button" class="btn btn-success" id="pbtn">7</button></td>
+  <!--  <td><button type="button" class="btn btn-success" id="pbtn"><%=@parkinglots[6].slot_id%></button></td>
+  -->
+  <td class="ptd">
 
+  <%if (@parkinglots[6].availaible)%>
+    <%= link_to "#{@parkinglots[6].slot_id}", book_now_path(@parkinglots[6].id) , :id => "pbtn",:class => "btn btn-success",:data => {:confirm => 'Are you sure?You will be billed from now'} %>
+  <%else%>
+    <%= link_to "#{@parkinglots[6].slot_id}",book_now_path(@parkinglots[6].id) ,id => "pbtn",:class => "btn btn-primary disabled", :method => :get  %>
+  <%end%>
 
+  </td>
 
   </tr>
   <!-- <tr>
@@ -47,21 +110,42 @@
 
   </tr> -->
   <tr class="ptr">
-    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success"><img src="C:\Users\admin\Desktop\ADI\images\reserved_901.png"></button></td>
-    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success">9</button></td>
-    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success">8</button></td>
-    <td class="ptd"><img src="C:\Users\admin\Desktop\ADI\images\s1.png"><!--<button type="button" class="btn btn-success">12</button>--></td>
+    <td class="ptd"><!--<img src="<%=image_url('reserved.png')%>">--></td>
+
+    <td class="ptd">
+
+    <%if (@parkinglots[7].availaible)%>
+      <%= link_to "#{@parkinglots[7].slot_id}", book_now_path(@parkinglots[7].id) , :id => "pbtn",:class => "btn btn-success",:data => {:confirm => 'Are you sure?You will be billed from now'} %>
+    <%else%>
+      <%= link_to "#{@parkinglots[7].slot_id}",book_now_path(@parkinglots[7].id) ,id => "pbtn",:class => "btn btn-primary disabled", :method => :get  %>
+    <%end%>
+
+    </td>
+    <td class="ptd">
+
+    <%if (@parkinglots[8].availaible)%>
+      <%= link_to "#{@parkinglots[8].slot_id}", book_now_path(@parkinglots[8].id) , :id => "pbtn",:class => "btn btn-success",:data => {:confirm => 'Are you sure?You will be billed from now'} %>
+    <%else%>
+      <%= link_to "#{@parkinglots[8].slot_id}",book_now_path(@parkinglots[8].id) ,id => "pbtn",:class => "btn btn-primary disabled", :method => :get  %>
+    <%end%>
+
+    </td>
+
+    <!-- <td class="ptd"><button type="button" id="pbtn" class="btn btn-success"><%=@parkinglots[7].slot_id%></button></td>
+    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success"><%=@parkinglots[8].slot_id%></button></td>
+  -->
+    <td class="ptd"><img src="<%=image_url('s1.png')%>"><!--<button type="button" class="btn btn-success">12</button>--></td>
     <td style="background-color:lightgrey; border:none;" class="ptd"></td>
-    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success"><img src="C:\Users\admin\Desktop\ADI\images\reserved_901.png"></button></td>
+    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success"><img src="<%=image_url('reserved.png')%>"></button></td>
 
   </tr>
   <tr class="ptr">
-    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success"><img src="C:\Users\admin\Desktop\ADI\images\reserved_901.png"></button></td>
-    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success">10</button></td>
-    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success">11</button></td>
-    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success">12</button></td>
-    <td  class="ptd" style="background-color:crimson; border:none;">ENTER | HERE</td>
-    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success"><img src="C:\Users\admin\Desktop\ADI\images\reserved_901.png"></button></td>
+    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success"><img src="<%=image_url('reserved.png')%>"></button></td>
+    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success"><%=@parkinglots[9].slot_id%></button></td>
+    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success"><%=@parkinglots[10].slot_id%></button></td>
+    <td class="ptd"><button type="button" id="pbtn" class="btn btn-success"><%=@parkinglots[11].slot_id%></button></td>
+    <td  class="ptd" style="background-color:#455A64; border:none;">ENTER | HERE</td>
+    <td class="ptd"></td>
     <!-- <td style="background-color:red;text-align:right; border:none;">|EN</td>
     <td style="background-color:red;text-align:left; border:none;">TER|</td> -->
 

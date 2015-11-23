@@ -88,11 +88,12 @@ lngs=[77.2100,77.2508,77.2197,77.2439,77.1961,77.2191]
   name =names[n]
   lat =lats[n]
   lng =lngs[n]
-  total_capacity=Faker::Number.between(10,20)
+  #total_capacity=Faker::Number.between(10,20)
+  total_capacity=12
   cost=10
   p=Parking.create!(name:name,lat:lat,lng:lng,total_capacity:total_capacity,filled:0,cost:cost)
   total_capacity.times do |i|
-  p.parking_lots.create!(availaible:true,slot_id:i)
+  p.parking_lots.create!(availaible:true,slot_id:i+1)
   end
 end
 
