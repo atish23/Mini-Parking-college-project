@@ -1,28 +1,25 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A working version of ParkEasy: <b>https://vast-wave-6400.herokuapp.com </b>  
 
-Things you may want to cover:
+You can login using email: <b>example@aditya.com</b> Password: <b>foobar</b>  
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+To see the complete functionality you will need to scan the QR code generated with this android application (ParkEasy)  
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+
+* Ruby version 2.1
+
+* Rails version 4.2.3
+
+* Firstly do <tt>bundler install</tt>
+
+* Then do <tt>rake db:migrate</tt>
+
+* Run seed file by <tt>rake db:seed</tt> for test data 
+
+* You can login using email: <b>example@aditya.com</b> Password: <b>foobar</b> 
+
+* Mailer on development mode will won't work. To make it work change the mailer setup in development initializer according to your email.
+
+* To run do <tt>rails s</tt>
