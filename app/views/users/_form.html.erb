@@ -11,16 +11,15 @@
 
   <%= f.label :mobile %>
   <%= f.number_field :mobile ,class: 'form-control'%>
-
-  <%= f.label :payment_option, "Would you like to pay online?" %>
-  <%= f.radio_button :payment_option ,class: 'form-control'%>
-
+<!--
+  <% #f.label :payment_option, "Would you like to pay online?" %>
+  <% #f.radio_button :payment_option ,class: 'form-control'%>
+-->
 
   <%= f.label :password %>
   <%= f.password_field :password, class: 'form-control' %>
 
   <%= f.label :password_confirmation, "Confirmation" %>
   <%= f.password_field :password_confirmation,class: 'form-control' %>
-  <%= f.hidden_field_tag :authenticity_token, form_authenticity_token %>
   <%= f.submit "Create my account",class: "btn btn-primary"%>
 <% end %>

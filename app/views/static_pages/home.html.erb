@@ -142,6 +142,7 @@ var end = {lat: 28.6100, lng: 77.2300};
     navigator.geolocation.getCurrentPosition(function(position) {
       initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
       map.setCenter(initialLocation);
+      findShortestDistance();
       findPath(initialLocation,end,map);
       start=initialLocation;
       var node = document.getElementById("placeholder");
@@ -174,7 +175,36 @@ var end = {lat: 28.6100, lng: 77.2300};
 
 
 
+findShortestDistance(){
+  var origin = new google.maps.LatLng(55.930385, -3.118425),
+    destination = "Stockholm, Sweden",
+    service = new google.maps.DistanceMatrixService();
 
+service.getDistanceMatrix(
+    {
+        origins: [origin],
+        destinations: [destination],
+        travelMode: google.maps.TravelMode.DRIVING,
+        avoidHighways: false,
+        avoidTolls: false
+    },
+    callback
+);
+
+function callback(response, status) {
+    var orig = document.getElementById("orig"),
+        dest = document.getElementById("dest"),
+        dist = document.getElementById("dist");
+
+    if(status=="OK") {
+        orig.value = response.destinationAddresses[0];
+        dest.value = response.originAddresses[0];
+        dist.value = response.rows[0].elements[0].distance.text;
+    } else {
+        alert("Error: " + status);
+    }
+}
+}
 
 
 
@@ -224,14 +254,45 @@ return infowindow;
 
 </div>
 <%else%>
-
 <% provide(:title, "Home") %>
 <div class="center jumbotron">
 <h1>Welcome to ParkEasy</h1>
+<i class="fa fa-car fa-5x"></i>
 <p>
-  Description goes here!.
+  An efficient parking system!
 </p>
-
-<%= link_to "Sign up now!", signup_path,class: "btn btn-lg btn-primary"%>
+<%= link_to "Sign up now", signup_path,class: "btn btn-lg btn-primary"%>
 </div>
+
+  <div class="row mt centered" >
+    <div class="col-lg-3">
+      <center>
+      <i class="fa fa-heart fa-3x"></i>
+      <h4>Simple & easy</h4>
+    </center>
+    </div><!--/col-lg-4 -->
+
+    <div class="col-lg-3">
+    <center>
+      <i class="fa fa-rupee fa-3x"></i>
+      <h4>Check out parking status and rates from anywhere</h4>
+      </center>
+    </div><!--/col-lg-4 -->
+
+    <div class="col-lg-3">
+      <center>
+      <i class="fa fa-thumbs-up fa-3x"></i>
+      <h4>Pre-book your slot</h4>
+    </center>
+    </div><!--/col-lg-4 -->
+
+    <div class="col-lg-3">
+      <center>
+        <i class="fa fa-shopping-bag fa-3x"></i>
+      <h4>Get discounts, offers and many more</h4>
+    </center>
+    </div><!--/col-lg-4 -->
+  </div><!-- /row -->
+
+
 <%end%>
