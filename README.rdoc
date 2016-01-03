@@ -1,4 +1,6 @@
 == README
+ParkEasy is an application which can make parking systems more efficient,accurate and feasible. Crowded cities like Delhi have many problems related to parking. This application aims to reduce these problems. Read more at: http://qr.ae/RgKrmx
+
 
 A working version of ParkEasy: <b>https://vast-wave-6400.herokuapp.com </b>  
 
