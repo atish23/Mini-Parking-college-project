@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
 
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
-  get 'admin_users/create'
+  devise_for :admins
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  #devise_for :admin_users, ActiveAdmin::Devise.config
+  # get 'admin_users/create'
 
-  get 'admin_users/read'
+  # get 'admin_users/read'
 
-  get 'admin_users/update'
+  # get 'admin_users/update'
 
-  get 'admin_users/delete'
+  # get 'admin_users/delete'
 
   get 'parking_lots/update'
 

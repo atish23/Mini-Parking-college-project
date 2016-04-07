@@ -9,7 +9,7 @@ require 'rqrcode_png'
 require 'dragonfly'
 
 6.times do |n|
-AdminUser.create!(email: "admin#{n}@example.com", password:"password",parking_id: n)
+Admin.create!(email: "admin#{n}@example.com", password:"password",parking_id: n)
 end
 str="1,Example User,MP 09 AB 1234"#{user.name}"+","+"#{user.car_number}"
 qr = RQRCode::QRCode.new( str, :size => 8, :level => :h )
@@ -81,9 +81,25 @@ end
                user.update_attribute :qrcode, png.to_string
   end
 
-names=["Karol Bagh","Nehru Place", "Connaught Place", "Lajpat Nagar", "Sarojni Nagar", "Select City Walk"]
-lats=[28.6629,28.5472,28.6328,28.5789,28.5769,28.5290]
-lngs=[77.2100,77.2508,77.2197,77.2439,77.1961,77.2191]
+# names=["Karol Bagh","Nehru Place", "Connaught Place", "Lajpat Nagar", "Sarojni Nagar", "Select City Walk"]
+# lats=[28.6629,28.5472,28.6328,28.5789,28.5769,28.5290]
+# lngs=[77.2100,77.2508,77.2197,77.2439,77.1961,77.2191]
+# 6.times do |n|
+#   name =names[n]
+#   lat =lats[n]
+#   lng =lngs[n]
+#   #total_capacity=Faker::Number.between(10,20)
+#   total_capacity=12
+#   cost=10
+#   p=Parking.create!(name:name,lat:lat,lng:lng,total_capacity:total_capacity,filled:0,cost:cost)
+#   total_capacity.times do |i|
+#   p.parking_lots.create!(availaible:true,slot_id:i+1)
+#   end
+# end
+
+names=["Empress Mall","Nandanvan","KDK College","Dharampeth","Inox Poonam Mall","Railway Station"]
+lats=[21.148194,21.141167,21.1396,21.139,21.1473,21.1496]
+lngs=[79.093283,79.126232,  79.1297,79.0631,79.1356,79.0877]
 6.times do |n|
   name =names[n]
   lat =lats[n]

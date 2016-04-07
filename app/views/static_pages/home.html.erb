@@ -2,7 +2,7 @@
 <%if logged_in?%>
 <div id="right-panel">
   <div id="placeholder"  >
-  <h1 class="center jumbotron">Welcome to ParkEasy</h2>
+  <h1 class="center jumbotron">Welcome to EasyToPark</h2>
   <h1><small>Click on parkings to view latest updates!</small></h1>
   <p align="left">Your details are:<br>
       <ul align="left">
@@ -18,26 +18,23 @@
 var map;
 function initMap() {
   var bounds = new google.maps.LatLngBounds();
-  var DelhiCenter = {lat: 28.6100, lng: 77.2300};
+  var NagpurCenter = {lat: 21.144378, lng: 79.080737};
 //
     //1. Karol Bagh 1.Nehru place 2.Connaught Place 3.Lajpat Nagar 4.Sarojni Nagar 5.Select City Walk
   map = new google.maps.Map(document.getElementById('map'), {
-    center: DelhiCenter,
+    center: NagpurCenter,
     zoom: 12
   });
   var marker = new google.maps.Marker({
-      position: DelhiCenter,
+      position: NagpurCenter,
       map: map,
       title: 'Hello World!'
     });
   //var contentString = //Hit a url here to get data!;
     var infowindow;
       $( document ).ready(function() {
-        $.getJSON("https://vast-wave-6400.herokuapp.com/parkings.json", function(data, status){
+        $.getJSON("http://localhost:3000/parkings.json", function(data, status){
         //$.getJSON("http://aditya.com:3000/parkings.json", function(data, status){
-
-
-
             markers=setMarkers(map,data);
              infowindow=setInfoWindows(markers,data);
          });
@@ -51,9 +48,8 @@ function initMap() {
 var i=0;
   window.setInterval(function(){
     $( document ).ready(function() {
-      $.getJSON("https://vast-wave-6400.herokuapp.com/parkings.json", function(data, status){
+      $.getJSON("http://localhost:3000/parkings.json", function(data, status){
     //  $.getJSON("http://aditya.com:3000/parkings.json", function(data, status){
-
           // alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
           infowindow.close()
           infowindow=setInfoWindows(markers,data);
@@ -61,17 +57,11 @@ var i=0;
        });
     });
   }, 10000);
-
-
-
   var centerControlDiv = document.createElement('div');
-  var centerControl = new CenterControl(centerControlDiv, map,DelhiCenter);
-
+  var centerControl = new CenterControl(centerControlDiv, map,NagpurCenter);
   centerControlDiv.index = 1;
   map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(centerControlDiv);
-
 }
-
 function findPath(start,end,map){
  var directionsDisplay = new google.maps.DirectionsRenderer;
  var directionsService = new google.maps.DirectionsService;
@@ -79,7 +69,6 @@ function findPath(start,end,map){
  directionsDisplay.setPanel(document.getElementById('right-panel'));
    calculateAndDisplayRoute(directionsService, directionsDisplay,start,end);
 }
-
 function calculateAndDisplayRoute(directionsService, directionsDisplay,startLoc,endLoc) {
  var start = startLoc;
  var end = endLoc;
@@ -95,10 +84,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay,startLoc,
    }
  });
 }
-
-
-function CenterControl(controlDiv, map,DelhiCenter) {
-
+function CenterControl(controlDiv, map,NagpurCenter) {
  // Set CSS for the control border.
  var controlUI = document.createElement('div');
  controlUI.style.backgroundColor = '#607D8B';
@@ -110,7 +96,6 @@ function CenterControl(controlDiv, map,DelhiCenter) {
  controlUI.style.textAlign = 'center';
  controlUI.title = 'Click to recenter the map';
  controlDiv.appendChild(controlUI);
-
  // Set CSS for the control interior.
  var controlText = document.createElement('div');
  controlText.style.color = '#D9D9D7';
@@ -121,21 +106,15 @@ function CenterControl(controlDiv, map,DelhiCenter) {
  controlText.style.paddingRight = '5px';
  controlText.innerHTML = 'Find me the nearest parking!';
  controlUI.appendChild(controlText);
-
  // Setup the click event listeners: simply set the map to Chicago.
  controlUI.addEventListener('click', function() {
-
-  var location=getGeolocation(DelhiCenter);
-
+  var location=getGeolocation(NagpurCenter);
  });
-
 }
-
-function getGeolocation(DelhiCenter){
+function getGeolocation(NagpurCenter){
 var initialLocation;
 var browserSupportFlag =  new Boolean();
-var end = {lat: 28.6100, lng: 77.2300};
-
+var end = {lat: 21.144378, lng: 79.080737};
   // Try W3C Geolocation (Preferred)
   if(navigator.geolocation) {
     browserSupportFlag = true;
@@ -158,28 +137,21 @@ var end = {lat: 28.6100, lng: 77.2300};
     browserSupportFlag = false;
     handleNoGeolocation(browserSupportFlag);
   }
-
   function handleNoGeolocation(errorFlag) {
     if (errorFlag == true) {
       alert("Geolocation service failed.");
-      initialLocation = DelhiCenter;
+      initialLocation = NagpurCenter;
     } else {
       alert("Your browser doesn't support geolocation. We've placed you in Siberia.");
-      initialLocation = DelhiCenter;
+      initialLocation = NagpurCenter;
     }
     map.setCenter(initialLocation);
   }
   return initialLocation;
 }
-
-
-
-
-findShortestDistance(){
-  var origin = new google.maps.LatLng(55.930385, -3.118425),
-    destination = "Stockholm, Sweden",
-    service = new google.maps.DistanceMatrixService();
-
+/*
+findShortestDistance(origin,destination){
+  var service = new google.maps.DistanceMatrixService();
 service.getDistanceMatrix(
     {
         origins: [origin],
@@ -190,12 +162,8 @@ service.getDistanceMatrix(
     },
     callback
 );
-
 function callback(response, status) {
-    var orig = document.getElementById("orig"),
-        dest = document.getElementById("dest"),
-        dist = document.getElementById("dist");
-
+    var orig,dest,dist;
     if(status=="OK") {
         orig.value = response.destinationAddresses[0];
         dest.value = response.originAddresses[0];
@@ -205,10 +173,7 @@ function callback(response, status) {
     }
 }
 }
-
-
-
-
+*/
 function setMarkers(map,data){
  var marker, i
  markers= new Array();
@@ -255,11 +220,14 @@ return infowindow;
 </div>
 <%else%>
 <% provide(:title, "Home") %>
+<% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+<% end %>
 <div class="center jumbotron">
-<h1>Welcome to ParkEasy</h1>
+<h1>Welcome to EasyToPark</h1>
 <i class="fa fa-car fa-5x"></i>
 <p>
-  An efficient parking system!
+  An efficient parking system for Nagpur!
 </p>
 <%= link_to "Sign up now", signup_path,class: "btn btn-lg btn-primary"%>
 </div>
@@ -289,7 +257,7 @@ return infowindow;
     <div class="col-lg-3">
       <center>
         <i class="fa fa-shopping-bag fa-3x"></i>
-      <h4>Get discounts, offers and many more</h4>
+      <h4>Get discounts, offers<br>and<br>many more</h4>
     </center>
     </div><!--/col-lg-4 -->
   </div><!-- /row -->

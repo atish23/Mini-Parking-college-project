@@ -11,8 +11,9 @@ class TransactionsController < ApplicationController
   def index
     #@user=current_user
     @transactions=current_user.transactions.order("created_at desc")
+    #raise @transactions.inspect
     @active_transaction=current_user.transactions.find_by(current_transaction:true)
-    
+    #raise @active_transaction.inspect
   #  debugger
   end
 

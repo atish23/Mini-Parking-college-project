@@ -24,7 +24,8 @@ gem "font-awesome-rails"
 gem 'font-awesome-sass'
 gem 'rqrcode_png'
 gem 'responders', '~> 2.0'
-gem 'activeadmin', github: 'activeadmin'
+#gem 'activeadmin', github: 'activeadmin'
+gem 'rails_admin'
 gem 'devise'
 gem 'cancan' # or cancancan
 gem 'draper'
@@ -48,7 +49,7 @@ gem 'bootstrap-will_paginate', '0.0.10'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
-  gem 'byebug',      '3.4.0'
+  #gem 'byebug',      '3.4.0'
   gem 'web-console', '2.0.0.beta3'
   gem 'spring',      '1.1.3'
 end

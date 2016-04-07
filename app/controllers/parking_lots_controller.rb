@@ -1,7 +1,4 @@
 class ParkingLotsController < ApplicationController
-
-
-
   def update
     transaction=current_user.transactions.where(:current_transaction => true).first
     Rails.logger.debug { transaction }
@@ -10,7 +7,7 @@ class ParkingLotsController < ApplicationController
     @parking_lot=ParkingLot.find(id)
     # debugger
     if @parking_lot.update!(:availaible => false)
-        flash[:success] = "You have successfully booked your spot.Your parking slot number is #{@parking_lot.slot_id+1}. Your entry time has started now."
+        flash[:success] = "You have successfully booked your spot.Your parking slot number is #{@parking_lot.slot_id}. Your entry time has started now."
         datetime=Time.now
         date= datetime
         in_time = datetime

@@ -1,5 +1,5 @@
 
-  <tr>
+<tr>
     <td><%=transaction.id%></td>
     <td><%=transaction.date%></td>
     <td><%=transaction.in.strftime("%I:%M%p")%></td>
@@ -10,6 +10,8 @@
     <%else%>
     <td>Online</td>
     <%end%>
-    <%name=Parking.find_by(id:transaction.parking_id).name%>
-    <td><%=name%></td>
+    <%#= raise Parking.find_by(id:transaction.parking_id).name.inspect%>
+    <%# parking = Parking.find_by(id:transaction.parking_id) %>
+    <%#= raise parking.name.inspect%>
+    <td><%#= parking.name %></td>
   </tr>
