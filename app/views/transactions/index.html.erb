@@ -21,7 +21,7 @@
       <% if @active_transaction.payment_type %>
       <td>Cash</td>
       <%else%>
-      <td>Online</td>
+      <td>Cash</td>
       <%end%>
       <%name=Parking.find_by(id:@active_transaction.parking_id).name%>
       <td><%=name%></td>

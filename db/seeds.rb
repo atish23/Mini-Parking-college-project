@@ -17,7 +17,7 @@ png = qr.to_img                                             # returns an instanc
 png.resize(300,300)
 
 user=User.create!(name:  "Example User",
-             email: "example@aditya.com",
+             email: "shrutikamaske2910@gmail.com",
              password:              "foobar",
              password_confirmation: "foobar",
              mobile: 9910991022,

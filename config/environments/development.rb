@@ -23,8 +23,8 @@ Rails.application.configure do
                     :address        => "smtp.gmail.com",
                     :port           => 587,
                     :authentication => :plain,
-                    :user_name      => "adityachowdhry09@gmail.com",
-                    :password       => "abc"
+                    :user_name      => "shrutikamaske2910@gmail.com",
+                    :password       => "shrutika2910"
 }
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
