@@ -33,7 +33,7 @@ function initMap() {
   //var contentString = //Hit a url here to get data!;
     var infowindow;
       $( document ).ready(function() {
-        $.getJSON("http://localhost:3000/parkings.json", function(data, status){
+        $.getJSON("/parkings.json", function(data, status){
         //$.getJSON("http://aditya.com:3000/parkings.json", function(data, status){
             markers=setMarkers(map,data);
              infowindow=setInfoWindows(markers,data);

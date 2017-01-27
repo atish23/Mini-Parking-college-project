@@ -57,7 +57,7 @@ Rails.application.configure do
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
   config.action_mailer.default_options = {from: 'no-reply@examopedia.co.in'}
-   config.action_mailer.default_url_options = { :host => 'vast-wave-6400.herokuapp.com' }
+   config.action_mailer.default_url_options = { :host => 'minipark.herokuapp.com' }
   ActionMailer::Base.smtp_settings = {
   :user_name => ENV['USER_NAME'],
   :password => ENV['MAIL_PASSWORD'],
