@@ -61,7 +61,6 @@ Rails.application.configure do
   ActionMailer::Base.smtp_settings = {
   :user_name => ENV['USER_NAME'],
   :password => ENV['MAIL_PASSWORD'],
-  :domain => 'examopedia.co.in',
   :address => 'smtp.sendgrid.net',
   :port => 587,
   :authentication => :plain,
