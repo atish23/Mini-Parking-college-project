@@ -50,12 +50,13 @@ Rails.application.routes.draw do
 
 namespace :api, defaults: {format: 'json'} do
   namespace :v1 do
-    get 'book_now/:id' => 'parking_lots#update', :as =>:book_now_api
+    get 'book_now/:user_id/:id' => 'parking_lots#update', :as =>:book_now_api
     get 'booked_online/:id' => 'transactions#booked_online'
     get 'parking_status/:id' => 'parking_lots#parking_status'
     get 'entry/' => 'parking_lots#entry'
     get 'exit/:id' => 'transactions#exit'
     resources :parkings
+    resources :sessions
     end
 
 end

@@ -1,4 +1,5 @@
 <% provide(:title, @user.name) %>
+<div class="container">
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
@@ -14,8 +15,7 @@
 <div class="row">
   <%= image_tag @user.qrcode.thumb('200x200').url %>
 </div>
-<%= link_to "show photo", @user.qrcode.thumb('200x200').url , :data => { :colorbox => true, :colorbox_height => '300px', :colorbox_width => '300px', :colorbox_photo => true } %>
-
-
-<%= link_to 'Edit', edit_user_path(@user) %>
-<%= link_to 'Back', users_path %>
+<%= link_to "Show photo", @user.qrcode.thumb('200x200').url , :data => { :colorbox => true, :colorbox_height => '300px', :colorbox_width => '300px', :colorbox_photo => true },class: 'btn btn-primary' %>
+<%= link_to 'Edit', edit_user_path(@user),class: 'btn btn-success' %>
+<%= link_to 'Back', users_path,class: 'btn btn-success btn-md' %>
+</div>

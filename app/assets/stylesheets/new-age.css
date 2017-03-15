@@ -107,10 +107,13 @@ p {
   background-color: transparent;
 }
 .front {
-  background-color: #00FF00
+  background-color: #87ceeb
 }
 .front1{
   background-image: url('/assets/cars2.jpg');
+}
+.right-corner{
+  background-image: url('/assets/3.jpg');
 }
 @media (min-width: 768px) {
   .navbar-default {

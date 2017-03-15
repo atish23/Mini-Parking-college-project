@@ -19,9 +19,4 @@ class ParkingsController < ApplicationController
     @parking=Parking.find(params[:id])
     @parkinglots=@parking.parking_lots
   end
-
-
-  private
-
-
 end

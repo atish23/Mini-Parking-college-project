@@ -1,15 +1,15 @@
 <div id="map-container">
 <%if logged_in?%>
-  <div id="right-panel">
+  <div id="right-panel" class="right-corner">
     <div id="placeholder" >
-      <h1 class="center jumbotron">Welcome to EasyToPark</h2>
-      <h1><small>Click on parkings to view latest updates!</small></h1>
-      <p align="left">Your details are:<br>
+      <b><h1 style="color:white;" class="center">Welcome to EasyToPark</h2></b>
+      <h1 style="color:white;"><small>Click on parkings to view latest updates!</small></h1>
+      <p style="color:white;" align="left">Your details are:<br>
           <ul align="left">
-            <li>Name: <%=current_user.name%></li>
-            <li>Email: <%=current_user.email%></li>
-            <li>Car Number: <%=current_user.car_number%></li>
-            <li>Mobile Number: <%=current_user.mobile%></li>
+            <li style="color:white;">Name: <%=current_user.name%></li>
+            <li style="color:white;">Email: <%=current_user.email%></li>
+            <li style="color:white;">Car Number: <%=current_user.car_number%></li>
+            <li style="color:white;">Mobile Number: <%=current_user.mobile%></li>
           </ul>
       </p>
     </div>

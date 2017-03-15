@@ -7,7 +7,6 @@ def  booked_online
     if transaction.nil?
       respond_with "false"
     else
-
       transaction.update!(currently_in:true)
       respond_with "true"
     end
@@ -15,6 +14,8 @@ end
 
 def exit
   transaction=Transaction.where("user_id=? AND current_transaction=?",params[:id],true).first
+  if !transaction.nil?
+
   time_taken=(((Time.now).to_time - transaction.in)/1.hour).round
   Rails.logger.debug("Time now time: #{Time.now.inspect}")
   Rails.logger.debug("My  transaction: #{transaction.in}")
@@ -31,9 +32,12 @@ def exit
   transaction.update!(current_transaction:false,payment:cost,out:out)
   parking.update(filled:parking.filled-1)
   parking_lot.update(availaible:true)
-
-  #flash[:success] = "Transaction ended! Your total cost is Rs.#{cost}"
-  respond_with cost
+  response = {status: "ok", cost: cost}
+  respond_with response
+  else
+    response = {status: "fail"}
+    respond_with response
+  end
 end
 
 
