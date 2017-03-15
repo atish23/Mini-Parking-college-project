@@ -8,6 +8,7 @@ class ParkingLotsController < ApplicationController
     respond_with lots
   end
   def entry
+    byebug
     #User id , parking id, parking_lot_id
     id=params[:ids]
     user=User.find(id[0])

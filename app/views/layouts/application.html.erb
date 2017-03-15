@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
   <title><%= full_title(yield(:title)) %> </title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-<!--  <meta name="viewport" content="width=device-width, initial-scale=1">
---><%= csrf_meta_tags %>
-   <%= render 'layouts/ie_files' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+  <%= csrf_meta_tags %>
+  
+  <%= render 'layouts/ie_files' %>
 </head>
+
 <div id="container">
 <body>
   <%= render 'layouts/header' %>
@@ -20,8 +29,7 @@
 
 <%= yield %>
 </div>
-  <%= render 'layouts/footer' %>
-<!--<%= debug(params) if Rails.env.development? %>-->
+  <%#= render 'layouts/footer' %>
 </div>
 </body>
 </html>

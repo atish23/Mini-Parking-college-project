@@ -55,7 +55,7 @@ namespace :api, defaults: {format: 'json'} do
     get 'parking_status/:id' => 'parking_lots#parking_status'
     get 'entry/' => 'parking_lots#entry'
     get 'exit/:id' => 'transactions#exit'
-
+    resources :parkings
     end
 
 end
