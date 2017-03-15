@@ -9,7 +9,7 @@ class ParkingLotsController < ApplicationController
   # end
 
   def update
-    current_user = User.find_by(params[:user_id]);
+    current_user = User.find(params[:user_id]);
     transaction=current_user.transactions.where(:current_transaction => true).first
     if transaction.nil?
         id= params[:id]
