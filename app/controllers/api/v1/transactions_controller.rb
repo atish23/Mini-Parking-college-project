@@ -40,6 +40,11 @@ def exit
   end
 end
 
+def all_transactions
+  transactions = Transaction.where("user_id=?",params[:id]);
+  response = {status: "ok", transactions: transactions}
+  respond_with response
+end
 
 end
 end
