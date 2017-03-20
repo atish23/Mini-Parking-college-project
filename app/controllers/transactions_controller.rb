@@ -16,7 +16,20 @@ class TransactionsController < ApplicationController
     #raise @active_transaction.inspect
   #  debugger
   end
+  def payment
+   customer = Stripe::Customer.retrieve(current_user.stripe_id)
+      customer.sources.create(source: params[:stripeToken])
+        Stripe::Charge.create(
+            :customer =>  customer.id,
+            :amount   =>  1000,
+            :description  => "Charges By User",
+            :currency => 'usd'
+           )
 
+        rescue Stripe::CardError  => e
+          flash[:error] = e.message
+          redirect_to root_path
+  end
   def create
     @transaction = current_user.transactions.build(transaction_params)
     if @transaction.save

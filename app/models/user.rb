@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   attr_accessor :remember_token, :activation_token, :reset_token
   has_many :transactions
   before_save   :downcase_email
-  before_create :create_activation_digest
+  before_create :create_activation_digest, :user_stripe_id
  require 'dragonfly'
   validates :name, presence: true
   NUMBER_REGEX =/\A[789]\d{9}\z/
@@ -25,6 +25,11 @@ class User < ActiveRecord::Base
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
+  end
+
+  def user_stripe_id
+    customer = Stripe::Customer.create(email: email)
+    self.stripe_id = customer.id
   end
 
   # Returns a random token.

@@ -18,5 +18,6 @@ class ParkingsController < ApplicationController
   def show
     @parking=Parking.find(params[:id])
     @parkinglots=@parking.parking_lots
+    @user = current_user
   end
 end

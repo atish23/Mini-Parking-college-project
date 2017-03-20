@@ -19,13 +19,13 @@ Rails.application.configure do
 
   host = 'localhost:3000'
   config.action_mailer.default_url_options = { host: host }
-  ActionMailer::Base.smtp_settings = {
-                    :address        => "smtp.gmail.com",
-                    :port           => 587,
-                    :authentication => :plain,
-                    :user_name      => "shrutikamaske2910@gmail.com",
-                    :password       => "shrutika2910"
-}
+#   ActionMailer::Base.smtp_settings = {
+#                     :address        => "smtp.gmail.com",
+#                     :port           => 587,
+#                     :authentication => :plain,
+#                     :user_name      => "shrutikamaske2910@gmail.com",
+#                     :password       => "shrutika2910"
+# }
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -48,4 +48,14 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  ActionMailer::Base.smtp_settings = {
+  :user_name => "dhirajdc",
+  :password => "admin#123",
+  :domain         => 'www.parking.com',
+  :address => 'smtp.sendgrid.net',
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true
+  }
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407140742) do
+ActiveRecord::Schema.define(version: 20170320205333) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20160407140742) do
     t.integer  "mobile",            limit: 8
     t.string   "qrcode_uid"
     t.string   "qrcode_name"
+    t.string   "stripe_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

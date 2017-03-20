@@ -7,7 +7,7 @@ class ParkingLotsController < ApplicationController
     @parking_lot=ParkingLot.find(id)
     # debugger
     if @parking_lot.update!(:availaible => false)
-        flash[:success] = "You have successfully booked your spot.Your parking slot number is #{@parking_lot.slot_id}. Your entry time has started now."
+        flash[:success] = "You have successfully booked your spot.Your parking slot number is #{@parking_lot.slot_id}. To confirm Click on Payment Link!"
         datetime=Time.now
         date= datetime
         in_time = datetime

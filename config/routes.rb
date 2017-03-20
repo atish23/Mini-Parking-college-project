@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   get '/book_slot/:id' => 'parking_lots#update_app'
   resources :parkings
   resources :transactions
+  post 'payment' => 'transactions#payment'
   get 'end_transaction/:id' =>'transactions#update', :as=> :end_transaction
   resources :users
   resources :account_activations, only: [:edit]
